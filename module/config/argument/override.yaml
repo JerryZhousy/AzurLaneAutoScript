@@ -306,6 +306,12 @@ CoalitionSp:
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
     Fleet2Onsen: false
+EventShop:
+  Scheduler:
+    SuccessInterval: 30
+    FailureInterval: 30
+    ServerUpdate: 00:00
+    Fleet2Onsen: false
 
 # ==================== Reward ====================
 
