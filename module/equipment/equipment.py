@@ -7,6 +7,11 @@ from module.retire.assets import DOCK_CHECK, EQUIP_CONFIRM as RETIRE_EQUIP_CONFI
 from module.storage.storage import StorageHandler
 from module.ui.assets import BACK_ARROW
 from module.ui.navbar import Navbar
+from module.ui.switch import Switch
+
+equipping_filter = Switch('Equiping_filter')
+equipping_filter.add_state('on', check_button=EQUIPPING_ON)
+equipping_filter.add_state('off', check_button=EQUIPPING_OFF)
 
 SWIPE_DISTANCE = 250
 SWIPE_RANDOM_RANGE = (-40, -20, 40, 20)
@@ -16,6 +21,10 @@ EQUIPMENT_OPEN.match = EQUIPMENT_OPEN.match_luma
 
 class Equipment(StorageHandler):
     equipment_has_take_on = False
+
+    def equipping_set(self, enable=False):
+        if equipping_filter.set('on' if enable else 'off', main=self):
+            self.wait_until_stable(SWIPE_AREA)
 
     def _ship_view_swipe(self, distance, check_button=EQUIPMENT_OPEN):
         swipe_count = 0
@@ -67,23 +76,23 @@ class Equipment(StorageHandler):
     def ship_view_prev(self, check_button=EQUIPMENT_OPEN):
         return self._ship_view_swipe(distance=SWIPE_DISTANCE, check_button=check_button)
 
-    def ship_info_enter(self, click_button, check_button=EQUIPMENT_OPEN, long_click=True, skip_first_screenshot=True):
+    def ship_info_enter(self, click_button, check_button=EQUIPMENT_OPEN, long_click=True, skil_first_screenshot=True):
         enter_timer = Timer(10)
 
         while 1:
-            if skip_first_screenshot:
-                skip_first_screenshot = False
+            if skil_first_screenshot:
+                skil_first_screenshot = False
             else:
                 self.device.screenshot()
 
             # End
-            if self.appear(check_button, offset=(5, 5)):
+            if self.appear(check_button):
                 break
 
             # Long click accidentally became normal click, exit from dock
             if long_click:
                 if self.appear(DOCK_CHECK, offset=(20, 20), interval=3):
-                    logger.info(f'ship_info_enter {DOCK_CHECK} -> {BACK_ARROW}')
+                    logger.info(f'equip_enter {DOCK_CHECK} -> {BACK_ARROW}')
                     self.device.click(BACK_ARROW)
                     continue
             if enter_timer.reached():
@@ -180,7 +189,7 @@ class Equipment(StorageHandler):
             if self.handle_storage_full():
                 continue
 
-            if confirm_timer.reached() and self.handle_popup_confirm('EQUIPMENT_TAKE_OFF'):
+            if confirm_timer.reached() and self.handle_popup_confirm():
                 confirm_timer.reset()
                 off_timer.reset()
                 bar_timer.reset()
@@ -256,24 +265,23 @@ class Equipment(StorageHandler):
 
         logger.info('Equipment take on ended')
 
-    def fleet_equipment_take_on_preset(self, preset_record, enter, long_click, out):
+    def fleet_equipment_take_on_preset(self, enter, out, fleet):
         """
         Args:
-            preset_record (list[int]): list of equipment record. [3, 1, 1, 1, 1, 1]
-            enter (Button): Button to edit equipment.
-            long_click (bool): How to click enter
+            enter (Button): Long click to edit equipment.
             out (Button): Button to confirm exit success.
+            fleet (list[int]): list of equipment record. [3, 1, 1, 1, 1, 1]
         """
         logger.hr('Equipment take on')
-        self.ship_info_enter(enter, long_click=long_click)
+        self.ship_info_enter(enter)
 
-        for index in '9'.join([str(x) for x in preset_record if x > 0]):
+        for index in '9'.join([str(x) for x in fleet if x > 0]):
             index = int(index)
             if index == 9:
                 self.ship_view_next()
             else:
                 self.ship_equipment_take_on_preset(index=index)
-                self.ui_click(EQUIPMENT_CLOSE, check_button=EQUIPMENT_OPEN, skip_first_screenshot=True)
+                self.ui_click(click_button=EQUIPMENT_CLOSE, check_button=EQUIPMENT_OPEN, offset=None)
 
         self.ui_back(out)
         self.equipment_has_take_on = True

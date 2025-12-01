@@ -6,6 +6,7 @@ import module.config.server as server
 from module.base.timer import Timer
 from module.config.config import Function
 from module.config.utils import get_server_next_update
+from module.log_res.log_res import LogRes
 from module.logger import logger
 from module.map.map_grids import SelectedGrids
 from module.ocr.ocr import Digit
@@ -36,6 +37,11 @@ class OSStatus(UI):
     @property
     def is_cl1_enabled(self) -> bool:
         return self.config.is_task_enabled('OpsiHazard1Leveling')
+
+    @property
+    def cl1_enough_yellow_coins(self) -> bool:
+        return self.get_yellow_coins() >= self.config.cross_get(
+            keys='OpsiHazard1Leveling.OpsiHazard1Leveling.OperationCoinsPreserve')
 
     @property
     def nearest_task_cooling_down(self) -> t.Optional[Function]:
@@ -81,16 +87,24 @@ class OSStatus(UI):
                 continue
             else:
                 break
+        LogRes(self.config).YellowCoin = yellow_coins
+        logger.info(f'Yellow coins: {yellow_coins}')
 
         return yellow_coins
 
     def get_purple_coins(self) -> int:
         if self.appear(OS_SHOP_CHECK):
-            return OCR_OS_SHOP_PURPLE_COINS.ocr(self.device.image)
+            purple_coins = OCR_OS_SHOP_PURPLE_COINS.ocr(self.device.image)
         else:
-            return OCR_SHOP_PURPLE_COINS.ocr(self.device.image)
+            purple_coins = OCR_SHOP_PURPLE_COINS.ocr(self.device.image)
+        LogRes(self.config).PurpleCoin = purple_coins
+        return purple_coins
 
     def os_shop_get_coins(self):
         self._shop_yellow_coins = self.get_yellow_coins()
         self._shop_purple_coins = self.get_purple_coins()
         logger.info(f'Yellow coins: {self._shop_yellow_coins}, purple coins: {self._shop_purple_coins}')
+
+    def cl1_task_call(self):
+        if self.is_cl1_enabled and self.cl1_enough_yellow_coins:
+            self.config.task_call('OpsiHazard1Leveling')

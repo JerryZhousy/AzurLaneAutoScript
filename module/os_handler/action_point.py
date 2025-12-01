@@ -5,6 +5,7 @@ from module.base.button import ButtonGrid
 from module.base.timer import Timer
 from module.base.utils import *
 from module.config.utils import get_server_next_update
+from module.log_res.log_res import LogRes
 from module.logger import logger
 from module.ocr.ocr import Digit, DigitCounter
 from module.os_handler.assets import *
@@ -140,8 +141,10 @@ class ActionPointHandler(UI, MapEventHandler):
         if self.config.OS_ACTION_POINT_BOX_USE:
             total += np.sum(np.array(box) * tuple(ACTION_POINT_BOX.values()))
         oil = box[0]
-
+        LogRes(self.config).Oil = oil
         logger.info(f'Action points: {current}({total}), oil: {oil}')
+        LogRes(self.config).ActionPoint = {'Value': current, 'Total': total}
+        self.config.update()
         self._action_point_current = current
         self._action_point_box = box
         self._action_point_total = total
