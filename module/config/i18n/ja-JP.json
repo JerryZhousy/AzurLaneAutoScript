@@ -1282,6 +1282,10 @@
       "name": "GemsFarming.DelayTaskIFNoFlagship.name",
       "help": "GemsFarming.DelayTaskIFNoFlagship.help"
     },
+    "EquipmentCode": {
+      "name": "GemsFarming.EquipmentCode.name",
+      "help": "GemsFarming.EquipmentCode.help"
+    },
     "CommissionLimit": {
       "name": "GemsFarming.CommissionLimit.name",
       "help": "GemsFarming.CommissionLimit.help"

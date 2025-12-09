@@ -1911,6 +1911,11 @@
         "type": "checkbox",
         "value": false
       },
+      "EquipmentCode": {
+        "type": "textarea",
+        "value": "DD: null\nbogue: null\nhermes: null\nlangley: null\nranger: null",
+        "mode": "yaml"
+      },
       "CommissionLimit": {
         "type": "checkbox",
         "value": false
