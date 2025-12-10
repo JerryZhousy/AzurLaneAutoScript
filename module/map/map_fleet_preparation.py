@@ -354,8 +354,6 @@ class FleetPreparation(InfoHandler):
                     pass
                 else:
                     submarine.clear()
-            else:
-                self.config.SUBMARINE = 0
             return False
 
         # Submarine.
