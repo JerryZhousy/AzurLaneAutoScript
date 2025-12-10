@@ -385,7 +385,6 @@
       "ServerUpdate": "00:00"
     },
     "GemsFarming": {
-      "ChangeFlagship": "ship_equip",
       "CommonCV": "any",
       "CommonCVFilter": "bogue > ranger > langley > hermes",
       "ChangeVanguard": "ship_equip",
