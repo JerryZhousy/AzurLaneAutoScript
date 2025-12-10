@@ -1714,10 +1714,6 @@
         "type": "checkbox",
         "value": false
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -1847,14 +1843,6 @@
       }
     },
     "GemsFarming": {
-      "ChangeFlagship": {
-        "type": "select",
-        "value": "ship_equip",
-        "option": [
-          "ship",
-          "ship_equip"
-        ]
-      },
       "CommonCV": {
         "type": "select",
         "value": "any",
@@ -1877,8 +1865,7 @@
         "value": "ship_equip",
         "option": [
           "disabled",
-          "ship",
-          "ship_equip"
+          "ship"
         ]
       },
       "CommonDD": {
@@ -2870,10 +2857,6 @@
         "type": "checkbox",
         "value": false
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -3570,10 +3553,6 @@
         "type": "checkbox",
         "value": false
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119,
@@ -3758,11 +3737,6 @@
         "value": false,
         "display": "hide"
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false,
-        "display": "hide"
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119,
@@ -3854,164 +3828,6 @@
     "MaritimeEscort": {
       "Enable": {
         "type": "checkbox",
-        "value": true,
-        "display": "hide"
-      }
-    },
-    "Coalition": {
-      "Mode": {
-        "type": "select",
-        "value": "area1-normal",
-        "option": [
-          "area1-normal",
-          "area1-hard",
-          "area2-normal",
-          "area2-hard",
-          "area3-normal",
-          "area3-hard",
-          "area4-normal",
-          "area4-hard",
-          "area5-normal",
-          "area5-hard",
-          "area6-normal",
-          "area6-hard"
-        ]
-      },
-      "Fleet": {
-        "type": "select",
-        "value": "single",
-        "option": [
-          "single",
-          "multi"
-        ]
-      }
-    },
-    "StopCondition": {
-      "OilLimit": {
-        "type": "input",
-        "value": 1000
-      },
-      "RunCount": {
-        "type": "input",
-        "value": 0
-      },
-      "MapAchievement": {
-        "type": "select",
-        "value": "non_stop",
-        "option": [
-          "non_stop",
-          "non_stop_clear_all",
-          "100_percent_clear",
-          "map_3_stars",
-          "threat_safe",
-          "threat_safe_without_3_stars"
-        ],
-        "display": "hide"
-      },
-      "StageIncrease": {
-        "type": "checkbox",
-        "value": false,
-        "display": "hide"
-      },
-      "GetNewShip": {
-        "type": "checkbox",
-        "value": false,
-        "display": "hide"
-      },
-      "ReachLevel": {
-        "type": "input",
-        "value": 0,
-        "display": "hide"
-      }
-    },
-    "Emotion": {
-      "Mode": {
-        "type": "select",
-        "value": "calculate",
-        "option": [
-          "calculate",
-          "ignore",
-          "calculate_ignore"
-        ]
-      },
-      "Fleet1Value": {
-        "type": "input",
-        "value": 119
-      },
-      "Fleet1Record": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime",
-        "display": "disabled"
-      },
-      "Fleet1Control": {
-        "type": "select",
-        "value": "prevent_yellow_face",
-        "option": [
-          "keep_exp_bonus",
-          "prevent_green_face",
-          "prevent_yellow_face",
-          "prevent_red_face"
-        ]
-      },
-      "Fleet1Recover": {
-        "type": "select",
-        "value": "not_in_dormitory",
-        "option": [
-          "not_in_dormitory",
-          "dormitory_floor_1",
-          "dormitory_floor_2"
-        ]
-      },
-      "Fleet1Oath": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Fleet2Value": {
-        "type": "input",
-        "value": 119,
-        "display": "hide"
-      },
-      "Fleet2Record": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime",
-        "display": "hide"
-      },
-      "Fleet2Control": {
-        "type": "select",
-        "value": "prevent_yellow_face",
-        "option": [
-          "keep_exp_bonus",
-          "prevent_green_face",
-          "prevent_yellow_face",
-          "prevent_red_face"
-        ],
-        "display": "hide"
-      },
-      "Fleet2Recover": {
-        "type": "select",
-        "value": "not_in_dormitory",
-        "option": [
-          "not_in_dormitory",
-          "dormitory_floor_1",
-          "dormitory_floor_2"
-        ],
-        "display": "hide"
-      },
-      "Fleet2Oath": {
-        "type": "checkbox",
-        "value": false,
-        "display": "hide"
-      },
-      "Fleet2Onsen": {
-        "type": "checkbox",
-        "value": false,
-        "display": "hide"
         "value": true
       }
     },
@@ -4608,10 +4424,6 @@
         "type": "checkbox",
         "value": false
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -5026,10 +4838,6 @@
         ]
       },
       "Fleet1Oath": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -5458,10 +5266,6 @@
         "type": "checkbox",
         "value": false
       },
-      "Fleet1Onsen": {
-        "type": "checkbox",
-        "value": false
-      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -5876,10 +5680,6 @@
         ]
       },
       "Fleet1Oath": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -6996,10 +6796,6 @@
         ]
       },
       "Fleet1Oath": {
-        "type": "checkbox",
-        "value": false
-      },
-      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },

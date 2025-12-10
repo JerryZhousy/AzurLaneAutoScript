@@ -9,24 +9,18 @@ from module.statistics.utils import *
 
 class BonusItem(Item):
     def predict_valid(self):
-        image = rgb2gray(self.image)
-        width, height = image_size(image)
-        wm, hm = width // 2, height // 2
-        row_center = image[hm: hm + 5, :]
-        info_bar = image[64: 69, :]
-        column_center = image[:, wm: wm + 5]
-        return all(np.mean(img > 160) > 0.1 for img in [image, row_center, info_bar, column_center])
+        return np.mean(rgb2gray(self.image) > 160) > 0.3
 
 
 class CampaignBonusStatistics(GetItemsStatistics):
     bonus_button: Button = CAMPAIGN_BONUS
 
-    def appear_on(self, image, similarity=0.85):
-        if CAMPAIGN_BONUS_STRATEGY_CHECK.match(image, offset=(200, 500), similarity=similarity):
+    def appear_on(self, image):
+        if CAMPAIGN_BONUS_STRATEGY_CHECK.match(image, offset=(200, 500)):
             return False
-        if AUTO_SEARCH_MENU_EXIT.match(image, offset=(200, 20), similarity=similarity) \
-                and (CAMPAIGN_BONUS.match(image, offset=(200, 500), similarity=similarity) \
-                and CAMPAIGN_BONUS_SINGLE.match(image, offset=(200, 500), similarity=similarity)):
+        if AUTO_SEARCH_MENU_EXIT.match(image, offset=(200, 20)) \
+                and (CAMPAIGN_BONUS.match(image, offset=(200, 500)) \
+                and CAMPAIGN_BONUS_SINGLE.match(image, offset=(200, 500))):
             return True
 
         return False

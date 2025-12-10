@@ -182,20 +182,8 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         return 4 + self.campaign._map_battle * 2
 
     @property
-    def change_flagship(self):
-        return 'ship' in self.config.GemsFarming_ChangeFlagship
-
-    @property
-    def change_flagship_equip(self):
-        return 'equip' in self.config.GemsFarming_ChangeFlagship
-
-    @property
     def change_vanguard(self):
         return 'ship' in self.config.GemsFarming_ChangeVanguard
-
-    @property
-    def change_vanguard_equip(self):
-        return 'equip' in self.config.GemsFarming_ChangeVanguard
 
     @property
     def fleet_to_attack(self):
@@ -249,22 +237,10 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
             bool: True if flagship changed.
         """
         logger.hr('Change flagship', level=1)
-        logger.attr('ChangeFlagship', self.config.GemsFarming_ChangeFlagship)
-        self._fleet_detail_enter(self.fleet_to_attack)
-        if self.change_flagship_equip:
-            logger.hr('Unmount flagship equipments', level=2)
-            self._ship_detail_enter(self.fleet_detail_enter_flagship)
-            self.clear_all_equip()
-            self._fleet_back()
+        self.fleet_enter(self.fleet_to_attack)
 
         logger.hr('Change flagship', level=2)
         success = self.flagship_change_execute()
-
-        if self.change_flagship_equip:
-            logger.hr('Mount flagship equipments', level=2)
-            self._ship_detail_enter(self.fleet_detail_enter_flagship)
-            self.apply_equip_code()
-            self._fleet_back()
 
         return success
 
@@ -277,21 +253,10 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         """
         logger.hr('Change vanguard', level=1)
         logger.attr('ChangeVanguard', self.config.GemsFarming_ChangeVanguard)
-        self._fleet_detail_enter(self.fleet_to_attack)
-        if self.change_vanguard_equip:
-            logger.hr('Unmount vanguard equipments', level=2)
-            self._ship_detail_enter(self.fleet_detail_enter)
-            self.clear_all_equip()
-            self._fleet_back()
+        self.fleet_enter(self.fleet_to_attack)
 
         logger.hr('Change vanguard', level=2)
         success = self.vanguard_change_execute()
-
-        if self.change_vanguard_equip:
-            logger.hr('Mount vanguard equipments', level=2)
-            self._ship_detail_enter(self.fleet_detail_enter)
-            self.apply_equip_code()
-            self._fleet_back()
 
         return success
 
@@ -582,37 +547,6 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
 
     def flagship_change_execute(self):
         """
-        In hard mode, let the ship leave the fleet first
-        """
-        if self.appear(DOCK_SHIP_DOWN):
-            self.ui_click(DOCK_SHIP_DOWN,
-                            appear_button=DOCK_CHECK, check_button=self.page_fleet_check_button, skip_first_screenshot=True)
-        else:
-            self.ui_back(check_button=FLEET_PREPARATION)
-
-    def dock_enter(self, button):
-        for _ in self.loop():
-            if self.appear(DOCK_CHECK, offset=(20, 20)):
-                break
-            if self.appear(self.page_fleet_check_button, offset=(30, 30), interval=5):
-                self.device.click(button)
-                continue
-            # 2025.05.29 game tips that infos skin feature when you enter dock
-            if self.handle_game_tips():
-                return False
-        return True
-
-    def flagship_change_with_emotion(self, ship):
-        """
-        Change flagship and calculate emotion
-        """
-        target_ship = max(ship, key=lambda s: (s.level, s.emotion))
-        if self.config.GemsFarming_ALLowHighFlagshipLevel:
-            self.set_emotion(target_ship.emotion)
-        self._ship_change_confirm(target_ship.button)
-
-    def flagship_change_execute(self):
-        """
         Returns:
             bool: If success.
 
@@ -699,8 +633,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
 
     def triggered_stop_condition(self, oil_check=True):
         # Lv32 limit
-        if self.change_flagship and self.campaign.config.LV32_TRIGGERED \
-                and not self.config.GemsFarming_ALLowHighFlagshipLevel:
+        if self.change_flagship and self.campaign.config.LV32_TRIGGERED:
             self._trigger_lv32 = True
             logger.hr('TRIGGERED LV32 LIMIT')
             return True
@@ -739,6 +672,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
             total (int):
         """
         self.config.STOP_IF_REACH_LV32 = self.change_flagship
+
         while 1:
             self._trigger_lv32 = False
             is_limit = self.config.StopCondition_RunCount
@@ -769,14 +703,10 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
             # End
             if self._trigger_lv32 or self._trigger_emotion:
                 success = True
-                self.hard_mode_override()
-                emotion = self.get_emotion()
                 if self.change_flagship:
                     success = self.flagship_change()
-                if self.change_vanguard and success:
-                    success = self.vanguard_change()
-                    if not success and self.config.GemsFarming_ALLowHighFlagshipLevel:
-                        self.set_emotion(emotion)
+                if self.change_vanguard:
+                    success = success and self.vanguard_change()
 
                 if is_limit and self.config.StopCondition_RunCount <= 0:
                     logger.hr('Triggered stop condition: Run count')
