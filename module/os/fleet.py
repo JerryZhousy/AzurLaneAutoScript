@@ -323,7 +323,6 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
         # Record story history to clear click record
         clicked_story = False
         clicked_story_count = 0
-
         stuck_timer = Timer(20, count=5).start()
         confirm_timer.reset()
         while 1:
@@ -460,8 +459,8 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
                 else:
                     if stuck_timer.reached():
                         logger.warning(f"homo_loca stuck at current view, try reset.")
-                        self.fleet_reset_view()
-                        stuck_timer.reset()
+                        if self.fleet_reset_view():
+                            stuck_timer.reset()
                     confirm_timer.reset()
                 record = current
             else:
@@ -474,9 +473,17 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
         return result
 
     def fleet_reset_view(self):
+        """
+        Returns:
+            bool: If reset
+        """
         current_fleet = self.fleet_selector.get()
+        if not current_fleet:
+            logger.warning('Failed to get OpSi fleet')
+            return False
         self.fleet_selector.open()
         self.fleet_selector.click(current_fleet)
+        return True
 
     def port_goto(self, allow_port_arrive=True):
         """
@@ -656,9 +663,9 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
             fleets = self.view.select(is_current_fleet=True)
             if fleets.count == 0:
                 logger.warning('Current fleet not found on local view, reset camera view to current fleet.')
-                self.fleet_reset_view()
-                self.wait_until_camera_stable()
-                continue
+                if self.fleet_reset_view():
+                    self.wait_until_camera_stable()
+                    continue
             # Calculate destination
             grids = self.radar.select(is_question=True)
             if grids:
