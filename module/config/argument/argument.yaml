@@ -271,14 +271,17 @@ C124LargeLeveling:
     value: 3
     option: [ 3, 4, 5 ]
 GemsFarming:
+  ChangeFlagship:
+    value: ship_equip
+    option: [ ship, ship_equip ]
   CommonCV:
     value: any
     option: [ custom, any, eagle, langley, bogue, ranger, hermes ]
   CommonCVFilter: |-
     bogue > ranger > langley > hermes
   ChangeVanguard:
-    value: ship
-    option: [ disabled, ship ]
+    value: ship_equip
+    option: [ disabled, ship, ship_equip ]
   CommonDD:
     value: any
     option: [ custom, any, favourite, aulick_or_foote , cassin_or_downes, z20_or_z21, DDG]

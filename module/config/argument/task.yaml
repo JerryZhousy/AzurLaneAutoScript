@@ -230,7 +230,6 @@ Reward:
       - Awaken
     Island:
       - Scheduler
-      - IslandTransport
       - Island1
       - Island2
       - Island3

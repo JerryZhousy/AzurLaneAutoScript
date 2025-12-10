@@ -231,6 +231,38 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
             self.COLOR_HP_RED = origin[1]
         return self.hp
 
+    def _storage_hp_get(self):
+        super().hp_get()
+        ship_icon = self._hp_grid().crop((-29, -165, 106, -30))
+        # gray background if no ship
+        has_ship = [not self.image_color_count(button, color=(36, 41, 46), threshold=221, count=15000)
+                    for button in ship_icon.buttons]
+        need_repair = [not repair for repair in self.hp_has_ship]
+        for index, repair in enumerate(need_repair):
+            if repair:
+                self._hp[self.fleet_current_index][index] = 0
+        for index, ship in enumerate(has_ship):
+            self._hp_has_ship[self.fleet_current_index][index] = ship
+        self.need_repair = [all(repair) for repair in zip(need_repair, has_ship)]
+        logger.attr('Repair icon', self.need_repair)
+        logger.attr('HP', ' '.join(
+            [str(int(data * 100)).rjust(3) + '%' if use else '____'
+            for data, use in zip(self.hp, self.hp_has_ship)]))
+
+    def storage_hp_get(self):
+        """
+        Calculate current HP in page STORAGE_CHECK, also detects the wrench (Ship died, need to repair)
+        """
+        origin = (self._hp_grid, self.COLOR_HP_RED)
+        self._hp_grid = self._storage_hp_grid
+        self.COLOR_HP_RED = (236, 0, 0)
+        try:
+            self._storage_hp_get()
+        finally:
+            self._hp_grid = origin[0]
+            self.COLOR_HP_RED = origin[1]
+        return self.hp
+
     def lv_get(self, after_battle=False):
         pass
 
@@ -322,6 +354,7 @@ class OSFleet(OSCamera, Combat, Fleet, OSAsh):
         result = set()
         # Record story history to clear click record
         clicked_story = False
+        clicked_story_count = 0
         stuck_timer = Timer(20, count=5).start()
         confirm_timer.reset()
         while 1:
