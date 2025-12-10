@@ -603,6 +603,11 @@ class GeneratedConfig:
     OpsiCheckLeveling_LastRun = datetime.datetime(2020, 1, 1, 0, 0)
     OpsiCheckLeveling_DelayAfterFull = False
 
+    # Group `OpsiCheckLeveling`
+    OpsiCheckLeveling_TargetLevel = 0
+    OpsiCheckLeveling_LastRun = datetime.datetime(2020, 1, 1, 0, 0)
+    OpsiCheckLeveling_DelayAfterFull = False
+
     # Group `Daemon`
     Daemon_EnterMap = True
 
