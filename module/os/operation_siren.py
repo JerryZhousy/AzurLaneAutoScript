@@ -299,7 +299,7 @@ class OperationSiren(OSMap):
 
         logger.hr('OS clear obscure', level=1)
         while True:
-            if self.storage_get_next_item('OBSCURE', use_logger=True, 
+            if self.storage_get_next_item('OBSCURE', use_logger=True,
                     skip_obscure_hazard_2=self.config.OpsiObscure_SkipHazard2Obscure):
                 self.zone_init()
                 self.fleet_set(self.config.OpsiFleet_Fleet)
@@ -568,6 +568,17 @@ class OperationSiren(OSMap):
             if self.config.OpsiGeneral_BuyActionPointLimit > 0:
                 keep_current_ap = False
             self.action_point_set(cost=70, keep_current_ap=keep_current_ap, check_rest_ap=True)
+            if self._action_point_total >= 3000:
+                with self.config.multi_set():
+                    self.config.task_delay(server_update=True)
+                    if not self.is_in_opsi_explore():
+                        cd = self.nearest_task_cooling_down
+                        if cd is None:
+                            for task in ['OpsiAbyssal', 'OpsiStronghold', 'OpsiObscure']:
+                                if self.config.is_task_enabled(task):
+                                    self.config.task_call(task)
+                        self.config.task_call('OpsiMeowfficerFarming')
+                self.config.task_stop()
 
             if self.config.OpsiHazard1Leveling_TargetZone != 0:
                 zone = self.config.OpsiHazard1Leveling_TargetZone
