@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 import module.config.server as server
 
-server.server = 'cn'
+server.server = 'cn' # Don't need to edit, it's used to avoid error.
 
 from module.base.decorator import cached_property
 from module.base.utils import load_image
@@ -62,16 +62,33 @@ class DropStatistics:
                 os.remove(self.csv_file)
         return True
 
+    def check_server(self, campaign):
+        """
+        Call server.set_server() by folder name
+
+        Args:
+            campaign (str):
+        """
+        name = campaign.split()
+        target_server = 'cn'
+        if len(name) >= 3:
+            target_server = name[-1]
+
+        if server.server != target_server:
+            server.set_server(target_server)
+
     def parse_template(self, file):
         """
         Extract template from a single file.
         New templates will be given an auto-increased ID.
         """
-        images = unpack(load_image(file))[-1::]
+        image = load_image(file)
+        similarity = get_similarity(image)
+        images = unpack(image)[-1::]
         for image in images:
             # if self.get_items.appear_on(image):
             #     self.get_items.extract_template(image, folder=self.template_folder)
-            if self.campaign_bonus.appear_on(image):
+            if self.campaign_bonus.appear_on(image, similarity=similarity):
                 for button in [CAMPAIGN_BONUS_SINGLE, CAMPAIGN_BONUS]:
                     self.campaign_bonus.bonus_button = button
                     self.campaign_bonus.extract_template(image, folder=self.template_folder)
@@ -90,7 +107,9 @@ class DropStatistics:
         """
         ts = os.path.splitext(os.path.basename(file))[0]
         campaign = os.path.basename(os.path.abspath(os.path.join(file, '../')))
-        images = unpack(load_image(file))[-1::]
+        image = load_image(file)
+        similarity = get_similarity(image)
+        images = unpack(image)[-1::]
         enemy_name = 'unknown'
         for image in images:
             # if self.battle_status.appear_on(image):
@@ -98,10 +117,10 @@ class DropStatistics:
             # if self.get_items.appear_on(image):
             #     for item in self.get_items.stats_get_items(image):
             #         yield [ts, campaign, enemy_name, 'GET_ITEMS', item.name, item.amount]
-            if self.campaign_bonus.appear_on(image):
+            if self.campaign_bonus.appear_on(image, similarity=similarity):
                 for button in [CAMPAIGN_BONUS_SINGLE, CAMPAIGN_BONUS]:
                     self.campaign_bonus.bonus_button = button
-                    for item in self.campaign_bonus.stats_get_items(image):
+                    for item in self.campaign_bonus.stats_get_items(image, mode='known'):
                         yield [ts, campaign, enemy_name, button.name, item.name, item.amount]
             else:
                 raise ImageError('No campaign bonus on image.')
@@ -115,7 +134,8 @@ class DropStatistics:
         """
         print('')
         logger.hr(f'Extract templates from {campaign}', level=1)
-        for ts, file in tqdm(load_folder(self.drop_folder(campaign)).items()):
+        self.check_server(campaign)
+        for ts, file in tqdm(load_folder(self.drop_folder(campaign), ext=['.png', '.jpg']).items()):
             try:
                 self.parse_template(file)
             except ImageError as e:
@@ -135,11 +155,12 @@ class DropStatistics:
         """
         print('')
         logger.hr(f'extract drops from {campaign}', level=1)
+        self.check_server(campaign)
         _ = self.csv_overwrite_check
 
         with open(self.csv_file, 'a', newline='', encoding=DropStatistics.CSV_ENCODING) as csv_file:
             writer = csv.writer(csv_file)
-            for ts, file in tqdm(load_folder(self.drop_folder(campaign)).items()):
+            for ts, file in tqdm(load_folder(self.drop_folder(campaign), ext=['.png', '.jpg']).items()):
                 try:
                     rows = list(self.parse_drop(file))
                     writer.writerows(rows)
