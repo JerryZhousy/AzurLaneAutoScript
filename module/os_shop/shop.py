@@ -216,7 +216,7 @@ class OSShop(PortShop, AkashiShop):
         items = self.items_filter_in_os_shop(items)
         if not len(items):
             logger.warning('Nothing to buy.')
-            return False  
+            return False
         skip_get_coins = True
         items.reverse()
         count = 0
@@ -272,9 +272,9 @@ class OSShop(PortShop, AkashiShop):
     @cached_property
     def yellow_coins_preserve(self):
         if self.is_cl1_enabled:
-            return self.config.cross_get(keys='OpsiHazard1Leveling.OpsiHazard1Leveling.OperationCoinsPreserve')
+            return 100000
         else:
-            return self.config.OS_NORMAL_YELLOW_COINS_PRESERVE
+            return 35000
 
     def get_currency_coins(self, item):
         if item.cost == 'YellowCoins':
