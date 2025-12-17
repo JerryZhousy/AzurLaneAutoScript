@@ -46,10 +46,13 @@ GemsFarming:
       display: display
       value: fleet1_all_fleet2_standby
       option: [ fleet1_all_fleet2_standby, fleet1_standby_fleet2_all ]
-  Emotion:
-    Mode: calculate_ignore
-    Fleet1Control: prevent_red_face
-    Fleet2Control: prevent_red_face
+  Submarine:
+    Mode:
+      display: display
+      value: do_not_use
+      option: [ do_not_use, hunt_only ]
+    AutoSearchMode: sub_standby
+    DistanceToBoss: use_open_ocean_support
 
 # ==================== Event ====================
 
@@ -179,7 +182,6 @@ Raid:
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
-    Fleet2Onsen: false
 Hospital:
   StopCondition:
     RunCount: 0
@@ -191,13 +193,11 @@ Hospital:
     Fleet1Control: prevent_yellow_face
     Fleet1Recover: not_in_dormitory
     Fleet1Oath: false
-    Fleet1Onsen: false
     Fleet2Value: 119
     Fleet2Record: 2020-01-01 00:00:00
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
-    Fleet2Onsen: false
 RaidDaily:
   Scheduler:
     SuccessInterval: 30
@@ -225,7 +225,6 @@ RaidDaily:
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
-    Fleet2Onsen: False
 MaritimeEscort:
   Scheduler:
     SuccessInterval: 30
@@ -240,17 +239,15 @@ Coalition:
     Event:
       type: state
     Name: dynamic
-    Event:
-      type: state
     Mode: normal
     UseClearMode: true
     UseFleetLock: true
     UseAutoSearch: false
     Use2xBook: false
     AmbushEvade: true
-#  Coalition:
-#    Mode:
-#      option: [ easy, normal, hard, ex ]
+  Coalition:
+    Mode:
+      option: [ easy, normal, hard, ex ]
   StopCondition:
     MapAchievement: non_stop
     StageIncrease: false
@@ -262,7 +259,6 @@ Coalition:
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
-    Fleet2Onsen: False
 CoalitionSp:
   Scheduler:
     SuccessInterval: 30
@@ -292,18 +288,16 @@ CoalitionSp:
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
-    Fleet2Onsen: false
-EventShop:
-  Scheduler:
-    SuccessInterval: 30
-    FailureInterval: 30
-    ServerUpdate: 00:00
-    Fleet2Onsen: false
 
 # ==================== Reward ====================
 
 Commission:
   Scheduler:
+    Enable:
+      type: lock
+      value: true
+      option: [ true, ]
+      option_bold: [ true, ]
     SuccessInterval: 30-60
     FailureInterval: 30-60
     ServerUpdate: 00:00
@@ -314,6 +308,11 @@ Tactical:
     ServerUpdate: 00:00
 Research:
   Scheduler:
+    Enable:
+      type: lock
+      value: true
+      option: [ true, ]
+      option_bold: [ true, ]
     SuccessInterval: 30-60
     FailureInterval: 30-60
     ServerUpdate: 00:00
@@ -334,6 +333,11 @@ Guild:
     ServerUpdate: 00:00, 06:00, 12:00, 18:00, 21:00
 Reward:
   Scheduler:
+    Enable:
+      type: lock
+      value: true
+      option: [ true, ]
+      option_bold: [ true, ]
     SuccessInterval: 120-240
     FailureInterval: 120-240
     ServerUpdate: 00:00
@@ -468,30 +472,3 @@ EventStory:
       value: true
       option: [ true, ]
       option_bold: [ true, ]
-
-# ==================== Dashboard ====================
-Dashboard:
-  Oil:
-    Color: ^000000
-  Coin:
-    Color: ^FFAA33
-  Gem:
-    Color: ^FF3333
-  Pt:
-    Color: ^00BFFF
-  YellowCoin:
-    Color: ^FF8800
-  PurpleCoin:
-    Color: ^7700BB
-  ActionPoint:
-    Color: ^0000FF
-  Merit:
-    Color: ^FFFF00
-  Cube:
-    Color: ^33FFFF
-  Core:
-    Color: ^AAAAAA
-  Medal:
-    Color: ^FFDD00
-  GuildCoin:
-    Color: ^AAAAAA
