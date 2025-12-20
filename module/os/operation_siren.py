@@ -506,11 +506,20 @@ class OperationSiren(OSMap):
                     if self._action_point_total < self.config.OpsiMeowfficerFarming_ActionPointPreserve:
                         logger.info(f'【智能调度】短猫相接行动力不足 ({self._action_point_total} < {self.config.OpsiMeowfficerFarming_ActionPointPreserve})')
                         
+                        # 获取当前黄币数量
+                        yellow_coins = self.get_yellow_coins()
+                        
                         # 推送通知
-                        self.notify_push(
-                            title="[Alas] 短猫相接 - 行动力不足",
-                            content=f"当前行动力 {self._action_point_total} 不足 (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})，推迟1小时并切换回侵蚀1"
-                        )
+                        if self.is_cl1_enabled:
+                            self.notify_push(
+                                title="[Alas] 短猫相接 - 切换至侵蚀1",
+                                content=f"行动力 {self._action_point_total} 不足 (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})\n黄币: {yellow_coins}\n推迟短猫1小时，切换至侵蚀1继续执行"
+                            )
+                        else:
+                            self.notify_push(
+                                title="[Alas] 短猫相接 - 行动力不足",
+                                content=f"行动力 {self._action_point_total} 不足 (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})\n黄币: {yellow_coins}\n推迟1小时"
+                            )
                         
                         # 推迟短猫1小时
                         logger.info('推迟短猫相接1小时')
@@ -640,7 +649,7 @@ class OperationSiren(OSMap):
                         
                         self.notify_push(
                             title="[Alas] 侵蚀1 - 黄币与行动力双重不足",
-                            content=f"黄币 {yellow_coins} 不足，但行动力 {self._action_point_total} 也不足以执行短猫 (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})，推迟1小时"
+                            content=f"黄币 {yellow_coins} 低于保留值 {self.config.OpsiHazard1Leveling_YellowCoinPreserve}\n行动力 {self._action_point_total} 不足 (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})\n推迟1小时"
                         )
                         
                         logger.info('推迟侵蚀1任务1小时')
@@ -649,7 +658,12 @@ class OperationSiren(OSMap):
                     else:
                         # 行动力充足，切换到短猫相接获取黄币
                         logger.info(f'行动力充足 ({self._action_point_total}), 切换到短猫相接获取黄币')
-                        
+
+                        self.notify_push(
+                            title="[Alas] 侵蚀1 - 切换至短猫相接",
+                            content=f"黄币 {yellow_coins} 低于保留值 {self.config.OpsiHazard1Leveling_YellowCoinPreserve}\n行动力: {self._action_point_total} (需要 {self.config.OpsiMeowfficerFarming_ActionPointPreserve})\n切换至短猫相接获取黄币"
+                        )
+
                         with self.config.multi_set():
                             self.config.task_call('OpsiMeowfficerFarming')
                         self.config.task_stop()
