@@ -309,9 +309,11 @@
       "ServerUpdate": "00:00"
     },
     "GemsFarming": {
+      "ChangeFlagship": "ship",
       "CommonCV": "any",
       "ChangeVanguard": "ship",
       "CommonDD": "any",
+      "EquipmentCode": "DD: null\nbogue: null\nhermes: null\nlangley: null\nranger: null",
       "CommissionLimit": true
     },
     "Campaign": {
@@ -342,6 +344,25 @@
       "Fleet2Mode": "combat_auto",
       "Fleet2Step": 2,
       "FleetOrder": "fleet1_all_fleet2_standby"
+    },
+    "Emotion": {
+      "Mode": "calculate_ignore",
+      "Fleet1Value": 119,
+      "Fleet1Record": "2020-01-01 00:00:00",
+      "Fleet1Control": "prevent_red_face",
+      "Fleet1Recover": "not_in_dormitory",
+      "Fleet1Oath": false,
+      "Fleet2Value": 119,
+      "Fleet2Record": "2020-01-01 00:00:00",
+      "Fleet2Control": "prevent_red_face",
+      "Fleet2Recover": "not_in_dormitory",
+      "Fleet2Oath": false
+    },
+    "Submarine": {
+      "Fleet": 0,
+      "Mode": "do_not_use",
+      "AutoSearchMode": "sub_standby",
+      "DistanceToBoss": "use_open_ocean_support"
     },
     "Storage": {
       "Storage": {}
@@ -653,6 +674,25 @@
     },
     "MaritimeEscort": {
       "Enable": true
+    },
+    "Storage": {
+      "Storage": {}
+    }
+  },
+  "EventShop": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "EventShop",
+      "SuccessInterval": 30,
+      "FailureInterval": 30,
+      "ServerUpdate": "00:00"
+    },
+    "EventShop": {
+      "UnlockSSRShip": true,
+      "BuyURShip": 2,
+      "PresetFilter": "all",
+      "CustomFilter": "EquipUR > EquipSSR > Cube > GachaTicket\n> Array > Chip > CatT3 \n> Meta > SkinBox\n> Oil > Coin > Medal > ExpBookT1 > FoodT1\n> DR > PR\n> AugmentCore > AugmentEnhanceT2 > AugmentChangeT2 > AugmentChangeT1\n> CatT2 > CatT1 > PlateGeneralT3 > PlateT3 > BoxT4\n> ShipSSR"
     },
     "Storage": {
       "Storage": {}
@@ -1657,7 +1697,8 @@
       "OneHitMode": true,
       "DossierAutoAttackMode": false,
       "RequestAssist": true,
-      "EnsureFullyCollected": true
+      "EnsureFullyCollected": true,
+      "AutoCollectShip": true
     },
     "Storage": {
       "Storage": {}
@@ -1869,6 +1910,11 @@
       "Fleet": 1,
       "Submarine": false
     },
+    "OpsiCheckLeveling": {
+      "TargetLevel": 0,
+      "LastRun": "2020-01-01 00:00:00",
+      "DelayAfterFull": false
+    },
     "Storage": {
       "Storage": {}
     }
@@ -1888,6 +1934,11 @@
     "OpsiFleet": {
       "Fleet": 1,
       "Submarine": false
+    },
+    "OpsiCheckLeveling": {
+      "TargetLevel": 0,
+      "LastRun": "2020-01-01 00:00:00",
+      "DelayAfterFull": false
     },
     "Storage": {
       "Storage": {}
@@ -1951,6 +2002,74 @@
   "GameManager": {
     "GameManager": {
       "AutoRestart": true
+    },
+    "Storage": {
+      "Storage": {}
+    }
+  },
+  "Resource": {
+    "Oil": {
+      "Value": 0,
+      "Limit": 0,
+      "Color": "^000000",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Coin": {
+      "Value": 0,
+      "Limit": 0,
+      "Color": "^FFAA33",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Gem": {
+      "Value": 0,
+      "Color": "^FF3333",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Pt": {
+      "Value": 0,
+      "Color": "^00BFFF",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Cube": {
+      "Value": 0,
+      "Color": "^33FFFF",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "ActionPoint": {
+      "Value": 0,
+      "Total": 0,
+      "Color": "^0000FF",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "YellowCoin": {
+      "Value": 0,
+      "Color": "^FF8800",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "PurpleCoin": {
+      "Value": 0,
+      "Color": "^7700BB",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Core": {
+      "Value": 0,
+      "Color": "^AAAAAA",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Medal": {
+      "Value": 0,
+      "Color": "^FFDD00",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "Merit": {
+      "Value": 0,
+      "Color": "^FFFF00",
+      "Record": "2020-01-01 00:00:00"
+    },
+    "GuildCoin": {
+      "Value": 0,
+      "Color": "^AAAAAA",
+      "Record": "2020-01-01 00:00:00"
     },
     "Storage": {
       "Storage": {}

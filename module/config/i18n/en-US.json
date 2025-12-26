@@ -90,6 +90,10 @@
       "name": "Maritime Escort",
       "help": ""
     },
+    "EventShop": {
+      "name": "Event Shop",
+      "help": ""
+    },
     "WarArchives": {
       "name": "War Archives",
       "help": "Due to the lack of maintenance of war archives, continuous clear may not work normally, if Alas runs abnormally, Please manually finish clearing and use auto search"
@@ -1181,6 +1185,12 @@
       "name": "Commission Farming Settings",
       "help": "Warning: This task allows players to get a small amount of gems, but not an efficient way to farm.\nPlayers who have recently started Azur Lane are easily superstitious about 0LB and low oil consumption, while being ignorant about character leveling.\nRunning this function will only make you feel fulfilled however in reality your account will not actually progress very much.\nThe main purpose of this task is to get extra cubes for players with a formed lineup. Please rationally treat gems as a by-product.\n\nFleet 1 is expected to consist of 1 0LB CV/CVL and 1 0LB Vanguard, Fleet 2 is expected to consist of support ships such as New Jersey or Shinano to provide external battle assistance.\nFor information about the drop mechanism/rate of urgent commissions, you can refer to <https://bbs.nga.cn/read.php?tid=27134956> (in Chinese Simplified)"
     },
+    "ChangeFlagship": {
+      "name": "Change Flagship",
+      "help": "Change flagship if flagship level >= 32 or either flagship or vanguard are emotion exhausted. If you choose not to change, your fleet will ignore the low emotion warning and continue combat.\nSwitch out to new common CV/CVL whose level is in range of 1 to 31, after current has reached level 32+. Meanwhile, abandoned flagships will be retired. Any common CV/CVL whose level is 2+ will be regarded as targets. Do confirm that your own ships which is not a target has been locked\n\nThe flagship's equipment is replaced when being switched out by first recording the current setup\nOnly populated equipment slots will be replaced. If the CV/CVL preference has been configured, all 5 slots will be populated otherwise only the auxiliary slots will be populated.",
+      "ship": "Change Ship",
+      "ship_equip": "Change Ship + Gears"
+    },
     "CommonCV": {
       "name": "Flagship Common CV/CVL Preference",
       "help": "",
@@ -1194,7 +1204,8 @@
       "name": "Change Vanguard",
       "help": "Change vanguard if flagship or vanguard are emotion exhausted. If you choose not to change, your fleet will ignore the low emotion warning and continue combat.\nSwitch out to new level 100(70) common vanguard from eagle or ironblood after current flagship has reached level 32+ (Only CN players'0 limit break ship can reach level 100)\n\nThe vanguard's equipment is replaced when being switched out by first recording the current setup. Only populated equipment slots will be replaced.",
       "disabled": "Don't Change",
-      "ship": "Change Ship"
+      "ship": "Change Ship",
+      "ship_equip": "Change Ship + Gears"
     },
     "CommonDD": {
       "name": "Flagship Common DD Preference",
@@ -1204,6 +1215,10 @@
       "aulick_or_foote": "Aulick or Foote",
       "cassin_or_downes": "Cassin or Downes",
       "z20_or_z21": "Z20 or Z21"
+    },
+    "EquipmentCode": {
+      "name": "Gear Code",
+      "help": "Only works when 'Change Ship + Gears' is chosen.\nWhen substituting down CV/CVL/DD, if corresponding gear code is not provided, alas will export it\nWhen substituting up corresponding CV/CVL/DD, if corresponding gear code is not provided, alas will use exported gear code from previous ship; otherwise alas will use gear code in the config\nBluestacks users need to enable virtual keyboard first.\nSee https://support.bluestacks.com/hc/en-us/articles/360061968892-How-to-use-a-virtual-on-screen-keyboard-on-BlueStacks-5"
     },
     "CommissionLimit": {
       "name": "Prevent Too Many Urgent Commissions",
@@ -1333,6 +1348,33 @@
       "help": "",
       "single": "Solo Challenge",
       "multi": "Coalition Battle"
+    }
+  },
+  "EventShop": {
+    "_info": {
+      "name": "Event Shop Settings",
+      "help": ""
+    },
+    "UnlockSSRShip": {
+      "name": "Unlock SSR Ship",
+      "help": ""
+    },
+    "BuyURShip": {
+      "name": "Buy X UR Ship(s)",
+      "help": "",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "Event Shop Filter",
+      "help": "Generally does not need to be modified.",
+      "all": "All",
+      "custom": "Custom"
+    },
+    "CustomFilter": {
+      "name": "Custom Filter",
+      "help": "To use your own filter, set \"Event Shop Filter\" to \"Custom\". All options have been defined at <https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/filter_string_en>"
     }
   },
   "Commission": {
@@ -2364,6 +2406,10 @@
     "EnsureFullyCollected": {
       "name": "Ensure 200 Beacon Data Fully Collected",
       "help": "Ignore AP limit setting temporarily before ash beacon fully collected. \"Meowfficer Farming\" must be enabled"
+    },
+    "AutoCollectShip": {
+      "name": "Automatically acquire new META ships",
+      "help": "Automatically acquire new META ships when claiming rewards. If disabled, the \"Sync\" button will not be clicked, and rewards must be claimed manually."
     }
   },
   "OpsiFleetFilter": {
@@ -2541,6 +2587,24 @@
       "22": "22 | NA Ocean SW Sector B"
     }
   },
+  "OpsiCheckLeveling": {
+    "_info": {
+      "name": "Daily Leveling Check",
+      "help": "Check if all ships in current fleet have received enough experience to reach the target level\nIf yes, then Alas will push a message.\n'Error notify config' should be set first."
+    },
+    "TargetLevel": {
+      "name": "Push when all ships received enough experience to reach target level X",
+      "help": "0 means no limit"
+    },
+    "LastRun": {
+      "name": "Last Check Time",
+      "help": "Automatically updated with the last check time, generally does not need to be modified"
+    },
+    "DelayAfterFull": {
+      "name": "Delay task when target level reached",
+      "help": ""
+    }
+  },
   "Daemon": {
     "_info": {
       "name": "Semi-auto Clicking",
@@ -2643,6 +2707,8 @@
       "Stop": "Stop",
       "ScrollON": "Auto Scroll ON",
       "ScrollOFF": "Auto Scroll OFF",
+      "DashboardON": "Dashboard ON",
+      "DashboardOFF": "Dashboard OFF",
       "ClearLog": "Clear Log",
       "Setting": "Setting",
       "CheckUpdate": "Check update",
@@ -2675,11 +2741,34 @@
     },
     "Overview": {
       "Scheduler": "Scheduler",
+      "Dashboard": "Dashboard",
       "Log": "Log",
       "Running": "Running",
       "Pending": "Pending",
       "Waiting": "Waiting",
       "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "TimeError": "Time error",
+      "JustNow": "Just now",
+      "MinutesAgo": "Minutes ago",
+      "HoursAgo": "Hours ago",
+      "DaysAgo": "Days ago",
+      "MonthsAgo": "Months ago",
+      "LongTimeAgo": "Long time ago",
+      "NoData": "No data",
+      "Oil": "Oil",
+      "Coin": "Coin",
+      "Gem": "Gem",
+      "Cube": "Cube",
+      "Pt": "Event Pt",
+      "YellowCoin": "Operation Supply Coin",
+      "PurpleCoin": "Special Item Token",
+      "ActionPoint": "Action Point",
+      "Merit": "Merit",
+      "Medal": "Medal",
+      "Core": "Core Data",
+      "GuildCoin": "Guild Coin"
     },
     "AddAlas": {
       "PopupTitle": "Add new config",

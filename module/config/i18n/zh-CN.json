@@ -90,6 +90,10 @@
       "name": "商船护航",
       "help": ""
     },
+    "EventShop": {
+      "name": "活动商店",
+      "help": ""
+    },
     "WarArchives": {
       "name": "作战档案",
       "help": "由于作战档案缺少维护，开荒功能不一定能正常使用，如果发现Alas运行异常，请手动完成开荒后使用自律寻敌功能"
@@ -1181,6 +1185,12 @@
       "name": "刷紧急委托",
       "help": "警告: 这个功能可以让玩家获取少量的钻石，但不是一个能高效获取钻石的方法\n玩碧蓝航线不久的玩家, 很容易迷信零破和低耗等, 而忽视了角色养成\n运行这个功能只会让你自己感觉很充实, 而你的帐号实际零提升\n这个功能的主要用途，是让阵容成型的玩家获取额外的魔方，请理性地把钻石当作副产物\n\n这个功能将在旗舰32级之后更换旗舰\n关于紧急委托刷新机制, 可阅读 https://bbs.nga.cn/read.php?tid=27134956\n委托油耗比: A3 > A1 > 2-4 > 2-1, 有活动图时建议选活动图, 2-1会拣问号有更多物资\n一队会完成所有的战斗, 前排应当为百级零破驱逐带输出装, 后排应该为33级及以下白皮零破航母\n二队应提供跨队支援（跨队弹幕、跨队辅助）"
     },
+    "ChangeFlagship": {
+      "name": "更换旗舰",
+      "help": "当旗舰等级>=32或红脸时更换旗舰\n寻找等级在1-31之间的白皮航母，同时会在退役时选择更换下来的旗舰。所有等级大于1级的白皮航母均会被视为退役目标，请务必锁定不是目标的船。换船时更换旗舰装备，这通过记录之前的装备完成。\n\n换装备只会更换正在装备中的栏位，即使是白装也会更换。如果指定了旗舰，则会更换全部5个装备，未指定旗舰只会更换设备。",
+      "ship": "更换舰船",
+      "ship_equip": "更换舰船 + 装备"
+    },
     "CommonCV": {
       "name": "指定旗舰航母",
       "help": "",
@@ -1194,7 +1204,8 @@
       "name": "更换前排",
       "help": "当前排红脸时更换前排，选择不更换则会强制红脸出击\n换前排通过找一艘心情不低于10、等级100的白鹰或铁血的白皮驱逐完成，所以尽量保证有足够多的驱逐。国服以外则为等级70的白鹰白船驱逐。\n\n换装备只会更换正在装备中的栏位，即使是白装也会更换。前排会更换全部5个装备。",
       "disabled": "不更换",
-      "ship": "更换舰船"
+      "ship": "更换舰船",
+      "ship_equip": "更换舰船 + 装备"
     },
     "CommonDD": {
       "name": "指定前排",
@@ -1204,6 +1215,10 @@
       "aulick_or_foote": "奥利克或富特",
       "cassin_or_downes": "卡辛或唐斯",
       "z20_or_z21": "Z20或Z21"
+    },
+    "EquipmentCode": {
+      "name": "装备码",
+      "help": "仅当选择“更换舰船 + 装备”时生效。\n在换下舰船时，若设置里当前舰船装备码为null则会导出；在换上舰船时，若设置里当前舰船装备码为null则会使用上一艘舰船导出的装备码，否则使用设置里的装备码\n蓝叠模拟器用户需要先开启虚拟键盘，详见https://support.bluestacks.com/hc/zh-tw/articles/360061968892-%E5%A6%82%E4%BD%95%E5%9C%A8-BlueStacks-5-%E4%B8%8A%E4%BD%BF%E7%94%A8%E5%B0%8F%E9%8D%B5%E7%9B%A4-%E8%99%9B%E6%93%AC%E9%8D%B5%E7%9B%A4"
     },
     "CommissionLimit": {
       "name": "防止紧急委托数量过多",
@@ -1333,6 +1348,33 @@
       "help": "",
       "single": "单队连战",
       "multi": "多队出击"
+    }
+  },
+  "EventShop": {
+    "_info": {
+      "name": "活动商店",
+      "help": ""
+    },
+    "UnlockSSRShip": {
+      "name": "解锁SSR舰船",
+      "help": ""
+    },
+    "BuyURShip": {
+      "name": "购买X只UR舰船",
+      "help": "",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "活动商店过滤器",
+      "help": "一般默认全买即可",
+      "all": "全部",
+      "custom": "自定义"
+    },
+    "CustomFilter": {
+      "name": "自定义过滤器",
+      "help": "使用自定义过滤器需将“活动商店过滤器”设置为“自定义”，并阅读 https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/filter_string_cn"
     }
   },
   "Commission": {
@@ -2364,6 +2406,10 @@
     "EnsureFullyCollected": {
       "name": "保证收集满每日200信标数据",
       "help": "在收集满为前，暂时无视保留行动力设置，需要同时开启 \"短猫相接\""
+    },
+    "AutoCollectShip": {
+      "name": "自动获取新META舰船",
+      "help": "领取奖励时自动获取新META舰船。关闭后将不会点击\"点击同步\"按钮，需要手动领取"
     }
   },
   "OpsiFleetFilter": {
@@ -2541,6 +2587,24 @@
       "22": "22 | NA海域西南B"
     }
   },
+  "OpsiCheckLeveling": {
+    "_info": {
+      "name": "每日经验检测",
+      "help": "检测出击舰队所有船是否已经获取满经验，是的话则发送一条推送消息\n需要先设置“错误推送设置”"
+    },
+    "TargetLevel": {
+      "name": "所有舰船获取到可升级至X级的经验后推送",
+      "help": "0表示不限制等级"
+    },
+    "LastRun": {
+      "name": "上次检查时间",
+      "help": "记录上一次检查的时间以防止任务重复运行，检查间隔为1天，这个数值是自动记录的，一般不需要修改"
+    },
+    "DelayAfterFull": {
+      "name": "到达目标等级后推迟任务",
+      "help": ""
+    }
+  },
   "Daemon": {
     "_info": {
       "name": "半自动点击",
@@ -2643,6 +2707,8 @@
       "Stop": "停止",
       "ScrollON": "自动滚动 开",
       "ScrollOFF": "自动滚动 关",
+      "DashboardON": "折叠",
+      "DashboardOFF": "展开",
       "ClearLog": "清空日志",
       "Setting": "设置",
       "CheckUpdate": "检查更新",
@@ -2675,11 +2741,34 @@
     },
     "Overview": {
       "Scheduler": "调度器",
+      "Dashboard": "仪表盘",
       "Log": "日志",
       "Running": "运行中",
       "Pending": "队列中",
       "Waiting": "等待中",
       "NoTask": "无任务"
+    },
+    "Dashboard": {
+      "TimeError": "时间错误",
+      "JustNow": "刚刚",
+      "MinutesAgo": "分钟前",
+      "HoursAgo": "小时前",
+      "DaysAgo": "天前",
+      "MonthsAgo": "月前",
+      "LongTimeAgo": "很久之前",
+      "NoData": "无数据",
+      "Oil": "石油",
+      "Coin": "物资",
+      "Gem": "钻石",
+      "Cube": "魔方",
+      "Pt": "活动PT",
+      "YellowCoin": "大世界黄币",
+      "PurpleCoin": "大世界紫币",
+      "ActionPoint": "行动力",
+      "Merit": "功勋",
+      "Medal": "勋章",
+      "Core": "核心数据",
+      "GuildCoin": "舰队币"
     },
     "AddAlas": {
       "PopupTitle": "添加新配置",

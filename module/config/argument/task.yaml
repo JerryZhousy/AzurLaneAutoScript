@@ -61,6 +61,8 @@ Farm:
       - Campaign
       - StopCondition
       - Fleet
+      - Emotion
+      - Submarine
 
 # ==================== Event ====================
 
@@ -109,6 +111,9 @@ Event:
     MaritimeEscort:
       - Scheduler
       - MaritimeEscort
+    EventShop:
+      - Scheduler
+      - EventShop
     WarArchives:
       - Scheduler
       - Campaign
@@ -318,10 +323,12 @@ Opsi:
       - Scheduler
       - OpsiMeowfficerFarming
       - OpsiFleet
+      - OpsiCheckLeveling
     OpsiHazard1Leveling:
       - Scheduler
       - OpsiHazard1Leveling
       - OpsiFleet
+      - OpsiCheckLeveling
     OpsiCrossMonth:
       - Scheduler
 
@@ -343,3 +350,22 @@ Tool:
       - AzurLaneUncensored
     GameManager:
       - GameManager
+
+# ==================== Dashboard ====================
+
+Dashboard:
+  page: 'dashboard'
+  tasks:
+    Resource:
+      - Oil
+      - Coin
+      - Gem
+      - Pt
+      - Cube
+      - ActionPoint
+      - YellowCoin
+      - PurpleCoin
+      - Core
+      - Medal
+      - Merit
+      - GuildCoin

@@ -265,15 +265,27 @@ C124LargeLeveling:
     value: 3
     option: [ 3, 4, 5 ]
 GemsFarming:
+  ChangeFlagship:
+    value: ship
+    option: [ ship, ship_equip ]
   CommonCV:
     value: any
     option: [ any, langley, bogue, ranger, hermes ]
   ChangeVanguard:
     value: ship
-    option: [ disabled, ship ]
+    option: [ disabled, ship, ship_equip ]
   CommonDD:
     value: any
     option: [ any, favourite, aulick_or_foote , cassin_or_downes, z20_or_z21 ]
+  EquipmentCode:
+    type: textarea
+    mode: yaml
+    value: |-
+      DD: null
+      bogue: null
+      hermes: null
+      langley: null
+      ranger: null
   CommissionLimit: true
 
 # ==================== Event ====================
@@ -310,6 +322,23 @@ Coalition:
   Fleet:
     value: single
     option: [ single, multi ]
+EventShop:
+  UnlockSSRShip: true
+  BuyURShip:
+    value: 2
+    option: [ 0, 1, 2 ]
+  PresetFilter:
+    value: all
+    option: [ all, custom ]
+  CustomFilter: |-
+    EquipUR > EquipSSR > Cube > GachaTicket
+    > Array > Chip > CatT3 
+    > Meta > SkinBox
+    > Oil > Coin > Medal > ExpBookT1 > FoodT1
+    > DR > PR
+    > AugmentCore > AugmentEnhanceT2 > AugmentChangeT2 > AugmentChangeT1
+    > CatT2 > CatT1 > PlateGeneralT3 > PlateT3 > BoxT4
+    > ShipSSR
 
 
 # ==================== Reward ====================
@@ -676,6 +705,7 @@ OpsiAshBeacon:
   DossierAutoAttackMode: false
   RequestAssist: true
   EnsureFullyCollected: true
+  AutoCollectShip: true
 OpsiFleetFilter:
   Filter: |-
     Fleet-4 > CallSubmarine > Fleet-2 > Fleet-3 > Fleet-1
@@ -731,6 +761,10 @@ OpsiHazard1Leveling:
   TargetZone:
     value: 0
     option: [ 0, 44, 22 ]
+OpsiCheckLeveling:
+  TargetLevel: 0
+  LastRun: 2020-01-01 00:00:00
+  DelayAfterFull: false
 
 # ==================== Tools ====================
 
@@ -763,3 +797,81 @@ AzurLaneUncensored:
     display: disabled
 GameManager:
   AutoRestart: true
+
+# ==================== Dashboard ====================
+
+Oil:
+  Value: 0
+  Limit: 0
+  Color:
+    value: ^000000
+    display: hide
+  Record: 2020-01-01 00:00:00
+Coin:
+  Value: 0
+  Limit: 0
+  Color:
+    value: ^FFAA33
+    display: hide
+  Record: 2020-01-01 00:00:00
+Gem:
+  Value: 0
+  Color:
+    value: ^FF3333
+    display: hide
+  Record: 2020-01-01 00:00:00
+Pt:
+  Value: 0
+  Color:
+    value: ^00BFFF
+    display: hide
+  Record: 2020-01-01 00:00:00
+YellowCoin:
+  Value: 0
+  Color:
+    value: ^FF8800
+    display: hide
+  Record: 2020-01-01 00:00:00
+PurpleCoin:
+  Value: 0
+  Color:
+    value: ^7700BB
+    display: hide
+  Record: 2020-01-01 00:00:00
+ActionPoint:
+  Value: 0
+  Total: 0
+  Color:
+    value: ^0000FF
+    display: hide
+  Record: 2020-01-01 00:00:00
+Merit:
+  Value: 0
+  Color:
+    value: ^FFFF00
+    display: hide
+  Record: 2020-01-01 00:00:00
+Cube:
+  Value: 0
+  Color:
+    value: ^33FFFF
+    display: hide
+  Record: 2020-01-01 00:00:00
+Core:
+  Value: 0
+  Color:
+    value: ^AAAAAA
+    display: hide
+  Record: 2020-01-01 00:00:00
+Medal:
+  Value: 0
+  Color:
+    value: ^FFDD00
+    display: hide
+  Record: 2020-01-01 00:00:00
+GuildCoin:
+  Value: 0
+  Color:
+    value: ^AAAAAA
+    display: hide
+  Record: 2020-01-01 00:00:00
