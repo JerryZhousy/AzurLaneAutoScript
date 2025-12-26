@@ -802,13 +802,16 @@
     },
     "Campaign": {
       "Name": "D3",
-      "Event": "war_archives_20220915_cn",
+      "Event": "war_archives_20221222_cn",
       "Mode": "normal",
       "UseClearMode": true,
       "UseFleetLock": true,
       "UseAutoSearch": true,
       "Use2xBook": false,
       "AmbushEvade": true
+    },
+    "InterceptiveCheck": {
+      "OilThreshold": 0
     },
     "StopCondition": {
       "OilLimit": 1000,
@@ -1759,7 +1762,8 @@
     "GeneralShop": {
       "UseGems": false,
       "Refresh": false,
-      "BuySkinBox": false,
+      "BuySkinBox": "disabled",
+      "BuySkinBoxAmount": 0,
       "ConsumeCoins": false,
       "Filter": "BookRedT3 > BookYellowT3 > BookBlueT3 > BookRedT2\n> Cube\n> FoodT6 > FoodT5"
     },

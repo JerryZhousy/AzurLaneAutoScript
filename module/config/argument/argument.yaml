@@ -161,6 +161,8 @@ Campaign:
   UseAutoSearch: true
   Use2xBook: false
   AmbushEvade: true
+InterceptiveCheck:
+  OilThreshold: 0
 StopCondition:
   OilLimit: 1000
   RunCount: 0
@@ -778,7 +780,10 @@ Island15:
 GeneralShop:
   UseGems: false
   Refresh: false
-  BuySkinBox: false
+  BuySkinBox:
+    value: disabled
+    option: [ disabled, unlimited, specified ]
+  BuySkinBoxAmount: 0
   ConsumeCoins: false
   Filter: |-
     BookRedT3 > BookYellowT3 > BookBlueT3 > BookRedT2

@@ -837,6 +837,7 @@
       "war_archives_20220526_cn": "archives Pledge of the Radiant Court",
       "war_archives_20220728_cn": "archives Aquilifers Ballade",
       "war_archives_20220915_cn": "archives Violet Tempest Blooming Lycoris",
+      "war_archives_20221222_cn": "archives Parallel Superimposition",
       "war_archives_20231026_cn": "archives Tempesta and the Fountain of Youth"
     },
     "Mode": {
@@ -864,6 +865,16 @@
     "AmbushEvade": {
       "name": "Evade Ambush(es)",
       "help": ""
+    }
+  },
+  "InterceptiveCheck": {
+    "_info": {
+      "name": "Dynamic Verification",
+      "help": "Judge whether the current task settings meet the requirements through in-game information to avoid problems caused by forgetting to adjust the task settings.\nAfter any of the following conditions is triggered, the current battle will be exited and the task will be closed."
+    },
+    "OilThreshold": {
+      "name": "Single Battle Oil Consumption Upper Limit",
+      "help": "If the oil consumption of a single battle is greater than or equal to X, the setting is deemed incorrect.\n0 means no limit on oil consumption."
     }
   },
   "StopCondition": {
@@ -3001,7 +3012,14 @@
     },
     "BuySkinBox": {
       "name": "Buy Equip Skin Boxes",
-      "help": "In order to reduce maintenance costs, the skin box selectors in the filter will not be updated with the game, but Alas will consider any unknown items with a quantity of 1 and consume 7000 coins as skin boxes and buy them."
+      "help": "In order to reduce maintenance costs, the skin box selectors in the filter will not be updated with the game, but Alas will consider any unknown items with a quantity of 1 and consume 7000 coins as skin boxes and buy them.",
+      "disabled": "Do Not Purchase",
+      "unlimited": "Unlimited Purchases",
+      "specified": "Purchase Specified Quantity"
+    },
+    "BuySkinBoxAmount": {
+      "name": "Purchase X Skin Boxes",
+      "help": "Takes effect when \"Purchase Specified Quantity\" is selected."
     },
     "ConsumeCoins": {
       "name": "Consume Spilled Coins",
