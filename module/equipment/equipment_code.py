@@ -108,7 +108,7 @@ class EquipmentCodeHandler(StorageHandler):
     #     """
     #     self.ui_back(check_button=EQUIPMENT_CODE_ENTRANCE)
 
-    def current_ship(self):
+    def current_ship(self, **kwargs):
         # Will be overridden in subclasses.
         pass
 

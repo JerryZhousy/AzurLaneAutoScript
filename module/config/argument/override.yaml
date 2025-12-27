@@ -9,8 +9,8 @@ Restart:
     Enable:
       type: state
       value: true
-      option: [ true, ]
-      option_bold: [ true, ]
+      option: [true]
+      option_bold: [true]
     SuccessInterval: 0
     FailureInterval: 0
     ServerUpdate: 00:00
@@ -45,12 +45,20 @@ GemsFarming:
     FleetOrder:
       display: display
       value: fleet1_all_fleet2_standby
-      option: [ fleet1_all_fleet2_standby, fleet1_standby_fleet2_all ]
+      option: [fleet1_all_fleet2_standby, fleet1_standby_fleet2_all]
+  Emotion:
+    Mode: calculate_ignore
+    Fleet1Control: prevent_red_face
+    Fleet1Recover: not_in_dormitory
+    Fleet1Oath: false
+    Fleet2Control: prevent_red_face
+    Fleet2Recover: not_in_dormitory
+    Fleet2Oath: false
   Submarine:
     Mode:
       display: display
       value: do_not_use
-      option: [ do_not_use, hunt_only ]
+      option: [do_not_use, hunt_only]
     AutoSearchMode: sub_standby
     DistanceToBoss: use_open_ocean_support
 
@@ -245,9 +253,9 @@ Coalition:
     UseAutoSearch: false
     Use2xBook: false
     AmbushEvade: true
-#  Coalition:
-#    Mode:
-#      option: [ easy, normal, hard, ex ]
+  #  Coalition:
+  #    Mode:
+  #      option: [ easy, normal, hard, ex ]
   StopCondition:
     MapAchievement: non_stop
     StageIncrease: false
@@ -288,6 +296,11 @@ CoalitionSp:
     Fleet2Control: prevent_yellow_face
     Fleet2Recover: not_in_dormitory
     Fleet2Oath: false
+EventShop:
+  Scheduler:
+    SuccessInterval: 30
+    FailureInterval: 30
+    ServerUpdate: 00:00
 
 # ==================== Reward ====================
 
@@ -296,8 +309,8 @@ Commission:
     Enable:
       type: lock
       value: true
-      option: [ true, ]
-      option_bold: [ true, ]
+      option: [true]
+      option_bold: [true]
     SuccessInterval: 30-60
     FailureInterval: 30-60
     ServerUpdate: 00:00
@@ -311,8 +324,8 @@ Research:
     Enable:
       type: lock
       value: true
-      option: [ true, ]
-      option_bold: [ true, ]
+      option: [true]
+      option_bold: [true]
     SuccessInterval: 30-60
     FailureInterval: 30-60
     ServerUpdate: 00:00
@@ -336,8 +349,8 @@ Reward:
     Enable:
       type: lock
       value: true
-      option: [ true, ]
-      option_bold: [ true, ]
+      option: [true]
+      option_bold: [true]
     SuccessInterval: 120-240
     FailureInterval: 120-240
     ServerUpdate: 00:00
@@ -470,5 +483,5 @@ EventStory:
     SkipBattle:
       type: lock
       value: true
-      option: [ true, ]
-      option_bold: [ true, ]
+      option: [true]
+      option_bold: [true]

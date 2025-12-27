@@ -16,6 +16,7 @@ from module.raid.assets import *
 from module.raid.combat import RaidCombat
 from module.ui.assets import RAID_CHECK
 from module.ui.page import page_rpg_stage
+from module.log_res import LogRes
 
 
 class RaidCounter(DigitCounter):

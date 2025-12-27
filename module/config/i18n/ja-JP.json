@@ -90,6 +90,10 @@
       "name": "Maritime Escort",
       "help": ""
     },
+    "EventShop": {
+      "name": "イベント商店",
+      "help": ""
+    },
     "WarArchives": {
       "name": "作戦履歴",
       "help": ""
@@ -1584,6 +1588,33 @@
       "multi": "multi"
     }
   },
+  "EventShop": {
+    "_info": {
+      "name": "EventShop._info.name",
+      "help": "EventShop._info.help"
+    },
+    "UnlockSSRShip": {
+      "name": "EventShop.UnlockSSRShip.name",
+      "help": "EventShop.UnlockSSRShip.help"
+    },
+    "BuyURShip": {
+      "name": "EventShop.BuyURShip.name",
+      "help": "EventShop.BuyURShip.help",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "EventShop.PresetFilter.name",
+      "help": "EventShop.PresetFilter.help",
+      "all": "all",
+      "custom": "custom"
+    },
+    "CustomFilter": {
+      "name": "EventShop.CustomFilter.name",
+      "help": "EventShop.CustomFilter.help"
+    }
+  },
   "Commission": {
     "_info": {
       "name": "Commission._info.name",
@@ -2613,6 +2644,10 @@
     "EnsureFullyCollected": {
       "name": "OpsiAshBeacon.EnsureFullyCollected.name",
       "help": "OpsiAshBeacon.EnsureFullyCollected.help"
+    },
+    "AutoCollectShip": {
+      "name": "OpsiAshBeacon.AutoCollectShip.name",
+      "help": "OpsiAshBeacon.AutoCollectShip.help"
     }
   },
   "OpsiFleetFilter": {
@@ -2814,6 +2849,24 @@
       "help": "侵蚀一明石一般只购买体力nanoda"
     }
   },
+  "OpsiCheckLeveling": {
+    "_info": {
+      "name": "OpsiCheckLeveling._info.name",
+      "help": "OpsiCheckLeveling._info.help"
+    },
+    "TargetLevel": {
+      "name": "OpsiCheckLeveling.TargetLevel.name",
+      "help": "OpsiCheckLeveling.TargetLevel.help"
+    },
+    "LastRun": {
+      "name": "OpsiCheckLeveling.LastRun.name",
+      "help": "OpsiCheckLeveling.LastRun.help"
+    },
+    "DelayAfterFull": {
+      "name": "OpsiCheckLeveling.DelayAfterFull.name",
+      "help": "OpsiCheckLeveling.DelayAfterFull.help"
+    }
+  },
   "Daemon": {
     "_info": {
       "name": "Daemon._info.name",
@@ -2916,8 +2969,8 @@
       "Stop": "中止",
       "ScrollON": "自動スクロール ON",
       "ScrollOFF": "自動スクロール OFF",
-      "DashboardON": "Gui.Button.DashboardON",
-      "DashboardOFF": "Gui.Button.DashboardOFF",
+      "DashboardON": "ダッシュボード ON",
+      "DashboardOFF": "ダッシュボード OFF",
       "ClearLog": "ログクリーニング",
       "Setting": "設定",
       "CheckUpdate": "アップデータチェック",
@@ -2950,13 +3003,21 @@
     },
     "Overview": {
       "Scheduler": "スケジューラー",
-      "Dashboard": "Gui.Overview.Dashboard",
-      "SecondsAgo": "Seconds ago",
+      "Dashboard": "ダッシュボード",
+      "Log": "ログ",
+      "Running": "実行中",
+      "Pending": "隊列中",
+      "Waiting": "Waiting",
+      "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "TimeError": "Time error",
+      "JustNow": "Just now",
       "MinutesAgo": "Minutes ago",
       "HoursAgo": "Hours ago",
       "DaysAgo": "Days ago",
       "MonthsAgo": "Months ago",
-      "YearsAgo": "Years ago",
+      "LongTimeAgo": "Long time ago",
       "NoData": "No data",
       "Oil": "Oil",
       "Coin": "Coin",
@@ -2966,15 +3027,10 @@
       "YellowCoin": "Operation Supply Coin",
       "PurpleCoin": "Special Item Token",
       "ActionPoint": "Action Point",
-      "Merit": "Gui.Overview.Merit",
-      "Medal": "Gui.Overview.Medal",
-      "Core": "Gui.Overview.Core",
-      "GuildCoin": "Gui.Overview.GuildCoin",
-      "Log": "ログ",
-      "Running": "実行中",
-      "Pending": "隊列中",
-      "Waiting": "Waiting",
-      "NoTask": "No Task"
+      "Merit": "Merit",
+      "Medal": "Medal",
+      "Core": "Core Data",
+      "GuildCoin": "Guild Coin"
     },
     "AddAlas": {
       "PopupTitle": "新しいコンフィグを追加",

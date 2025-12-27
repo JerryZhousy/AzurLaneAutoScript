@@ -14,7 +14,7 @@ from module.ocr.ocr import Digit
 from module.os_handler.assets import *
 from module.os_shop.assets import OS_SHOP_CHECK, OS_SHOP_PURPLE_COINS, SHOP_PURPLE_COINS, SHOP_YELLOW_COINS
 from module.ui.ui import UI
-from module.log_res.log_res import LogRes
+from module.log_res import LogRes
 
 if server.server != 'jp':
     OCR_SHOP_YELLOW_COINS = Digit(SHOP_YELLOW_COINS, letter=(239, 239, 239), threshold=160, name='OCR_SHOP_YELLOW_COINS')

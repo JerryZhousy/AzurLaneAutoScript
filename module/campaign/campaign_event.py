@@ -60,8 +60,8 @@ class CampaignEvent(CampaignStatus):
             return False
 
         pt = self.get_event_pt()
-        logger.attr('Event_PT_limit', f'{pt}/{limit}')
-        if pt >= limit:
+        if pt >= limit and limit > 0:
+            logger.attr('Event_PT_limit', f'{pt}/{limit}')
             logger.hr(f'Reach event PT limit: {limit}')
             self._disable_tasks(tasks)
             return True

@@ -117,6 +117,13 @@ footer {
     margin-bottom: .25rem !important;
 }
 
+.status-point {
+    margin: 37% 50% 63% 50%;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+}
+
 .hr-task-group-box {
     display: flex;
     align-items: center;

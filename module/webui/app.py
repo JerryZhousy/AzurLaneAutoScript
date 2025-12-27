@@ -57,10 +57,12 @@ from module.config.utils import (
     filepath_args,
     filepath_config,
     read_file,
+    readable_time,
 )
 from module.config.utils import time_delta
 from module.log_res.log_res import LogRes
 from module.logger import logger
+from module.log_res import LogRes
 from module.ocr.rpc import start_ocr_server_process, stop_ocr_server_process
 from module.submodule.submodule import load_config
 from module.submodule.utils import get_config_mod
@@ -689,7 +691,8 @@ class AlasGUI(Frame):
                             ],
                         ),
                     ],
-                ),
+                )
+
             else:
                 put_scope(
                     "log-bar",
@@ -708,7 +711,7 @@ class AlasGUI(Frame):
                         put_html('<hr class="hr-group">'),
                         put_scope("dashboard"),
                     ],
-                ),
+                )
             put_scope("log", [put_html("")])
 
         log.console.width = log.get_width()
@@ -829,6 +832,10 @@ class AlasGUI(Frame):
                 ],
                 onclick=[_toggle_screenshot, _switch_placeholder],
             ).style("text-align: center")
+
+    def set_dashboard_display(self, b):
+        self._log.set_dashboard_display(b)
+        self.alas_update_dashboard(True)
 
     def set_dashboard_display(self, b):
         self._log.set_dashboard_display(b)
@@ -980,7 +987,7 @@ class AlasGUI(Frame):
         _arg_group = self._log.dashboard_arg_group if groups_to_display is None else groups_to_display
         time_now = datetime.now().replace(microsecond=0)
         for group_name in _arg_group:
-            group = deep_get(d=self.alas_config.data, keys=f'Dashboard.{group_name}')
+            group = LogRes(self.alas_config).group(group_name)
             if group is None:
                 continue
 
@@ -999,7 +1006,6 @@ class AlasGUI(Frame):
             else:
                 value_limit = ''
                 value_total = ''
-            # value = value + value_limit + value_total
 
             value_time = group['Record']
             if value_time is None or value_time == datetime(2020, 1, 1, 0, 0, 0):
@@ -1011,6 +1017,7 @@ class AlasGUI(Frame):
                 delta = timedelta_to_text()
             else:
                 delta = timedelta_to_text(time_delta(value_time - time_now))
+
             if group_name not in self._log.last_display_time.keys():
                 self._log.last_display_time[group_name] = ''
             if self._log.last_display_time[group_name] == delta and not self._log.first_display:
@@ -1028,7 +1035,7 @@ class AlasGUI(Frame):
             limit_style = '--dashboard-limit--' if value_limit else '--dashboard-total--'
             value_limit = value_limit if value_limit else value_total
             # Handle dot color
-            _color = f"""background-color:{deep_get(d=group, keys='Color').replace('^', '#')}"""
+            _color = f"""background-color:{deep_get(group, 'Color').replace('^', '#')}"""
             color = f'<div class="status-point" style={_color}>'
             with use_scope(group_name, clear=True):
                 put_row(
@@ -1048,7 +1055,7 @@ class AlasGUI(Frame):
                                             ],
                                         ).style('grid-template-columns:min-content auto;align-items: baseline;'),
                                         put_text(
-                                            t(f'Gui.Overview.{group_name}') + " - " + delta
+                                            t(f"Gui.Dashboard.{group_name}") + " - " + delta
                                         ).style('---dashboard-help--')
                                     ],
                                     size="auto auto",
@@ -1263,7 +1270,6 @@ class AlasGUI(Frame):
                     img.setAttribute("data-modal-src", "{State.get_placeholder_url()}");
                 }}
             ''')
-
     @use_scope("content", clear=True)
     def alas_daemon_overview(self, task: str) -> None:
         self.init_menu(name=task)

@@ -90,6 +90,10 @@
       "name": "商船護航",
       "help": ""
     },
+    "EventShop": {
+      "name": "活動商店",
+      "help": ""
+    },
     "WarArchives": {
       "name": "作戰檔案",
       "help": "由於作戰檔案缺少維護，開荒功能不一定能正常使用，如果發現Alas運行異常，請手動完成開荒後使用自律尋敵功能"
@@ -1452,7 +1456,7 @@
     },
     "EquipmentCode": {
       "name": "裝備碼",
-      "help": "僅當選擇「更換艦船 + 裝備」時生效。\n在換下艦船時，若設定裏當前艦船裝備碼為null則會導出；在換上艦船時，若設置裏當前艦船裝備碼為null則會使用上一艘艦船導出的裝備碼，否則使用設定裏的裝備碼\n藍疊模擬器用戶需要先開啟虛擬鍵盤，詳見https://support.bluestacks.com/hc/zh-tw/articles/360061968892-%E5%A6%82%E4%BD%95%E5%9C%A8-BlueStacks-5-%E4%B8%8A%E4%BD%BF%E7%94%A8%E5%B0%8F%E9%8D%B5%E7%9B%A4-%E8%99%9B%E6%93%AC%E9%8D%B5%E7%9B%A4"
+      "help": "僅當選擇「更換艦船 + 裝備」時生效。\n在換下艦船時，若設定裏當前艦船裝備碼為null則會導出；在換上艦船時，若設定裏當前艦船裝備碼為null則會使用上一艘艦船導出的裝備碼，否則使用設定裏的裝備碼\n藍疊模擬器用戶需要先開啟虛擬鍵盤，詳見https://support.bluestacks.com/hc/zh-tw/articles/360061968892-%E5%A6%82%E4%BD%95%E5%9C%A8-BlueStacks-5-%E4%B8%8A%E4%BD%BF%E7%94%A8%E5%B0%8F%E9%8D%B5%E7%9B%A4-%E8%99%9B%E6%93%AC%E9%8D%B5%E7%9B%A4"
     },
     "CommissionLimit": {
       "name": "防止緊急委託數量過多",
@@ -1582,6 +1586,33 @@
       "help": "",
       "single": "單隊連戰",
       "multi": "多隊出擊"
+    }
+  },
+  "EventShop": {
+    "_info": {
+      "name": "活動商店",
+      "help": ""
+    },
+    "UnlockSSRShip": {
+      "name": "解鎖SSR艦船",
+      "help": ""
+    },
+    "BuyURShip": {
+      "name": "購買X艘UR艦船",
+      "help": "",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "活動商店過濾器",
+      "help": "一般不需要修改",
+      "all": "全部",
+      "custom": "自定義"
+    },
+    "CustomFilter": {
+      "name": "自定義活動商店過濾器",
+      "help": "使用自定義過濾器需將 \"活動商店過濾器\" 設定為 \"自定義過濾器\"，並閱讀 https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/filter_string_cn"
     }
   },
   "Commission": {
@@ -2814,6 +2845,24 @@
       "help": "侵蚀一明石一般只购买体力nanoda"
     }
   },
+  "OpsiCheckLeveling": {
+    "_info": {
+      "name": "每日經驗檢測",
+      "help": "檢測出擊艦隊所有艦是否已經獲得滿經驗，若是則發送一條推送消息\n需要先設定「錯誤推送設定」"
+    },
+    "TargetLevel": {
+      "name": "所有艦船獲得到可升級至 X 級的經驗後推送",
+      "help": "0 表示不限制等級"
+    },
+    "LastRun": {
+      "name": "上次檢查時間",
+      "help": "記錄上一次檢查的時間以防止任務重複運行，檢查間隔為1天，該數值是自動記錄的，一般不需要修改"
+    },
+    "DelayAfterFull": {
+      "name": "達到目標等級後延遲任務",
+      "help": ""
+    }
+  },
   "Daemon": {
     "_info": {
       "name": "半自動點擊",
@@ -2916,8 +2965,8 @@
       "Stop": "停止",
       "ScrollON": "自動滾動 開",
       "ScrollOFF": "自動滾動 關",
-      "DashboardON": "開",
-      "DashboardOFF": "關",
+      "DashboardON": "摺叠",
+      "DashboardOFF": "展開",
       "ClearLog": "清空日誌",
       "Setting": "設定",
       "CheckUpdate": "檢查更新",
@@ -2951,12 +3000,20 @@
     "Overview": {
       "Scheduler": "調度器",
       "Dashboard": "儀表盤",
-      "SecondsAgo": "秒前",
+      "Log": "日誌",
+      "Running": "執行中",
+      "Pending": "佇列中",
+      "Waiting": "等待中",
+      "NoTask": "無任務"
+    },
+    "Dashboard": {
+      "TimeError": "時間錯誤",
+      "JustNow": "剛剛",
       "MinutesAgo": "分鐘前",
       "HoursAgo": "小時前",
       "DaysAgo": "天前",
       "MonthsAgo": "月前",
-      "YearsAgo": "年前",
+      "LongTimeAgo": "很久之前",
       "NoData": "無數據",
       "Oil": "石油",
       "Coin": "物資",
@@ -2969,12 +3026,7 @@
       "Merit": "功勳",
       "Medal": "勳章",
       "Core": "覈心數據",
-      "GuildCoin": "艦隊幣",
-      "Log": "日誌",
-      "Running": "執行中",
-      "Pending": "佇列中",
-      "Waiting": "等待中",
-      "NoTask": "無任務"
+      "GuildCoin": "艦隊幣"
     },
     "AddAlas": {
       "PopupTitle": "添加新的設定",

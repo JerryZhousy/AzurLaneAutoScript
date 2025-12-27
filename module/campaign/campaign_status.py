@@ -12,7 +12,7 @@ from module.base.utils import color_similar, get_color
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
 from module.ui.ui import UI
-from module.log_res.log_res import LogRes
+from module.log_res import LogRes
 
 #if server.server != 'jp':
 #    OCR_COIN = Digit(OCR_COIN, name='OCR_COIN', letter=(239, 239, 239), threshold=128)
@@ -90,7 +90,6 @@ class CampaignStatus(UI):
         LogRes(self.config).Coin = _coin
         if update:
             self.config.update()
-
         return _coin['Value']
 
     def _get_oil(self):
@@ -102,16 +101,20 @@ class CampaignStatus(UI):
             # Original color
             if server.server != 'jp':
                 ocr = Digit(OCR_OIL, name='OCR_OIL', letter=(247, 247, 247), threshold=128)
+                ocr_limit = Digit(OCR_OIL_LIMIT, name='OCR_COIN_LIMIT', letter=(239, 239, 239), threshold=128)
             else:
                 ocr = Digit(OCR_OIL, name='OCR_OIL', letter=(201, 201, 201), threshold=128)
+                ocr_limit = Digit(OCR_OIL_LIMIT, name='OCR_COIN_LIMIT', letter=(180, 188, 193), threshold=128)
         elif color_similar(color, (59, 59, 64)):
             # With black overlay
             ocr = Digit(OCR_OIL, name='OCR_OIL', letter=(165, 165, 165), threshold=128)
+            ocr_limit = Digit(OCR_OIL_LIMIT, name='OCR_COIN_LIMIT', letter=(165, 165, 165), threshold=128)
         else:
             logger.warning(f'Unexpected OCR_OIL_CHECK color')
             ocr = Digit(OCR_OIL, name='OCR_OIL', letter=(247, 247, 247), threshold=128)
+            ocr_limit = Digit(OCR_OIL_LIMIT, name='OCR_COIN_LIMIT', letter=(239, 239, 239), threshold=128)
 
-        return ocr.ocr(self.device.image)
+        return ocr, ocr_limit
 
     def _get_num(self, _button, name):
         # Update offset
@@ -163,7 +166,6 @@ class CampaignStatus(UI):
         LogRes(self.config).Oil = _oil
         if update:
             self.config.update()
-
         return _oil['Value']
 
     def is_balancer_task(self):

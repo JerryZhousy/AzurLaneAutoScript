@@ -95,10 +95,11 @@ class CampaignRun(CampaignEvent, ShopStatus):
             return True
         # Oil limit
         if oil_check:
+            # Gem limit
             self.status_get_gems()
+            # Coin limit
             self.get_coin()
-            _oil = self.get_oil()
-            if _oil < max(500, self.config.StopCondition_OilLimit):
+            if self.get_oil() < max(500, self.config.StopCondition_OilLimit):
                 logger.hr('Triggered stop condition: Oil limit')
                 self.config.task_delay(minute=(120, 240))
                 return True
@@ -425,7 +426,7 @@ class CampaignRun(CampaignEvent, ShopStatus):
 
             # Update config
             if len(self.config.modified):
-                logger.info('Updating config for dashboard')
+                logger.info('Updating dashboard data')
                 self.config.update()
 
             # Run
@@ -440,7 +441,7 @@ class CampaignRun(CampaignEvent, ShopStatus):
 
             # Update config
             if len(self.campaign.config.modified):
-                logger.info('Updating config for dashboard')
+                logger.info('Updating dashboard data')
                 self.campaign.config.update()
             # After run
             self.run_count += 1

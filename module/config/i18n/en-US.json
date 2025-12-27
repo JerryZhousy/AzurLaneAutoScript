@@ -90,6 +90,10 @@
       "name": "Maritime Escort",
       "help": ""
     },
+    "EventShop": {
+      "name": "Event Shop",
+      "help": ""
+    },
     "WarArchives": {
       "name": "War Archives",
       "help": "Due to the lack of maintenance of war archives, continuous clear may not work normally, if Alas runs abnormally, Please manually finish clearing and use auto search"
@@ -1588,6 +1592,33 @@
       "multi": "Coalition Battle"
     }
   },
+  "EventShop": {
+    "_info": {
+      "name": "Event Shop Settings",
+      "help": ""
+    },
+    "UnlockSSRShip": {
+      "name": "Unlock SSR Ship",
+      "help": ""
+    },
+    "BuyURShip": {
+      "name": "Buy X UR Ship(s)",
+      "help": "",
+      "0": "0",
+      "1": "1",
+      "2": "2"
+    },
+    "PresetFilter": {
+      "name": "Event Shop Filter",
+      "help": "Generally does not need to be modified.",
+      "all": "All",
+      "custom": "Custom"
+    },
+    "CustomFilter": {
+      "name": "Custom Filter",
+      "help": "To use your own filter, set \"Event Shop Filter\" to \"Custom\". All options have been defined at <https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/filter_string_en>"
+    }
+  },
   "Commission": {
     "_info": {
       "name": "Commission Settings",
@@ -2617,6 +2648,10 @@
     "EnsureFullyCollected": {
       "name": "Ensure 200 Beacon Data Fully Collected",
       "help": "Ignore AP limit setting temporarily before ash beacon fully collected. \"Meowfficer Farming\" must be enabled"
+    },
+    "AutoCollectShip": {
+      "name": "Automatically acquire new META ships",
+      "help": "Automatically acquire new META ships when claiming rewards. If disabled, the \"Sync\" button will not be clicked, and rewards must be claimed manually."
     }
   },
   "OpsiFleetFilter": {
@@ -2818,6 +2853,24 @@
       "help": "侵蚀一明石一般只购买体力nanoda"
     }
   },
+  "OpsiCheckLeveling": {
+    "_info": {
+      "name": "Daily Leveling Check",
+      "help": "Check if all ships in current fleet have received enough experience to reach the target level\nIf yes, then Alas will push a message.\n'Error notify config' should be set first."
+    },
+    "TargetLevel": {
+      "name": "Push when all ships received enough experience to reach target level X",
+      "help": "0 means no limit"
+    },
+    "LastRun": {
+      "name": "Last Check Time",
+      "help": "Automatically updated with the last check time, generally does not need to be modified"
+    },
+    "DelayAfterFull": {
+      "name": "Delay task when target level reached",
+      "help": ""
+    }
+  },
   "Daemon": {
     "_info": {
       "name": "Semi-auto Clicking",
@@ -2920,8 +2973,8 @@
       "Stop": "Stop",
       "ScrollON": "Auto Scroll ON",
       "ScrollOFF": "Auto Scroll OFF",
-      "DashboardON": "Fold",
-      "DashboardOFF": "Unfold",
+      "DashboardON": "Dashboard ON",
+      "DashboardOFF": "Dashboard OFF",
       "ClearLog": "Clear Log",
       "Setting": "Setting",
       "CheckUpdate": "Check update",
@@ -2954,13 +3007,21 @@
     },
     "Overview": {
       "Scheduler": "Scheduler",
-      "Dashboard": "Gui.Overview.Dashboard",
-      "SecondsAgo": "Seconds ago",
+      "Dashboard": "Dashboard",
+      "Log": "Log",
+      "Running": "Running",
+      "Pending": "Pending",
+      "Waiting": "Waiting",
+      "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "TimeError": "Time error",
+      "JustNow": "Just now",
       "MinutesAgo": "Minutes ago",
       "HoursAgo": "Hours ago",
       "DaysAgo": "Days ago",
       "MonthsAgo": "Months ago",
-      "YearsAgo": "Years ago",
+      "LongTimeAgo": "Long time ago",
       "NoData": "No data",
       "Oil": "Oil",
       "Coin": "Coin",
@@ -2973,12 +3034,7 @@
       "Merit": "Merit",
       "Medal": "Medal",
       "Core": "Core Data",
-      "GuildCoin": "Guild Coin",
-      "Log": "Log",
-      "Running": "Running",
-      "Pending": "Pending",
-      "Waiting": "Waiting",
-      "NoTask": "No Task"
+      "GuildCoin": "Guild Coin"
     },
     "AddAlas": {
       "PopupTitle": "Add new config",
