@@ -22,6 +22,11 @@ class Combat(Combat_, MapEventHandler):
         if self.is_combat_loading():
             return True
 
+        # Check if already in combat execution (PAUSE button visible)
+        # This handles cases where auto search skips battle preparation
+        if self.is_combat_executing():
+            return True
+
         if self.appear(BATTLE_PREPARATION):
             return True
         if self.appear(SIREN_PREPARATION, offset=(20, 20)):

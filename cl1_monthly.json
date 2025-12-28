@@ -1,0 +1,1764 @@
+{
+  "2025-12": 4655,
+  "2025-12-akashi": 180,
+  "2025-12-akashi-ap-entries": [
+    {
+      "ts": "2025-12-04T17:23:16.526510",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T17:23:17.931943",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:06:42.276124",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:06:43.744007",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:09:02.733457",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:20:11.425543",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:31:10.515989",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T18:59:01.084257",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T19:40:59.182942",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T19:44:23.691816",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T19:50:17.473149",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T19:50:18.889116",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-04T19:50:20.307152",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T00:37:33.783034",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T01:25:12.933723",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T01:25:14.337125",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:15:47.072239",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:15:48.518225",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:15:49.922504",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:16:55.812558",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:24:36.255092",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:24:37.665386",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:24:39.083423",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T02:59:00.070814",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T03:18:54.676390",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T03:39:22.066739",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T03:39:23.476271",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:08:32.697608",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:08:34.112116",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:23:47.049510",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:30:17.045579",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:30:18.540624",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:30:19.943593",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:30:21.344937",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:37:41.506940",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:38:47.084116",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:38:48.522915",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:47:28.727660",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:47:30.175833",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T04:47:31.578904",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:07:16.660363",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:07:18.071703",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:33:58.602347",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:41:46.508523",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:46:26.551218",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T05:49:12.446525",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T11:25:30.513075",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T11:25:31.919486",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T11:40:08.180749",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T11:40:09.649311",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T11:44:57.841290",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T12:22:07.117641",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T13:44:48.264686",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T13:55:09.278811",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T13:55:10.682674",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T13:59:19.546921",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:19:58.819312",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:20:00.229312",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:24:35.988678",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:26:30.208126",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:26:31.614345",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:32:07.526342",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:32:08.929921",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:41:51.833204",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T14:41:53.236496",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:05:03.765626",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:15:06.723429",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:19:23.712280",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:19:25.115370",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:37:22.793535",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:46:22.165681",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:46:23.569775",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T15:46:24.973372",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T16:15:04.721215",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T16:33:02.771891",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T16:39:05.243662",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T16:49:22.666965",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T17:01:26.158052",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T17:42:12.156871",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T17:42:13.560717",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T17:45:57.915627",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T20:15:17.508817",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T20:36:15.773653",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:07:32.430212",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:14:04.353637",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:14:05.757540",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:28:42.582757",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:28:43.985995",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:59:55.363232",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T21:59:56.762673",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:11:17.161083",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:39:52.734821",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:39:54.137059",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:41:41.934092",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:54:42.647990",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:54:44.051235",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:57:18.224152",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T22:59:07.598818",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T23:00:59.493767",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-05T23:01:00.897905",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T04:12:17.004007",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T04:37:15.672151",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T04:48:45.996637",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T04:48:47.384574",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T04:48:48.788255",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:05:29.431177",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:05:30.834312",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:10:26.896572",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:39:28.200994",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:39:29.606015",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:45:49.071093",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:45:50.470108",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:56:34.982213",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:56:36.387102",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:59:17.125943",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:59:18.529635",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T05:59:19.932294",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:00:31.720947",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:00:33.125077",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:00:34.526919",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:03:35.055397",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:03:36.459510",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:08:20.312245",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:08:21.714795",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T06:30:45.648679",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T07:03:07.571622",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T07:03:08.977735",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T07:11:47.544449",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T07:30:23.150015",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T07:49:48.751527",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T08:17:07.138270",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:39:26.586432",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:39:27.989959",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:49:12.901351",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:49:14.304077",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:49:15.706742",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T09:56:41.661111",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T11:09:49.265364",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T11:27:56.146256",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T11:27:57.552219",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:20:57.208472",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:23:35.690048",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:45:08.601009",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:45:10.007178",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:47:13.899934",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:47:15.309725",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-06T12:47:16.714192",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T00:44:07.096275",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T00:44:08.539009",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T04:47:44.908786",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T05:16:56.573023",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T05:16:57.974633",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T05:33:03.621435",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T05:33:05.027743",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T05:41:57.296426",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T06:55:51.235745",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T06:55:52.635610",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T06:55:54.037482",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T07:15:36.150438",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T08:00:42.022353",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T08:10:32.009402",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T08:10:33.461236",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T09:02:26.303255",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T09:26:04.123957",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T09:26:05.556331",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T09:39:54.203839",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T09:42:42.353950",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T13:11:25.061610",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-07T13:18:06.248560",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T10:51:52.891002",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T10:51:54.330002",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T10:53:37.374859",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:08:24.274845",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:08:26.029752",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:21:55.284608",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:21:56.690209",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:25:04.942840",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T11:25:06.697761",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:00:49.371786",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:23:01.050634",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:23:02.101636",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:41:19.839038",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:50:14.417651",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T12:50:15.471590",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:19:42.062779",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:22:47.717904",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:39:59.551203",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:40:00.601387",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:40:01.656458",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T13:40:02.707410",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T14:15:00.601922",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T14:53:55.678268",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T14:53:56.732243",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T14:53:58.136121",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T15:06:19.482485",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T15:06:20.885630",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T15:49:21.333748",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T15:53:45.777926",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T16:05:03.711247",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T16:36:16.775349",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:03:35.713896",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:03:37.113644",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:03:38.517606",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:10:46.927442",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:10:48.328461",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:33:47.794351",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:33:49.201935",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T17:33:50.606241",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T18:03:22.306799",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T19:15:25.020848",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T19:15:26.076079",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T19:42:33.397534",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T20:51:29.295499",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T20:53:55.917193",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T20:53:57.497855",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T20:53:59.409870",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T20:54:00.814996",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T21:18:40.852736",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T21:18:42.256434",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T21:30:01.159189",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T22:16:53.848162",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T22:16:55.252109",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-24T22:16:56.656641",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-25T20:38:26.180546",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-25T20:38:27.586403",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-25T20:38:28.994039",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T15:34:18.997997",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T15:34:20.428972",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T15:34:21.835356",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:02:54.473892",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:20:10.827463",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:20:11.881542",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:20:12.933243",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:47:16.520429",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:47:17.571172",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:53:31.189231",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:55:12.906136",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T16:55:13.959433",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T17:01:15.183763",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T17:01:16.237342",
+      "amount": 100,
+      "base": 100,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T17:01:17.643764",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T20:40:02.980380",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T21:13:26.632643",
+      "amount": 100,
+      "base": 50,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-27T21:13:28.198365",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T02:29:37.353690",
+      "amount": 200,
+      "base": 100,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T02:29:38.746577",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T03:05:54.156715",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T03:41:23.548383",
+      "amount": 40,
+      "base": 20,
+      "count": 2,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T03:41:24.953299",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T11:50:44.414854",
+      "amount": 50,
+      "base": 50,
+      "count": 1,
+      "source": "akashi"
+    },
+    {
+      "ts": "2025-12-28T11:50:45.959375",
+      "amount": 20,
+      "base": 20,
+      "count": 1,
+      "source": "akashi"
+    }
+  ],
+  "2025-12-akashi-ap": 21340
+}
