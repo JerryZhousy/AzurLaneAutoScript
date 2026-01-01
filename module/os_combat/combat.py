@@ -234,6 +234,13 @@ class Combat(Combat_, MapEventHandler):
             in: is_combat_loading()
             out: combat status
         """
+        # 记录战斗开始时间用于统计
+        try:
+            from module.statistics.ship_exp_stats import get_ship_exp_stats
+            get_ship_exp_stats().on_battle_start()
+        except Exception:
+            pass
+        
         logger.info('Auto search combat loading')
         self.device.stuck_record_clear()
         self.device.click_record_clear()
@@ -289,4 +296,12 @@ class Combat(Combat_, MapEventHandler):
                 continue
             
         logger.info('Combat end.')
+        
+        # 记录战斗结束，统计耗时
+        try:
+            from module.statistics.ship_exp_stats import get_ship_exp_stats
+            get_ship_exp_stats().on_battle_end()
+        except Exception:
+            pass
+        
         return success

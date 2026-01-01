@@ -792,17 +792,46 @@ class OperationSiren(OSMap):
         self.fleet_set(self.config.OpsiFleet_Fleet)
         self.ship_info_enter(FLEET_FLAGSHIP)
         all_full_exp = True
+        
+        # 收集所有舰船数据
+        ship_data_list = []
+        position = 1
 
         while 1:
             self.device.screenshot()
             level, exp = ship_info_get_level_exp(main=self)
-            current_total_exp = LIST_SHIP_EXP[level - 1] + exp
-            logger.info(f'Level: {level}, Exp: {exp}, Total Exp: {current_total_exp}, Target Exp: {LIST_SHIP_EXP[target_level - 1]}')
-            if current_total_exp < LIST_SHIP_EXP[target_level - 1]:
+            total_exp = LIST_SHIP_EXP[level - 1] + exp
+            logger.info(f'Position: {position}, Level: {level}, Exp: {exp}, Total Exp: {total_exp}, Target Exp: {LIST_SHIP_EXP[target_level - 1]}')
+            
+            # 保存舰船数据
+            ship_data_list.append({
+                'position': position,
+                'level': level,
+                'current_exp': exp,
+                'total_exp': total_exp
+            })
+            
+            if total_exp < LIST_SHIP_EXP[target_level - 1]:
                 all_full_exp = False
-                break
+            
             if not self.ship_view_next():
                 break
+            position += 1
+
+        # 保存所有舰船数据到JSON
+        try:
+            from module.statistics.ship_exp_stats import save_ship_exp_data
+            from module.statistics.opsi_month import get_opsi_stats
+            
+            current_battles = get_opsi_stats().summary().get('total_battles', 0)
+            save_ship_exp_data(
+                ships=ship_data_list,
+                target_level=target_level,
+                fleet_index=self.config.OpsiFleet_Fleet,
+                battle_count_at_check=current_battles
+            )
+        except Exception as e:
+            logger.warning(f'Failed to save ship exp data: {e}')
 
         if all_full_exp:
             logger.info(f'All ships in fleet {self.config.OpsiFleet_Fleet} are full exp, '
@@ -818,6 +847,7 @@ class OperationSiren(OSMap):
             logger.info('Delay task after all ships are full exp')
             self.config.task_delay(server_update=True)
             self.config.task_stop()
+
 
     def _os_explore_task_delay(self):
         """
