@@ -9,7 +9,6 @@ import requests
 import threading
 import time
 import re
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from pathlib import Path
 from functools import partial
@@ -105,8 +104,6 @@ from module.webui.widgets import (
 patch_executor()
 patch_mimetype()
 task_handler = TaskHandler()
-# Thread pool executor for async network requests
-_network_executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="alas-network")
 
 
 def timedelta_to_text(delta=None):
@@ -2255,7 +2252,6 @@ class AlasGUI(Frame):
         # Announcement check function - fetches from API and pushes to frontend
         self._last_announcement_id = None
         def check_and_push_announcement():
-            """Check for announcements asynchronously to avoid blocking GUI."""
             def _fetch_announcement():
                 try:
                     # Add timestamp to bypass cache
@@ -2278,8 +2274,9 @@ class AlasGUI(Frame):
                 except Exception as e:
                     logger.debug(f"Announcement check failed: {e}")
             
-            # Submit to thread pool to avoid blocking GUI
-            _network_executor.submit(_fetch_announcement)
+            # Run network request in background thread to prevent blocking GUI
+            thread = threading.Thread(target=_fetch_announcement, daemon=True)
+            thread.start()
 
         # Periodic announcement check generator
         def announcement_checker():
