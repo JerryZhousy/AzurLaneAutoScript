@@ -1343,7 +1343,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StrategicSearchHandler):
             # 跳转至指定高侵蚀区域
             with self.config.temporary(STORY_ALLOW_SKIP=False):
                 self.os_map_goto_globe(unpin=False)
-                self.globe_goto(target_zone, types=('SAFE', 'DANGEROUS'), refresh=True)
+                self.globe_goto(target_zone, types=('DANGEROUS',), refresh=True)
                 self.zone_init()
                 self.map_init(map_=None)
                 camera_queue = self.map.camera_data
