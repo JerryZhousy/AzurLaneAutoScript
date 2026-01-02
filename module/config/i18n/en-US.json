@@ -2826,10 +2826,12 @@
     "Dashboard": {
       "TimeError": "Time error",
       "JustNow": "Just now",
+      "SecondsAgo": "Seconds ago",
       "MinutesAgo": "Minutes ago",
       "HoursAgo": "Hours ago",
       "DaysAgo": "Days ago",
       "MonthsAgo": "Months ago",
+      "YearsAgo": "Years ago",
       "LongTimeAgo": "Long time ago",
       "NoData": "No data",
       "Oil": "Oil",
