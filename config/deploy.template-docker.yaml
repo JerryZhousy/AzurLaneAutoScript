@@ -129,13 +129,13 @@ Deploy:
     # --port. Port to listen
     # You will be able to access webui via `http://{host}:{port}`
     # [In most cases] Default to 22267
-    WebuiPort: 22267
+    WebuiPort: 114514
     # Language to use on web ui
     # 'zh-CN' for Chinese simplified
     # 'en-US' for English
     # 'ja-JP' for Japanese
     # 'zh-TW' for Chinese traditional
-    Language: en-US
+    Language: zh-CN
     # Theme of web ui
     # 'default' for light theme
     # 'dark' for dark theme
