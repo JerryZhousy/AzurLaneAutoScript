@@ -119,7 +119,7 @@ Deploy:
     # Filepath of SSH executable `ssh.exe`
     # [Default] ssh (find ssh in system PATH)
     # If you don't have one, install OpenSSH or download it here (https://github.com/PowerShell/Win32-OpenSSH/releases)
-    SSHExecutable: /usr/bin/ssh
+    SSHExecutable: /usr/bin/ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
 
   Webui:
     # --host. Host to listen
