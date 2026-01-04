@@ -59,7 +59,7 @@ class ConfigModel:
     Language: str = "en-US"
     Theme: str = "default"
     DpiScaling: bool = True
-    Password: Optional[str] = None
+    Password: Optional[str] = "123456"
     CDN: Union[str, bool] = False
     Run: Optional[str] = None
 
