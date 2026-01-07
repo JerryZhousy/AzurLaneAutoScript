@@ -152,6 +152,7 @@ class Cl1DataSubmitter:
         
         return {
             'device_id': self.device_id,
+            'instance_id': self._instance_name,
             'month': raw_data['month'],
             'battle_count': battle_count,
             'battle_rounds': battle_rounds,
