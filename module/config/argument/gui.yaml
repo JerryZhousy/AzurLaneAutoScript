@@ -59,10 +59,12 @@ Overview:
 Dashboard:
   TimeError:
   JustNow:
+  SecondsAgo:
   MinutesAgo:
   HoursAgo:
   DaysAgo:
   MonthsAgo:
+  YearsAgo:
   LongTimeAgo:
   NoData:
   Oil:

@@ -68,16 +68,14 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             bool:
         """
         image = self.image_crop((0, 620, 1280, 690), copy=False)
+        # note that CN/EN/TW are the same, but JP character is smaller
         similarity, button = TEMPLATE_COMBAT_LOADING.match_luma_result(image)
         if similarity > 0.85:
             loading = (button.area[0] + 38 - LOADING_BAR.area[0]) / (LOADING_BAR.area[2] - LOADING_BAR.area[0])
             logger.attr('Loading', f'{int(loading * 100)}%')
-            # 提交云端日志用来Debug
-            ApiClient.submit_bug_log('检测到加载条')
             return True
         if self.is_combat_executing():
             logger.warning('检测到战斗状态但未检测到加载条')
-            ApiClient.submit_bug_log('检测到战斗状态但未检测到加载条')
             return True
         return False
 
@@ -124,6 +122,10 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             return PAUSE_Seaside
         if PAUSE_Ninja.match_template_color(self.device.image, offset=(10, 10)):
             return PAUSE_Ninja
+        if PAUSE_ShadowPuppetry.match_luma(self.device.image, offset=(10, 10)):
+            return PAUSE_ShadowPuppetry
+        if PAUSE_MaidCafe.match_template_color(self.device.image, offset=(10, 10)):
+            return PAUSE_MaidCafe
         return False
 
     def handle_combat_quit(self, offset=(20, 20), interval=3):
@@ -169,6 +171,10 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             return True
         if QUIT_Ninja.match_luma(self.device.image, offset=offset):
             self.device.click(QUIT_Ninja)
+            timer.reset()
+            return True
+        if QUIT_MaidCafe.match_luma(self.device.image, offset=offset):
+            self.device.click(QUIT_MaidCafe)
             timer.reset()
             return True
         return False
@@ -633,9 +639,3 @@ class Combat(Level, HPBalancer, Retirement, SubmarineCall, CombatAuto, CombatMan
             # self.handle_map_after_combat_story()
 
         logger.info('Combat end.')
-
-
-if __name__ == '__main__':
-    self = Combat('alas5')
-    self.image_file = r'C:\Users\LmeSzinc\Documents\MuMu共享文件夹\Screenshots\MuMu12-20251219-021500.png'
-    self.is_combat_loading()

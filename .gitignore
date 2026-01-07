@@ -1,6 +1,13 @@
 ### AzurLaneAutoScript
 log
-
+config/backup/*
+config/*.ini
+!config/template.ini
+config/*.yaml
+!config/deploy.*.yaml
+config/*.json
+config/tmp*
+!config/template*.json
 *.pyw
 dev_tools/debug_tools
 .idea

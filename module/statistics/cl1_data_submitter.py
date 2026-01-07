@@ -34,7 +34,7 @@ class Cl1DataSubmitter:
         self.endpoint = endpoint
         self._device_id: Optional[str] = None
         self._last_submit_time: float = 0
-        self._submit_interval: int = 3600  # 1小时
+        self._submit_interval: int = 600  # 10分钟
         
         # 获取项目根目录
         self.project_root = Path(__file__).resolve().parents[2]
@@ -150,8 +150,12 @@ class Cl1DataSubmitter:
         # 净赚体力 = 从明石获得的总行动力
         net_stamina_gain = akashi_ap
         
+        # 生成匿名 instance_id（使用 device_id + instance_name 的哈希值）
+        instance_hash = hashlib.md5(f"{self.device_id}_{self._instance_name}".encode()).hexdigest()[:16]
+        
         return {
             'device_id': self.device_id,
+            'instance_id': instance_hash,
             'month': raw_data['month'],
             'battle_count': battle_count,
             'battle_rounds': battle_rounds,

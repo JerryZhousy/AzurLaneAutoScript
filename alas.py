@@ -18,6 +18,7 @@ from module.config.deep import deep_get, deep_set
 from module.exception import *
 from module.logger import logger
 from module.notify import handle_notify
+from module.base.api_client import ApiClient
 
 
 class AzurLaneAutoScript:
@@ -761,6 +762,8 @@ class AzurLaneAutoScript:
                         title=f"Alas <{self.config_name}> crashed",
                         content=f"<{self.config_name}> RequestHumanTakeover\nTask `{task}` failed 3 or more times.",
                     )
+                    logger.warning("任务连续失败次数过多，正在上报错误日志...")
+                    ApiClient.submit_bug_log(f"Alas <{self.config_name}> crashed\nTask `{task}` failed 3 or more times.")
                     exit(1)
 
                 if success == True:
@@ -794,6 +797,8 @@ class AzurLaneAutoScript:
                     logger.critical("The error appears to be fatal and unrecoverable by restarting.")
                     self.save_error_log()
                     logger.critical("Scheduler is now terminating. Manual intervention is required.")
+                    logger.warning("遇到无法恢复的致命错误，正在上报错误日志...")
+                    ApiClient.submit_bug_log(f"Alas <{self.config_name}> Scheduler terminating.\nMaximum global failures ({MAX_GLOBAL_FAILURES}) reached.\n{traceback.format_exc()}")
                     exit(1)   # 达到上限，强制终止程序
 
                  # --- 尝试重启 ---

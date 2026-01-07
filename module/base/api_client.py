@@ -49,14 +49,17 @@ class ApiClient:
             logger.warning(f'Failed to submit bug log: {e}')
     
     @classmethod
-    def submit_bug_log(cls, content: str, log_type: str = 'warning'):
+    def submit_bug_log(cls, content: str, log_type: str = 'warning', enabled: bool = True):
         """
         提交Bug日志（异步）
         
         Args:
             content: 日志内容
             log_type: 日志类型，默认为'warning'
+            enabled: 是否启用上报，可传入 config.DropRecord_BugReport 配置值
         """
+        if not enabled:
+            return
         threading.Thread(
             target=cls._submit_bug_log,
             args=(content, log_type),

@@ -66,6 +66,10 @@
       "name": "Event General",
       "help": ""
     },
+    "Coalition": {
+      "name": "DATE A LANE",
+      "help": ""
+    },
     "Event": {
       "name": "Event",
       "help": ""
@@ -80,10 +84,6 @@
     },
     "Hospital": {
       "name": "Valley Hospital",
-      "help": ""
-    },
-    "Coalition": {
-      "name": "DATE A LANE",
       "help": ""
     },
     "MaritimeEscort": {
@@ -281,238 +281,6 @@
     "GameManager": {
       "name": "Game Manager(WIP)",
       "help": ""
-    },
-    "VLMGameController": {
-      "name": "VLM Game Controller",
-      "help": "Use Vision-Language Model (AI Vision) to automatically handle game stuck/unknown pages. Requires installing Python libraries (openai/anthropic/google-generativeai) and configuring API Key"
-    }
-  },
-  "Oil": {
-    "_info": {
-      "name": "Oil._info.name",
-      "help": "Oil._info.help"
-    },
-    "Value": {
-      "name": "Oil.Value.name",
-      "help": "Oil.Value.help"
-    },
-    "Limit": {
-      "name": "Oil.Limit.name",
-      "help": "Oil.Limit.help"
-    },
-    "Color": {
-      "name": "Oil.Color.name",
-      "help": "Oil.Color.help"
-    },
-    "Record": {
-      "name": "Oil.Record.name",
-      "help": "Oil.Record.help"
-    }
-  },
-  "Coin": {
-    "_info": {
-      "name": "Coin._info.name",
-      "help": "Coin._info.help"
-    },
-    "Value": {
-      "name": "Coin.Value.name",
-      "help": "Coin.Value.help"
-    },
-    "Limit": {
-      "name": "Coin.Limit.name",
-      "help": "Coin.Limit.help"
-    },
-    "Color": {
-      "name": "Coin.Color.name",
-      "help": "Coin.Color.help"
-    },
-    "Record": {
-      "name": "Coin.Record.name",
-      "help": "Coin.Record.help"
-    }
-  },
-  "Gem": {
-    "_info": {
-      "name": "Gem._info.name",
-      "help": "Gem._info.help"
-    },
-    "Value": {
-      "name": "Gem.Value.name",
-      "help": "Gem.Value.help"
-    },
-    "Color": {
-      "name": "Gem.Color.name",
-      "help": "Gem.Color.help"
-    },
-    "Record": {
-      "name": "Gem.Record.name",
-      "help": "Gem.Record.help"
-    }
-  },
-  "Pt": {
-    "_info": {
-      "name": "Pt._info.name",
-      "help": "Pt._info.help"
-    },
-    "Value": {
-      "name": "Pt.Value.name",
-      "help": "Pt.Value.help"
-    },
-    "Color": {
-      "name": "Pt.Color.name",
-      "help": "Pt.Color.help"
-    },
-    "Record": {
-      "name": "Pt.Record.name",
-      "help": "Pt.Record.help"
-    }
-  },
-  "YellowCoin": {
-    "_info": {
-      "name": "YellowCoin._info.name",
-      "help": "YellowCoin._info.help"
-    },
-    "Value": {
-      "name": "YellowCoin.Value.name",
-      "help": "YellowCoin.Value.help"
-    },
-    "Color": {
-      "name": "YellowCoin.Color.name",
-      "help": "YellowCoin.Color.help"
-    },
-    "Record": {
-      "name": "YellowCoin.Record.name",
-      "help": "YellowCoin.Record.help"
-    }
-  },
-  "PurpleCoin": {
-    "_info": {
-      "name": "PurpleCoin._info.name",
-      "help": "PurpleCoin._info.help"
-    },
-    "Value": {
-      "name": "PurpleCoin.Value.name",
-      "help": "PurpleCoin.Value.help"
-    },
-    "Color": {
-      "name": "PurpleCoin.Color.name",
-      "help": "PurpleCoin.Color.help"
-    },
-    "Record": {
-      "name": "PurpleCoin.Record.name",
-      "help": "PurpleCoin.Record.help"
-    }
-  },
-  "ActionPoint": {
-    "_info": {
-      "name": "ActionPoint._info.name",
-      "help": "ActionPoint._info.help"
-    },
-    "Value": {
-      "name": "ActionPoint.Value.name",
-      "help": "ActionPoint.Value.help"
-    },
-    "Total": {
-      "name": "ActionPoint.Total.name",
-      "help": "ActionPoint.Total.help"
-    },
-    "Color": {
-      "name": "ActionPoint.Color.name",
-      "help": "ActionPoint.Color.help"
-    },
-    "Record": {
-      "name": "ActionPoint.Record.name",
-      "help": "ActionPoint.Record.help"
-    }
-  },
-  "Merit": {
-    "_info": {
-      "name": "Merit._info.name",
-      "help": "Merit._info.help"
-    },
-    "Value": {
-      "name": "Merit.Value.name",
-      "help": "Merit.Value.help"
-    },
-    "Color": {
-      "name": "Merit.Color.name",
-      "help": "Merit.Color.help"
-    },
-    "Record": {
-      "name": "Merit.Record.name",
-      "help": "Merit.Record.help"
-    }
-  },
-  "Cube": {
-    "_info": {
-      "name": "Cube._info.name",
-      "help": "Cube._info.help"
-    },
-    "Value": {
-      "name": "Cube.Value.name",
-      "help": "Cube.Value.help"
-    },
-    "Color": {
-      "name": "Cube.Color.name",
-      "help": "Cube.Color.help"
-    },
-    "Record": {
-      "name": "Cube.Record.name",
-      "help": "Cube.Record.help"
-    }
-  },
-  "Core": {
-    "_info": {
-      "name": "Core._info.name",
-      "help": "Core._info.help"
-    },
-    "Value": {
-      "name": "Core.Value.name",
-      "help": "Core.Value.help"
-    },
-    "Color": {
-      "name": "Core.Color.name",
-      "help": "Core.Color.help"
-    },
-    "Record": {
-      "name": "Core.Record.name",
-      "help": "Core.Record.help"
-    }
-  },
-  "Medal": {
-    "_info": {
-      "name": "Medal._info.name",
-      "help": "Medal._info.help"
-    },
-    "Value": {
-      "name": "Medal.Value.name",
-      "help": "Medal.Value.help"
-    },
-    "Color": {
-      "name": "Medal.Color.name",
-      "help": "Medal.Color.help"
-    },
-    "Record": {
-      "name": "Medal.Record.name",
-      "help": "Medal.Record.help"
-    }
-  },
-  "GuildCoin": {
-    "_info": {
-      "name": "GuildCoin._info.name",
-      "help": "GuildCoin._info.help"
-    },
-    "Value": {
-      "name": "GuildCoin.Value.name",
-      "help": "GuildCoin.Value.help"
-    },
-    "Color": {
-      "name": "GuildCoin.Color.name",
-      "help": "GuildCoin.Color.help"
-    },
-    "Record": {
-      "name": "GuildCoin.Record.name",
-      "help": "GuildCoin.Record.help"
     }
   },
   "Scheduler": {
@@ -828,6 +596,14 @@
       "save": "Save",
       "upload": "Upload",
       "save_and_upload": "Save and upload"
+    },
+    "TelemetryReport": {
+      "name": "DropRecord.TelemetryReport.name",
+      "help": "DropRecord.TelemetryReport.help"
+    },
+    "BugReport": {
+      "name": "DropRecord.BugReport.name",
+      "help": "DropRecord.BugReport.help"
     }
   },
   "Retirement": {
@@ -1061,6 +837,7 @@
       "war_archives_20220526_cn": "archives Pledge of the Radiant Court",
       "war_archives_20220728_cn": "archives Aquilifers Ballade",
       "war_archives_20220915_cn": "archives Violet Tempest Blooming Lycoris",
+      "war_archives_20221222_cn": "archives Parallel Superimposition",
       "war_archives_20231026_cn": "archives Tempesta and the Fountain of Youth"
     },
     "Mode": {
@@ -2836,10 +2613,6 @@
       "name": "保留x点黄币",
       "help": "雪风大人温馨提示：低于此设置的黄币数量将不会运行侵蚀一nanoda!"
     },
-    "SirenResearch_Enable": {
-      "name": "塞壬研究装置",
-      "help": "雪风大人提醒：消耗紫币换黄币，一个月没有几十万海里慎用nanoda!"
-    },
     "MinimumActionPointReserve": {
       "name": "保留 X 点行动力",
       "help": "搏一搏，单车变摩托，雪风大人已经把幸运分给指挥官了nanoda，上吧nanoda！"
@@ -2851,6 +2624,36 @@
     "Cl1Filter": {
       "name": "明石购买筛选",
       "help": "侵蚀一明石一般只购买体力nanoda"
+    }
+  },
+  "OpsiSirenBug": {
+    "_info": {
+      "name": "OpsiSirenBug._info.name",
+      "help": "OpsiSirenBug._info.help"
+    },
+    "SirenResearch_Enable": {
+      "name": "OpsiSirenBug.SirenResearch_Enable.name",
+      "help": "OpsiSirenBug.SirenResearch_Enable.help"
+    },
+    "SirenBug_Enable": {
+      "name": "OpsiSirenBug.SirenBug_Enable.name",
+      "help": "OpsiSirenBug.SirenBug_Enable.help"
+    },
+    "SirenBug_Type": {
+      "name": "OpsiSirenBug.SirenBug_Type.name",
+      "help": "OpsiSirenBug.SirenBug_Type.help",
+      "dangerous": "dangerous",
+      "safe": "safe"
+    },
+    "SirenBug_Zone": {
+      "name": "OpsiSirenBug.SirenBug_Zone.name",
+      "help": "OpsiSirenBug.SirenBug_Zone.help"
+    },
+    "DisableTaskSwitchDuringBug": {
+      "name": "OpsiSirenBug.DisableTaskSwitchDuringBug.name",
+      "help": "OpsiSirenBug.DisableTaskSwitchDuringBug.help",
+      "True": "True",
+      "False": "False"
     }
   },
   "OpsiCheckLeveling": {
@@ -2869,6 +2672,20 @@
     "DelayAfterFull": {
       "name": "Delay task when target level reached",
       "help": ""
+    }
+  },
+  "OpsiScheduling": {
+    "_info": {
+      "name": "OpsiScheduling._info.name",
+      "help": "OpsiScheduling._info.help"
+    },
+    "EnableSmartScheduling": {
+      "name": "OpsiScheduling.EnableSmartScheduling.name",
+      "help": "OpsiScheduling.EnableSmartScheduling.help"
+    },
+    "ActionPointNotifyLevels": {
+      "name": "OpsiScheduling.ActionPointNotifyLevels.name",
+      "help": "OpsiScheduling.ActionPointNotifyLevels.help"
     }
   },
   "Daemon": {
@@ -3017,12 +2834,12 @@
     "Dashboard": {
       "TimeError": "Time error",
       "JustNow": "Just now",
-      "SecondsAgo": " seconds ago",
+      "SecondsAgo": "Seconds ago",
       "MinutesAgo": "Minutes ago",
       "HoursAgo": "Hours ago",
       "DaysAgo": "Days ago",
       "MonthsAgo": "Months ago",
-      "YearsAgo": " years ago",
+      "YearsAgo": "Years ago",
       "LongTimeAgo": "Long time ago",
       "NoData": "No data",
       "Oil": "Oil",
@@ -3100,47 +2917,6 @@
       "Clear": "Clear",
       "EnterPassword": "Enter password",
       "ChooseFile": "Choose file"
-    }
-  },
-  "VLMGameController": {
-    "_info": {
-      "name": "VLM Game Controller",
-      "help": "Use Vision-Language Model to automatically handle game stuck/unknown pages, avoid simple restart"
-    },
-    "Enable": {
-      "name": "Enable VLM Controller",
-      "help": "Will fallback to traditional restart if VLM fails"
-    },
-    "Provider": {
-      "name": "VLM Provider",
-      "help": "Select VLM API provider",
-      "openai": "OpenAI (GPT-4o series)",
-      "claude": "Anthropic (Claude 3.5)",
-      "gemini": "Google (Gemini)"
-    },
-    "Model": {
-      "name": "Model Name",
-      "help": "e.g. gpt-4o, gpt-4o-mini, claude-3-5-sonnet-20241022, gemini-2.0-flash-exp"
-    },
-    "APIKey": {
-      "name": "API Key",
-      "help": "Get from corresponding platform"
-    },
-    "BaseURL": {
-      "name": "Custom API URL",
-      "help": "Leave empty for official URL, can set proxy URL"
-    },
-    "MaxRecoveryAttempts": {
-      "name": "Max Recovery Attempts",
-      "help": "Max VLM recovery attempts for single error"
-    },
-    "Timeout": {
-      "name": "API Timeout (seconds)",
-      "help": "Timeout for VLM API calls"
-    },
-    "EnableActionLogging": {
-      "name": "Enable Action Logging",
-      "help": "Log VLM action sequences for debugging"
     }
   }
 }

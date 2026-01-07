@@ -302,7 +302,7 @@ class ConfigGenerator:
                 deep_load(['Task', task])
         # Arguments
         visited_group = set()
-        dashboard_args = deep_get(read_file(filepath_argument("task")), 'Dashboard.tasks.Resource')
+        dashboard_args = deep_get(read_file(filepath_argument("task")), 'Dashboard.tasks.Dashboard', default=[])
         for path, data in deep_iter(self.argument, depth=2):
             if path[0] not in dashboard_args:
                 if path[0] not in visited_group:

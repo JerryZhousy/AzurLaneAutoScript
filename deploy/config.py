@@ -11,7 +11,7 @@ class ExecutionError(Exception):
 
 class ConfigModel:
     # Git
-    Repository: str = "https://github.com/LmeSzinc/AzurLaneAutoScript"
+    Repository: str = "https://gitee.com/wqeaxc/AzurLaneAutoScript1"
     Branch: str = "master"
     GitExecutable: str = "./toolkit/Git/mingw64/bin/git.exe"
     GitProxy: Optional[str] = None
@@ -46,9 +46,9 @@ class ConfigModel:
     DiscordRichPresence: bool = False
 
     # Remote Access
-    EnableRemoteAccess: bool = False
+    EnableRemoteAccess: bool = True
     SSHUser: Optional[str] = None
-    SSHServer: Optional[str] = None
+    SSHServer: Optional[str] = "app.hk1.azurlane.cloud:10022"
     SSHExecutable: Optional[str] = None
 
     # Webui
@@ -59,7 +59,7 @@ class ConfigModel:
     Language: str = "en-US"
     Theme: str = "default"
     DpiScaling: bool = True
-    Password: Optional[str] = None
+    Password: Optional[str] = "123456"
     CDN: Union[str, bool] = False
     Run: Optional[str] = None
 

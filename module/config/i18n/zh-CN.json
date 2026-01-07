@@ -66,6 +66,10 @@
       "name": "活动通用设置",
       "help": ""
     },
+    "Coalition": {
+      "name": "DATE A LANE",
+      "help": ""
+    },
     "Event": {
       "name": "活动图",
       "help": ""
@@ -80,10 +84,6 @@
     },
     "Hospital": {
       "name": "深谷来信",
-      "help": ""
-    },
-    "Coalition": {
-      "name": "DATE A LANE",
       "help": ""
     },
     "MaritimeEscort": {
@@ -281,238 +281,6 @@
     "GameManager": {
       "name": "游戏管理器(未完成)",
       "help": ""
-    },
-    "VLMGameController": {
-      "name": "VLM智能控制器",
-      "help": "使用视觉语言模型（AI视觉）自动处理游戏卡死和未知界面，避免简单重启。需要安装对应的Python库（openai/anthropic/google-generativeai）并配置API Key"
-    }
-  },
-  "Oil": {
-    "_info": {
-      "name": "Oil._info.name",
-      "help": "Oil._info.help"
-    },
-    "Value": {
-      "name": "Oil.Value.name",
-      "help": "Oil.Value.help"
-    },
-    "Limit": {
-      "name": "Oil.Limit.name",
-      "help": "Oil.Limit.help"
-    },
-    "Color": {
-      "name": "Oil.Color.name",
-      "help": "Oil.Color.help"
-    },
-    "Record": {
-      "name": "Oil.Record.name",
-      "help": "Oil.Record.help"
-    }
-  },
-  "Coin": {
-    "_info": {
-      "name": "Coin._info.name",
-      "help": "Coin._info.help"
-    },
-    "Value": {
-      "name": "Coin.Value.name",
-      "help": "Coin.Value.help"
-    },
-    "Limit": {
-      "name": "Coin.Limit.name",
-      "help": "Coin.Limit.help"
-    },
-    "Color": {
-      "name": "Coin.Color.name",
-      "help": "Coin.Color.help"
-    },
-    "Record": {
-      "name": "Coin.Record.name",
-      "help": "Coin.Record.help"
-    }
-  },
-  "Gem": {
-    "_info": {
-      "name": "Gem._info.name",
-      "help": "Gem._info.help"
-    },
-    "Value": {
-      "name": "Gem.Value.name",
-      "help": "Gem.Value.help"
-    },
-    "Color": {
-      "name": "Gem.Color.name",
-      "help": "Gem.Color.help"
-    },
-    "Record": {
-      "name": "Gem.Record.name",
-      "help": "Gem.Record.help"
-    }
-  },
-  "Pt": {
-    "_info": {
-      "name": "Pt._info.name",
-      "help": "Pt._info.help"
-    },
-    "Value": {
-      "name": "Pt.Value.name",
-      "help": "Pt.Value.help"
-    },
-    "Color": {
-      "name": "Pt.Color.name",
-      "help": "Pt.Color.help"
-    },
-    "Record": {
-      "name": "Pt.Record.name",
-      "help": "Pt.Record.help"
-    }
-  },
-  "YellowCoin": {
-    "_info": {
-      "name": "YellowCoin._info.name",
-      "help": "YellowCoin._info.help"
-    },
-    "Value": {
-      "name": "YellowCoin.Value.name",
-      "help": "YellowCoin.Value.help"
-    },
-    "Color": {
-      "name": "YellowCoin.Color.name",
-      "help": "YellowCoin.Color.help"
-    },
-    "Record": {
-      "name": "YellowCoin.Record.name",
-      "help": "YellowCoin.Record.help"
-    }
-  },
-  "PurpleCoin": {
-    "_info": {
-      "name": "PurpleCoin._info.name",
-      "help": "PurpleCoin._info.help"
-    },
-    "Value": {
-      "name": "PurpleCoin.Value.name",
-      "help": "PurpleCoin.Value.help"
-    },
-    "Color": {
-      "name": "PurpleCoin.Color.name",
-      "help": "PurpleCoin.Color.help"
-    },
-    "Record": {
-      "name": "PurpleCoin.Record.name",
-      "help": "PurpleCoin.Record.help"
-    }
-  },
-  "ActionPoint": {
-    "_info": {
-      "name": "ActionPoint._info.name",
-      "help": "ActionPoint._info.help"
-    },
-    "Value": {
-      "name": "ActionPoint.Value.name",
-      "help": "ActionPoint.Value.help"
-    },
-    "Total": {
-      "name": "ActionPoint.Total.name",
-      "help": "ActionPoint.Total.help"
-    },
-    "Color": {
-      "name": "ActionPoint.Color.name",
-      "help": "ActionPoint.Color.help"
-    },
-    "Record": {
-      "name": "ActionPoint.Record.name",
-      "help": "ActionPoint.Record.help"
-    }
-  },
-  "Merit": {
-    "_info": {
-      "name": "Merit._info.name",
-      "help": "Merit._info.help"
-    },
-    "Value": {
-      "name": "Merit.Value.name",
-      "help": "Merit.Value.help"
-    },
-    "Color": {
-      "name": "Merit.Color.name",
-      "help": "Merit.Color.help"
-    },
-    "Record": {
-      "name": "Merit.Record.name",
-      "help": "Merit.Record.help"
-    }
-  },
-  "Cube": {
-    "_info": {
-      "name": "Cube._info.name",
-      "help": "Cube._info.help"
-    },
-    "Value": {
-      "name": "Cube.Value.name",
-      "help": "Cube.Value.help"
-    },
-    "Color": {
-      "name": "Cube.Color.name",
-      "help": "Cube.Color.help"
-    },
-    "Record": {
-      "name": "Cube.Record.name",
-      "help": "Cube.Record.help"
-    }
-  },
-  "Core": {
-    "_info": {
-      "name": "Core._info.name",
-      "help": "Core._info.help"
-    },
-    "Value": {
-      "name": "Core.Value.name",
-      "help": "Core.Value.help"
-    },
-    "Color": {
-      "name": "Core.Color.name",
-      "help": "Core.Color.help"
-    },
-    "Record": {
-      "name": "Core.Record.name",
-      "help": "Core.Record.help"
-    }
-  },
-  "Medal": {
-    "_info": {
-      "name": "Medal._info.name",
-      "help": "Medal._info.help"
-    },
-    "Value": {
-      "name": "Medal.Value.name",
-      "help": "Medal.Value.help"
-    },
-    "Color": {
-      "name": "Medal.Color.name",
-      "help": "Medal.Color.help"
-    },
-    "Record": {
-      "name": "Medal.Record.name",
-      "help": "Medal.Record.help"
-    }
-  },
-  "GuildCoin": {
-    "_info": {
-      "name": "GuildCoin._info.name",
-      "help": "GuildCoin._info.help"
-    },
-    "Value": {
-      "name": "GuildCoin.Value.name",
-      "help": "GuildCoin.Value.help"
-    },
-    "Color": {
-      "name": "GuildCoin.Color.name",
-      "help": "GuildCoin.Color.help"
-    },
-    "Record": {
-      "name": "GuildCoin.Record.name",
-      "help": "GuildCoin.Record.help"
     }
   },
   "Scheduler": {
@@ -828,6 +596,14 @@
       "save": "保存",
       "upload": "上传",
       "save_and_upload": "保存并上传"
+    },
+    "TelemetryReport": {
+      "name": "遥测数据上报",
+      "help": "启用后将定期向服务器匿名上报 CL1 统计数据（战斗次数、明石遇见概率等匿名数据）ID生成详见源码，统计信息 https://alas.nanoda.work/"
+    },
+    "BugReport": {
+      "name": "Bug 日志上报",
+      "help": "启用后将在遇到异常时向服务器匿名上报 Bug 日志以帮助改进ID生成详见源码"
     }
   },
   "Retirement": {
@@ -1061,6 +837,7 @@
       "war_archives_20220526_cn": "档案 泠誓光庭",
       "war_archives_20220728_cn": "档案 雄鹰的叙事歌",
       "war_archives_20220915_cn": "档案 紫绛槿岚",
+      "war_archives_20221222_cn": "档案 定向折叠",
       "war_archives_20231026_cn": "档案 飓风与青春之泉"
     },
     "Mode": {
@@ -2836,10 +2613,6 @@
       "name": "保留x点黄币",
       "help": "雪风大人温馨提示：低于此设置的黄币数量将不会运行侵蚀一nanoda!"
     },
-    "SirenResearch_Enable": {
-      "name": "塞壬研究装置",
-      "help": "雪风大人提醒：消耗紫币换黄币，一个月没有几十万海里慎用nanoda!"
-    },
     "MinimumActionPointReserve": {
       "name": "保留 X 点行动力",
       "help": "搏一搏，单车变摩托，雪风大人已经把幸运分给指挥官了nanoda，上吧nanoda！"
@@ -2851,24 +2624,36 @@
     "Cl1Filter": {
       "name": "明石购买筛选",
       "help": "侵蚀一明石一般只购买体力nanoda,ActionPoint > PurpleCoins为购买紫币nanoda"
-    },
-    "RecordNonCL1AP": {
-      "name": "记录非侵蚀1来源的体力",
-      "help": "开启后，无论当前是否处于侵蚀1任务，都会记录从明石购买的体力数据。\n关闭后，仅记录侵蚀1任务中的体力数据。"
     }
   },
-  "OpsiScheduling": {
+  "OpsiSirenBug": {
     "_info": {
-      "name": "智能调度Beta",
-      "help": "侵蚀1与短猫相接之间的智能调度功能\n启用后将根据黄币和行动力自动切换任务并发送推送通知"
+      "name": "塞壬研究装置Bug利用",
+      "help": "专门用于配置塞壬研究装置及其Bug利用的相关选项"
     },
-    "EnableSmartScheduling": {
-      "name": "启用智能调度",
-      "help": "雪风大人温馨提示：启用后将自动管理侵蚀1和短猫相接之间的切换nanoda!\n• 黄币不足且行动力充足时 → 自动切换到短猫获取黄币\n• 黄币不足且行动力也不足时 → 推迟1小时并推送通知\n• 短猫中行动力不足时 → 推迟短猫并切换回侵蚀1\n• 侵蚀1行动力低于最低保留时 → 推迟1小时并推送通知\n• 行动力跨越阈值时 → 发送推送通知"
+    "SirenResearch_Enable": {
+      "name": "塞壬研究装置",
+      "help": "雪风大人提醒：消耗紫币换黄币，一个月没有几十万海里慎用nanoda!"
     },
-    "ActionPointNotifyLevels": {
-      "name": "行动力推送阈值",
-      "help": "雪风大人提醒：行动力升至或降至这些阈值时会发送推送通知nanoda!\n使用逗号分隔多个阈值，例如: 500,1000,2000,3000\n注意：需要在 Alas - 错误处理 中配置推送通知才能生效"
+    "SirenBug_Enable": {
+      "name": "塞壬研究装置Bug利用(实验性)",
+      "help": "利用塞壬研究装置Bug，无限刷取高侵蚀区域塞壬研究装置资源\n启用该功能前需启用塞壬研究装置功能，否则该功能将不生效"
+    },
+    "SirenBug_Type": {
+      "name": "海域类型切换",
+      "help": "选择前往的海域是安全海域还是普通海域",
+      "dangerous": "普通海域",
+      "safe": "安全海域"
+    },
+    "SirenBug_Zone": {
+      "name": "指定Bug利用区域(实验性)",
+      "help": "指定已刷出塞壬研究装置的高侵蚀区域\n支持海域ID、国服/国际服/日服/台服海域名称，例如 \"51\", \"NA海域东南E\", \"NA Ocean SE Sector E\"\n填入默认值0，或者删除数值即可取消指定"
+    },
+    "DisableTaskSwitchDuringBug": {
+      "name": "Bug利用期间禁止任务切换 (实验性)",
+      "help": "⚠️ 实验性功能 ⚠️\nBug利用期间临时禁用调度器的任务切换检查，避免被委托、日常等任务打断\n如果Bug利用过程中经常被其他到时任务中断，可以启用此选项",
+      "True": "True",
+      "False": "False"
     }
   },
   "OpsiCheckLeveling": {
@@ -2887,6 +2672,20 @@
     "DelayAfterFull": {
       "name": "到达目标等级后推迟任务",
       "help": ""
+    }
+  },
+  "OpsiScheduling": {
+    "_info": {
+      "name": "智能调度Beta",
+      "help": "侵蚀1与短猫相接之间的智能调度功能\n启用后将根据黄币和行动力自动切换任务并发送推送通知"
+    },
+    "EnableSmartScheduling": {
+      "name": "启用智能调度",
+      "help": "雪风大人温馨提示：启用后将自动管理侵蚀1和短猫相接之间的切换nanoda!\n• 黄币不足且行动力充足时 → 自动切换到短猫获取黄币\n• 黄币不足且行动力也不足时 → 推迟1小时并推送通知\n• 短猫中行动力不足时 → 推迟短猫并切换回侵蚀1\n• 侵蚀1行动力低于最低保留时 → 推迟1小时并推送通知\n• 行动力跨越阈值时 → 发送推送通知"
+    },
+    "ActionPointNotifyLevels": {
+      "name": "行动力推送阈值",
+      "help": "雪风大人提醒：行动力升至或降至这些阈值时会发送推送通知nanoda!\n使用逗号分隔多个阈值，例如: 500,1000,2000,3000\n注意：需要在 Alas - 错误处理 中配置推送通知才能生效"
     }
   },
   "Daemon": {
@@ -3030,8 +2829,7 @@
       "Running": "运行中",
       "Pending": "队列中",
       "Waiting": "等待中",
-      "NoTask": "无任务",
-      "PlaceholderSwitched": "雪风大人的图片已切换nanoda"
+      "NoTask": "无任务"
     },
     "Dashboard": {
       "TimeError": "时间错误",

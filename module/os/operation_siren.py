@@ -392,7 +392,7 @@ class OperationSiren(OSMap):
             - 行动力从 1200 降至 900，会推送"降至1000以下"
         """
         # 检查是否启用智能调度
-        if not self.config.OpsiScheduling_EnableSmartScheduling:
+        if not getattr(self.config, 'OpsiScheduling_EnableSmartScheduling', False):
             return
             
         # 初始化上次通知的阈值记录（首次调用时为 None）
@@ -404,7 +404,8 @@ class OperationSiren(OSMap):
         
         # 解析配置的阈值列表
         try:
-            thresholds = [int(x.strip()) for x in self.config.OpsiScheduling_ActionPointNotifyLevels.split(',')]
+            levels_str = getattr(self.config, 'OpsiScheduling_ActionPointNotifyLevels', '500, 1000, 2000, 3000')
+            thresholds = [int(x.strip()) for x in levels_str.split(',')]
         except Exception as e:
             logger.warning(f"解析行动力阈值配置失败: {e}")
             return
@@ -505,7 +506,8 @@ class OperationSiren(OSMap):
                 
                 # ===== 智能调度: 短猫相接行动力不足检查 =====
                 # 检查当前行动力是否低于配置的保留值
-                if self.config.OpsiScheduling_EnableSmartScheduling:
+                if getattr(self.config, 'OpsiScheduling_EnableSmartScheduling', False):
+
                     if self._action_point_total < self.config.OpsiMeowfficerFarming_ActionPointPreserve:
                         logger.info(f'【智能调度】短猫相接行动力不足 ({self._action_point_total} < {self.config.OpsiMeowfficerFarming_ActionPointPreserve})')
                         
@@ -706,7 +708,7 @@ class OperationSiren(OSMap):
             
             # ===== 智能调度: 最低行动力保留检查 =====
             # 检查当前行动力是否低于最低保留值
-            if self.config.OpsiScheduling_EnableSmartScheduling:
+            if getattr(self.config, 'OpsiScheduling_EnableSmartScheduling', False):
                 min_reserve = self.config.OpsiHazard1Leveling_MinimumActionPointReserve
                 if self._action_point_total < min_reserve:
                     logger.warning(f'【智能调度】行动力低于最低保留 ({self._action_point_total} < {min_reserve})')
@@ -759,13 +761,20 @@ class OperationSiren(OSMap):
 
             # 每次循环结束后提交CL1数据
             try:
-                from module.statistics.cl1_data_submitter import get_cl1_submitter
-                submitter = get_cl1_submitter()
-                # 不检查时间间隔,每次循环都提交
-                raw_data = submitter.collect_data()
-                if raw_data.get('battle_count', 0) > 0:
-                    metrics = submitter.calculate_metrics(raw_data)
-                    submitter.submit_data(metrics)
+                # 检查遥测上报开关
+                if not getattr(self.config, 'DropRecord_TelemetryReport', True):
+                    logger.info('Telemetry report disabled by config')
+                else:
+                    from module.statistics.cl1_data_submitter import get_cl1_submitter
+                    # 获取当前实例名称，确保使用正确的数据文件路径
+                    instance_name = self.config.config_name if hasattr(self.config, 'config_name') else None
+                    submitter = get_cl1_submitter(instance_name=instance_name)
+                    # 不检查时间间隔,每次循环都提交
+                    raw_data = submitter.collect_data()
+                    if raw_data.get('battle_count', 0) > 0:
+                        metrics = submitter.calculate_metrics(raw_data)
+                        submitter.submit_data(metrics)
+                        logger.info(f'CL1 data submission queued for instance: {instance_name}')
             except Exception as e:
                 logger.debug(f'CL1 data submission failed: {e}')
 
@@ -823,12 +832,18 @@ class OperationSiren(OSMap):
             from module.statistics.ship_exp_stats import save_ship_exp_data
             from module.statistics.opsi_month import get_opsi_stats
             
-            current_battles = get_opsi_stats().summary().get('total_battles', 0)
+            # 获取当前实例名称
+            instance_name = self.config.config_name if hasattr(self.config, 'config_name') else None
+            
+            # 使用实例名获取战绩，确保战斗场次正确
+            current_battles = get_opsi_stats(instance_name=instance_name).summary().get('total_battles', 0)
+            
             save_ship_exp_data(
                 ships=ship_data_list,
                 target_level=target_level,
                 fleet_index=self.config.OpsiFleet_Fleet,
-                battle_count_at_check=current_battles
+                battle_count_at_check=current_battles,
+                instance_name=instance_name  # 指定实例名称保存数据
             )
         except Exception as e:
             logger.warning(f'Failed to save ship exp data: {e}')

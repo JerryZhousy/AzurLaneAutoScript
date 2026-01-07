@@ -324,12 +324,13 @@ Opsi:
       - Scheduler
       - OpsiMeowfficerFarming
       - OpsiFleet
-      - OpsiCheckLeveling
     OpsiHazard1Leveling:
       - Scheduler
       - OpsiHazard1Leveling
+      - OpsiSirenBug
       - OpsiFleet
       - OpsiCheckLeveling
+      - OpsiScheduling
     OpsiCrossMonth:
       - Scheduler
 
@@ -357,7 +358,7 @@ Tool:
 Dashboard:
   page: "dashboard"
   tasks:
-    Resource:
+    Dashboard:
       - Oil
       - Coin
       - Gem

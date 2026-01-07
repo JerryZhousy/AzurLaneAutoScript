@@ -241,7 +241,7 @@ class Combat(Combat_, MapEventHandler):
             if hasattr(self, 'config') and hasattr(self.config, 'task'):
                 if self.config.task.command == 'OpsiHazard1Leveling':
                     _is_cl1_battle = True
-                    _instance_name = getattr(self.config, 'config_name', None)
+                    _instance_name = self.config.config_name if hasattr(self.config, 'config_name') else None
                     from module.statistics.ship_exp_stats import get_ship_exp_stats
                     get_ship_exp_stats(instance_name=_instance_name).on_battle_start()
         except Exception:

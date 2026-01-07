@@ -72,33 +72,7 @@ class ModuleBase:
         The import is paralleled since taking screenshot is I/O-bound while importing is CPU-bound,
         thus would speed up the startup 0.5 ~ 1.0s and even 5s on slow PCs.
         """
-        if ModuleBase.EARLY_OCR_IMPORT:
-            return
-        if not self.config.is_actual_task:
-            logger.info('No actual task bound, skip early_ocr_import')
-            return
-        if self.config.task.command in ['Daemon', 'OpsiDaemon']:
-            logger.info('No ocr in daemon task, skip early_ocr_import')
-            return
-
-        def do_ocr_import():
-            # Wait first image
-            import time
-            while 1:
-                if self.device.has_cached_image:
-                    break
-                time.sleep(0.01)
-
-            logger.info('early_ocr_import start')
-            from module.ocr.al_ocr import AlOcr
-            _ = AlOcr
-            logger.info('early_ocr_import finish')
-
-        logger.info('early_ocr_import call')
-        import threading
-        thread = threading.Thread(target=do_ocr_import, daemon=True)
-        thread.start()
-        ModuleBase.EARLY_OCR_IMPORT = True
+        return
 
     @cached_class_property
     def worker(self):
