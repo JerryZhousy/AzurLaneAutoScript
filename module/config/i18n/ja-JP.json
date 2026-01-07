@@ -3985,10 +3985,6 @@
       "name": "OpsiHazard1Leveling.OperationCoinsPreserve.name",
       "help": "OpsiHazard1Leveling.OperationCoinsPreserve.help"
     },
-    "DoScanningDevice": {
-      "name": "OpsiHazard1Leveling.DoScanningDevice.name",
-      "help": "OpsiHazard1Leveling.DoScanningDevice.help"
-    },
     "MinimumActionPointReserve": {
       "name": "保留 X 点行动力",
       "help": "搏一搏，单车变摩托，雪风大人已经把幸运分给指挥官了nanoda，上吧nanoda！"

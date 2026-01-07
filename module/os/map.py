@@ -1119,15 +1119,9 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             logger.info(f'Found scanning device on {grid}')
             # 检查是否开启研究装置交互
             siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
-            cl1_do_scanning_device = self.config.cross_get(
-                    keys="OpsiHazard1Leveling.OpsiHazard1Leveling.DoScanningDevice")
             
             if not siren_research_enabled:
                 logger.info('SirenResearch disabled by config, skip scanning device')
-                self._solved_map_event.add('is_scanning_device')
-                return True
-            if (self.is_in_task_cl1_leveling or self.zone.zone_id in [22, 44]) and not cl1_do_scanning_device:
-                logger.info('In CL1 leveling and DoScanningDevice disabled, mark scanning device as solved')
                 self._solved_map_event.add('is_scanning_device')
                 return True
                 
