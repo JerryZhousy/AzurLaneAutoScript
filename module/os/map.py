@@ -1378,7 +1378,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             
             if getattr(self, 'is_siren_device_confirmed', False):
                 # 执行自律寻敌
-                logger.info('[装置处理] info_handler 已确认为塞壬研究装置')
+                # 执行自律寻敌
                 logger.info('[装置处理] 执行自律寻敌')
                 self.os_auto_search_run(drop=drop)
 
@@ -1388,11 +1388,11 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 
                 self._solved_map_event.add('is_scanning_device')
                 
-                logger.info('[装置处理] 检查是否需要执行Bug利用')
-                self._handle_siren_bug_reinteract(drop=drop)
-            else:
-                logger.warning('[装置处理] 未确认为塞壬研究装置(可能是普通事件), 跳过后续处理')
-                self._solved_map_event.add('is_scanning_device')
+                if self.is_siren_device_confirmed:
+                    logger.info('[装置处理] 已确认为塞壬研究装置，检查是否需要执行Bug利用')
+                    self._handle_siren_bug_reinteract(drop=drop)
+                else:
+                     logger.info('[装置处理] 未确认为塞壬研究装置，跳过Bug利用')
             
             return True
 
