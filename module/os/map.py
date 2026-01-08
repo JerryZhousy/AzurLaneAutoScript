@@ -980,109 +980,241 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 return True
             elif 'event' in result and grid.is_scanning_device:
                 # ========== 地图检测:检测到扫描装置 ==========
-                logger.hr('检测到扫描装置,开始验证', level=2)
+                logger.hr('检测到扫描装置,开始处理', level=2)
                 logger.info(f'[地图检测] 格子 {grid} 被识别为扫描装置 (grid.is_scanning_device=True)')
                 logger.info(f'[地图检测] 移动结果: {result}')
-                
-                # ========== OCR验证选项文本(二次确认是否为塞壬研究装置) ==========
-                logger.info('[OCR验证] 开始等待选项按钮出现')
-                option_wait_timer = Timer(5, count=10).start()
-                options_verified = False
-                wait_count = 0
-                
-                while not option_wait_timer.reached():
-                    wait_count += 1
-                    self.device.screenshot()
-                    
-                    # 检测选项按钮
-                    logger.info(f'[选项检测] 第 {wait_count} 次尝试检测选项按钮...')
-                    options = self._story_option_buttons_2()
-                    logger.info(f'[选项检测] 检测结果: 发现 {len(options)} 个选项按钮')
-                    
-                    if len(options) > 0:
-                        # 打印每个选项的位置信息
-                        for i, opt in enumerate(options):
-                            logger.info(f'[选项检测] 选项{i+1}: {opt.name}, 区域={opt.area}')
-                        
-                        # 只要检测到选项就立即进行OCR验证
-                        logger.info(f'[OCR验证] 检测到 {len(options)} 个选项,开始OCR文本验证')
-                        if self._verify_siren_research_options(options):
-                            logger.info('[OCR验证] ✓ 验证成功,确认为塞壬研究装置!')
-                            options_verified = True
-                            break
-                        else:
-                            logger.warning('[OCR验证] ✗ 验证失败(文本不匹配),不是塞壬研究装置')
-                            break
-                    else:
-                        logger.info(f'[选项检测] 未检测到选项,继续等待... (剩余时间: {5 - wait_count * 0.5:.1f}秒)')
-                    
-                    time.sleep(0.5)
-                
-                # ========== 根据验证结果处理 ==========
-                if options_verified:
-                    logger.info('[装置处理] ========== 验证通过,开始处理塞壬研究装置 ==========')
-                    
-                    # 1. 循环点击第2个选项直到装置消失
-                    logger.info('[装置处理] 步骤1: 开始循环点击第2个选项(探测隐藏资源)')
-                    process_timer = Timer(30, count=60).start()
-                    click_count = 0
-                    
-                    while not process_timer.reached():
-                        self.device.screenshot()
-                        current_options = self._story_option_buttons_2()
-                        
-                        logger.info(f'[装置处理] 检查装置状态: 当前 {len(current_options)} 个选项')
-                        
-                        if len(current_options) >= 3:
-                            # 选项还在,点击第2个选项(索引1)
-                            click_count += 1
-                            logger.info(f'[装置处理] 装置仍存在,点击第2个选项 (第{click_count}次)')
-                            logger.info(f'[装置处理] 点击位置: {current_options[1].button}')
-                            self.device.click(current_options[1])
-                            logger.info('[装置处理] 等待2秒处理结果...')
-                            time.sleep(2.0)
-                            
-                            # 处理可能的确认按钮
-                            logger.info('[装置处理] 检查并点击确认按钮')
-                            self._click_story_confirm_button()
-                        else:
-                            # 选项消失了,装置处理完成
-                            logger.info('[装置处理] ✓ 装置选项已消失,处理完成!')
-                            logger.info(f'[装置处理] 总共点击次数: {click_count}')
-                            break
-                        
-                        time.sleep(0.5)
-                    
-                    # 2. 执行自律寻敌(处理装置触发的内容)
-                    logger.info('[装置处理] 步骤2: 执行自律寻敌,处理装置触发的战斗/事件')
-                    self.os_auto_search_run(drop=drop)
-                    logger.info('[装置处理] 自律寻敌完成')
-                    
-                    # 3. 装置处理完成,标记为已处理
-                    logger.info('[装置处理] 步骤3: 标记装置为已处理,避免重复处理')
+
+                # ========== 配置检查 ==========
+                siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+                if not siren_research_enabled:
+                    logger.warning('[配置检查] 塞壬研究装置功能已禁用,标记但不处理')
                     self._solved_map_event.add('is_scanning_device')
-                    logger.info('[装置处理] ✓ 装置已标记为已处理')
-                    
-                    # 4. 执行Bug利用
-                    logger.info('[装置处理] 步骤4: 检查是否需要执行Bug利用')
-                    self._handle_siren_bug_reinteract(drop=drop)
-                    
-                    logger.info('[装置处理] ========== 塞壬研究装置处理完成 ==========')
-                    
-                else:
-                    # 验证失败,退出对话但不标记(后续可重试)
-                    logger.warning('[装置处理] 验证失败,退出对话并保留重试机会')
-                    logger.info('[装置处理] 点击返回箭头退出对话')
-                    for i in range(5):
-                        logger.info(f'[装置处理] 点击返回 ({i+1}/5)')
-                        self.device.click(BACK_ARROW)
-                        time.sleep(0.3)
-                    logger.info('[装置处理] 已退出对话,未标记装置(可重试)')
+                    return True
+
+                # ========== 装置处理 ==========
+                # 选项点击已由 wait_until_walk_stable -> info_handler.story_skip 处理
+                
+                # 执行自律寻敌
+                logger.info('[装置处理] 步骤1: 执行自律寻敌')
+                self.os_auto_search_run(drop=drop)
+                
+                # 标记处理
+                self._solved_map_event.add('is_scanning_device')
+                
+                # Bug利用
+                logger.info('[装置处理] 步骤2: 检查是否需要执行Bug利用')
+                self._handle_siren_bug_reinteract(drop=drop)
                 
                 return True
+
+        logger.warning('Failed to goto question mark after 5 trail, '
+                       'this might be 2 adjacent fleet mechanism, stopped')
+        return False
+
+    def interrupt_auto_search(self, goto_main=True, skip_first_screenshot=True):
+        """
+        Args:
+            goto_main (bool): If go to the page_main
+
+        Raises:
+            TaskEnd: If auto search interrupted
+
+        Pages:
+            in: Any, usually to be is_combat_executing
+            out: page_main or IN_MAP
+        """
+        logger.info('Interrupting auto search')
+        is_loading = False
+        pause_interval = Timer(0.5, count=1)
+        in_main_timer = Timer(3, count=6)
+        in_map_timer = Timer(1, count=6)
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
             else:
-                logger.warning(f'Arrive question with unexpected result: {result}, expected: {grid.str}')
+                self.device.screenshot()
+
+            # End
+            if self.is_in_main():
+                logger.info('Auto search interrupted')
+                self.config.task_stop()
+            if not goto_main and self.is_in_map():
+                if in_map_timer.reached():
+                    logger.info('Auto search interrupted')
+                    self.config.task_stop()
+
+            if self.appear_then_click(AUTO_SEARCH_REWARD, offset=(50, 50), interval=3):
+                self.interval_clear(GOTO_MAIN)
+                in_main_timer.reset()
+                in_map_timer.reset()
                 continue
+            if pause_interval.reached():
+                pause = self.is_combat_executing()
+                if pause:
+                    self.device.click(pause)
+                    self.interval_reset(MAINTENANCE_ANNOUNCE)
+                    is_loading = False
+                    pause_interval.reset()
+                    in_main_timer.reset()
+                    in_map_timer.reset()
+                    continue
+            if self.handle_combat_quit():
+                self.interval_reset(MAINTENANCE_ANNOUNCE)
+                pause_interval.reset()
+                in_main_timer.reset()
+                in_map_timer.reset()
+                continue
+            if self.appear_then_click(QUIT_RECONFIRM, offset=True, interval=5):
+                self.interval_reset(MAINTENANCE_ANNOUNCE)
+                pause_interval.reset()
+                in_main_timer.reset()
+                in_map_timer.reset()
+                continue
+
+            if goto_main and self.appear_then_click(GOTO_MAIN, offset=(20, 20), interval=3):
+                in_main_timer.reset()
+                continue
+            if self.ui_additional():
+                continue
+            if self.handle_map_event():
+                continue
+            # Only print once when detected
+            if not is_loading:
+                if self.is_combat_loading():
+                    is_loading = True
+                    in_main_timer.clear()
+                    in_map_timer.clear()
+                    continue
+                # Random background from page_main may trigger EXP_INFO_*, don't check them
+                if in_main_timer.reached():
+                    logger.info('handle_exp_info')
+                    if self.handle_battle_status():
+                        continue
+                    if self.handle_exp_info():
+                        continue
+            elif self.is_combat_executing():
+                is_loading = False
+                in_main_timer.clear()
+                in_map_timer.clear()
+                continue
+
+    def os_auto_search_run(self, drop=None, strategic=False, interrupt=None):
+        """
+        Args:
+            drop (DropRecord):
+            strategic (bool): True to use strategic search
+            interrupt (callable):
+        Returns:
+            int: Number of finished combat
+        """
+        finished_combat = 0
+        for _ in range(5):
+            backup = self.config.temporary(Campaign_UseAutoSearch=True)
+            try:
+                if strategic:
+                    self.strategic_search_start(skip_first_screenshot=True)
+                combat = self.os_auto_search_daemon(drop=drop, strategic=strategic, interrupt=interrupt)
+                finished_combat += combat
+            except CampaignEnd:
+                logger.info('OS auto search finished')
+            finally:
+                backup.recover()
+
+            # Continue if was Auto search interrupted by ash popup
+            # Break if zone cleared
+            if self.config.is_task_enabled('OpsiAshBeacon'):
+                if self.handle_ash_beacon_attack() or self.ash_popup_canceled:
+                    strategic = False
+                    continue
+                else:
+                    break
+            else:
+                if self.info_bar_count() >= 2:
+                    break
+                elif self.ash_popup_canceled:
+                    continue
+                else:
+                    break
+
+        return finished_combat
+
+    def clear_question(self, drop=None):
+        """
+        Clear nearly (and 3 grids from above) question marks on radar.
+        Try 3 times at max to avoid loop tries on 2 adjacent fleet mechanism.
+
+        Args:
+            drop:
+
+        Returns:
+            bool: If cleared
+        """
+        logger.hr('Clear question', level=2)
+        for _ in range(3):
+            grid = self.radar.predict_question(self.device.image, in_port=self.zone.is_port)
+            if grid is None:
+                logger.info('No question mark above current fleet on this radar')
+                return False
+
+            logger.info(f'Found question mark on {grid}')
+            self.handle_info_bar()
+
+            self.update_os()
+            self.view.predict()
+            self.view.show()
+
+            grid = self.convert_radar_to_local(grid)
+            self.device.click(grid)
+            
+            # 重置标志位
+            self.is_siren_device_confirmed = False
+            
+            with self.config.temporary(STORY_ALLOW_SKIP=False):
+                result = self.wait_until_walk_stable(
+                    drop=drop, walk_out_of_step=False, confirm_timer=Timer(1.5, count=4))
+            if 'akashi' in result:
+                self._solved_map_event.add('is_akashi')
+                return True
+            elif 'event' in result and grid.is_logging_tower:
+                self._solved_map_event.add('is_logging_tower')
+                return True
+            elif 'event' in result and grid.is_scanning_device:
+                # ========== 地图检测:检测到扫描装置 ==========
+                logger.hr('检测到扫描装置,开始处理', level=2)
+                logger.info(f'[地图检测] 格子 {grid} 被识别为扫描装置 (grid.is_scanning_device=True)')
+                logger.info(f'[地图检测] 移动结果: {result}')
+
+                # ========== 配置检查 ==========
+                siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+                if not siren_research_enabled:
+                    logger.warning('[配置检查] 塞壬研究装置功能已禁用,标记但不处理')
+                    self._solved_map_event.add('is_scanning_device')
+                    return True
+
+                # ========== 装置处理 ==========
+                # 选项点击已由 wait_until_walk_stable -> info_handler.story_skip 处理
+                
+                if getattr(self, 'is_siren_device_confirmed', False):
+                    # 执行自律寻敌
+                    logger.info('[装置处理] info_handler 已确认为塞壬研究装置')
+                    logger.info('[装置处理] 步骤1: 执行自律寻敌')
+                    self.os_auto_search_run(drop=drop)
+                    
+                    # 二次重扫，防止出现意外情况导致装置处理失败
+                    logger.info('[装置处理] 步骤1.5: 执行二次重扫')
+                    self.map_rescan_current(drop=drop)
+
+                    # 标记处理
+                    self._solved_map_event.add('is_scanning_device')
+                    
+                    # Bug利用
+                    logger.info('[装置处理] 步骤2: 检查是否需要执行Bug利用')
+                    self._handle_siren_bug_reinteract(drop=drop)
+                else:
+                    logger.warning('[装置处理] 未确认为塞壬研究装置(可能是普通事件), 跳过后续处理')
+                    self._solved_map_event.add('is_scanning_device')
+                
+                return True
 
         logger.warning('Failed to goto question mark after 5 trail, '
                        'this might be 2 adjacent fleet mechanism, stopped')
@@ -1224,108 +1356,45 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             # ========== 地图选择:发现扫描装置 ==========
             logger.hr('发现扫描装置,开始处理', level=2)
             logger.info(f'[地图选择] 在 {grid} 位置发现扫描装置')
-            logger.info(f'[地图选择] 装置属性: is_scanning_device={grid.is_scanning_device}')
-            logger.info(f'[地图选择] 总共发现 {len(grids)} 个扫描装置目标')
             
-            # ========== 配置检查:是否开启研究装置交互 ==========
             siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
-            logger.info(f'[配置检查] SirenResearch_Enable = {siren_research_enabled}')
-            
             if not siren_research_enabled:
                 logger.warning('[配置检查] 塞壬研究装置功能已禁用,跳过处理')
                 self._solved_map_event.add('is_scanning_device')
-                logger.info('[配置检查] 已标记装置为已处理(跳过)')
                 return True
             
-            # ========== 移动到装置位置 ==========
+            # ========== 移动并处理 ==========
             logger.info(f'[移动装置] 开始移动到装置位置: {grid}')
-            logger.info(f'[移动装置] 点击装置坐标: {grid.button}')
             self.device.click(grid)
             
+            # 重置标志位
+            self.is_siren_device_confirmed = False
+            
+            # wait_until_walk_stable 会调用 handle_story_skip 处理选项
             logger.info('[移动装置] 等待移动稳定...')
-            with self.config.temporary(STORY_ALLOW_SKIP=False):
-                result = self.wait_until_walk_stable(
-                    drop=drop, walk_out_of_step=False, confirm_timer=Timer(1.5, count=4))
+            result = self.wait_until_walk_stable(
+                drop=drop, walk_out_of_step=False, confirm_timer=Timer(1.5, count=4))
             logger.info(f'[移动装置] 移动完成,结果: {result}')
             
-            # ========== OCR验证选项文本(二次确认) ==========
-            logger.info('[OCR验证] 开始等待选项按钮出现')
-            option_wait_timer = Timer(5, count=10).start()
-            options_verified = False
-            wait_count = 0
-            
-            while not option_wait_timer.reached():
-                wait_count += 1
-                self.device.screenshot()
-                
-                # 检测选项按钮
-                logger.info(f'[选项检测] 第 {wait_count} 次尝试检测选项按钮...')
-                options = self._story_option_buttons_2()
-                logger.info(f'[选项检测] 检测结果: 发现 {len(options)} 个选项按钮')
-                
-                if len(options) > 0:
-                    # 打印每个选项的位置信息
-                    for i, opt in enumerate(options):
-                        logger.info(f'[选项检测] 选项{i+1}: {opt.name}, 区域={opt.area}')
-                    
-                    # 移动到装置后,只要检测到选项就立即进行OCR验证
-                    logger.info(f'[OCR验证] 检测到 {len(options)} 个选项,开始OCR文本验证')
-                    if self._verify_siren_research_options(options):
-                        logger.info('[OCR验证] ✓ 验证成功,确认为塞壬研究装置!')
-                        options_verified = True
-                        break
-                    else:
-                        logger.warning('[OCR验证] ✗ 验证失败(文本不匹配),不是塞壬研究装置')
-                        break
-                else:
-                    logger.info(f'[选项检测] 未检测到选项,继续等待... (剩余时间: {5 - wait_count * 0.5:.1f}秒)')
-                
-                time.sleep(0.5)
-            
-            # ========== 根据验证结果处理 ==========
-            if options_verified:
-                logger.info('[装置处理] ========== 验证通过,开始处理塞壬研究装置 ==========')
-                
-                # 1. 点击"离开"退出当前对话
-                logger.info('[装置处理] 步骤1: 点击"离开"选项退出对话')
-                if len(options) >= 3:
-                    logger.info(f'[装置处理] 点击第3个选项(离开),位置: {options[2].button}')
-                    self.device.click(options[2])
-                    logger.info('[装置处理] 等待1秒关闭对话...')
-                    time.sleep(1.0)
-                    logger.info('[装置处理] 对话已关闭')
-                else:
-                    logger.warning(f'[装置处理] 警告: 选项数量不足({len(options)}),无法点击"离开"')
-                
-                # 2. 执行自律寻敌(处理装置触发的内容)
-                logger.info('[装置处理] 步骤2: 执行自律寻敌,处理装置触发的战斗/事件')
+            if getattr(self, 'is_siren_device_confirmed', False):
+                # 执行自律寻敌
+                logger.info('[装置处理] info_handler 已确认为塞壬研究装置')
+                logger.info('[装置处理] 执行自律寻敌')
                 self.os_auto_search_run(drop=drop)
-                logger.info('[装置处理] 自律寻敌完成')
+
+                # 二次重扫，防止出现意外情况导致装置处理失败
+                logger.info('[装置处理] 执行二次重扫')
+                self.map_rescan_current(drop=drop)
                 
-                # 3. 装置处理完成,标记为已处理
-                logger.info('[装置处理] 步骤3: 标记装置为已处理,避免重复处理')
                 self._solved_map_event.add('is_scanning_device')
-                logger.info('[装置处理] ✓ 装置已标记为已处理')
                 
-                # 4. 执行Bug利用
-                logger.info('[装置处理] 步骤4: 检查是否需要执行Bug利用')
+                logger.info('[装置处理] 检查是否需要执行Bug利用')
                 self._handle_siren_bug_reinteract(drop=drop)
-                
-                logger.info('[装置处理] ========== 塞壬研究装置处理完成 ==========')
             else:
-                # 验证失败,退出对话但不标记(后续可重试)
-                logger.warning('[装置处理] 验证失败,退出对话并保留重试机会')
-                logger.info('[装置处理] 点击返回箭头退出对话')
-                for i in range(5):
-                    logger.info(f'[装置处理] 点击返回 ({i+1}/5)')
-                    self.device.click(BACK_ARROW)
-                    time.sleep(0.3)
-                logger.info('[装置处理] 已退出对话,未标记装置(可重试)')
-            if 'event' in result:
+                logger.warning('[装置处理] 未确认为塞壬研究装置(可能是普通事件), 跳过后续处理')
                 self._solved_map_event.add('is_scanning_device')
-                return True
-            else:
-                return False
+            
+            return True
 
         grids = self.view.select(is_logging_tower=True)
         if 'is_logging_tower' not in self._solved_map_event and grids and grids[0].is_logging_tower:
@@ -1647,108 +1716,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             time.sleep(0.3)
         return False
 
-    def _verify_siren_research_options(self, options):
-        """
-        验证剧情选项是否为塞壬研究装置的正确选项
-        
-        Args:
-            options (list[Button]): 选项按钮列表
-            
-        Returns:
-            bool: True表示验证通过,False表示验证失败
-        """
-        logger.hr('OCR文本验证函数', level=3)
-        logger.info(f'[OCR验证] ========== 开始验证选项文本 ==========')
-        logger.info(f'[OCR验证] 接收到 {len(options)} 个选项按钮')
-        
-        # 打印所有选项的基本信息
-        for i, opt in enumerate(options):
-            logger.info(f'[OCR验证] 选项{i+1}: {opt.name}, 区域={opt.area}')
-        
-        # 参数检查
-        if len(options) < 3:
-            logger.error(f'[OCR验证] ✗ 验证失败: 选项数量不足 (当前={len(options)}, 需要>=3)')
-            return False
-        
-        logger.info(f'[OCR验证] ✓ 选项数量检查通过 (至少3个选项)')
-        
-        try:
-            logger.info('[OCR验证] 导入OCR模块...')
-            from module.ocr.ocr import Ocr
-            import re
-            logger.info('[OCR验证] ✓ OCR模块导入成功')
-            
-            # 定义关键词(去除符号,只保留关键文字)
-            logger.info('[OCR验证] 定义关键词匹配规则...')
-            keywords = [
-                ['塞王能源存储器', '探测隐藏', '敌人'],  # 选项1关键词
-                ['特别兑换凭证', '探测隐藏', '资源'],     # 选项2关键词  
-                ['离开']                                  # 选项3关键词
-            ]
-            logger.info(f'[OCR验证] ✓ 关键词规则已定义: 选项1需要{keywords[0]}, 选项2需要{keywords[1]}, 选项3需要{keywords[2]}')
-            
-            # OCR识别前3个选项
-            logger.info('[OCR验证] ---------- 开始OCR识别3个选项 ----------')
-            results = []
-            for i in range(min(3, len(options))):
-                option = options[i]
-                logger.info(f'[OCR验证] 正在识别选项{i+1}...')
-                logger.info(f'[OCR验证]   - 选项{i+1} 名称: {option.name}')
-                logger.info(f'[OCR验证]   - 选项{i+1} 区域: {option.button}')
-                
-                # 执行OCR识别
-                ocr = Ocr(option, lang='cnocr', name=f'SIREN_RESEARCH_OPTION_{i+1}')
-                result = ocr.ocr(self.device.image)
-                logger.info(f'[OCR验证]   - 选项{i+1} OCR原始结果: "{result}"')
-                
-                # 去除所有非中文字符(包括符号)
-                result_clean = re.sub(r'[^\u4e00-\u9fff]', '', result)
-                results.append(result_clean)
-                logger.info(f'[OCR验证]   - 选项{i+1} 清理后文本: "{result_clean}"')
-                logger.info(f'[OCR验证] ✓ 选项{i+1} 识别完成')
-            
-            logger.info('[OCR验证] ---------- OCR识别完成,开始关键词匹配 ----------')
-            
-            # 验证每个选项是否包含对应的关键词
-            match_count = 0
-            for i, (result, kw_list) in enumerate(zip(results, keywords)):
-                logger.info(f'[OCR验证] 正在验证选项{i+1}...')
-                logger.info(f'[OCR验证]   - 选项{i+1} 文本: "{result}"')
-                logger.info(f'[OCR验证]   - 选项{i+1} 需要关键词: {kw_list}')
-                
-                # 检查每个关键词是否在文本中
-                matched_kws = [kw for kw in kw_list if kw in result]
-                logger.info(f'[OCR验证]   - 选项{i+1} 匹配到的关键词: {matched_kws}')
-                
-                if len(matched_kws) == len(kw_list):
-                    logger.info(f'[OCR验证] ✓ 选项{i+1} 验证通过: 所有关键词都匹配 ({len(matched_kws)}/{len(kw_list)})')
-                    match_count += 1
-                else:
-                    missing_kws = set(kw_list) - set(matched_kws)
-                    logger.warning(f'[OCR验证] ✗ 选项{i+1} 验证不完全: 匹配{len(matched_kws)}/{len(kw_list)}, 缺少关键词: {missing_kws}')
-            
-            logger.info('[OCR验证] ---------- 关键词匹配完成,统计结果 ----------')
-            logger.info(f'[OCR验证] 匹配统计: {match_count}/3 个选项验证通过')
-            logger.info(f'[OCR验证] 容错阈值: 至少需要 2/3 个选项匹配')
-            
-            # 至少2个选项匹配才算验证通过(容错)
-            if match_count >= 2:
-                logger.info(f'[OCR验证] ========== ✓ 验证成功 ==========')
-                logger.info(f'[OCR验证] 最终结果: 验证通过 ({match_count}/3 个选项匹配,达到容错阈值)')
-                logger.info(f'[OCR验证] 确认为塞壬研究装置!')
-                return True
-            else:
-                logger.warning(f'[OCR验证] ========== ✗ 验证失败 ==========')
-                logger.warning(f'[OCR验证] 最终结果: 验证失败 (仅 {match_count}/3 个选项匹配,未达到容错阈值 2/3)')
-                logger.warning(f'[OCR验证] 不是塞壬研究装置')
-                return False
-                
-        except Exception as e:
-            logger.error(f'[OCR验证] ========== ✗ 验证异常 ==========')
-            logger.error(f'[OCR验证] 异常类型: {type(e).__name__}')
-            logger.error(f'[OCR验证] 异常信息: {e}', exc_info=True)
-            logger.error(f'[OCR验证] 因异常返回验证失败')
-            return False
+
 
     def _handle_siren_bug_reinteract(self, drop=None):
         # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律   

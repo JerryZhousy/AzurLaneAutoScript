@@ -410,10 +410,47 @@ class InfoHandler(ModuleBase):
                 self._story_option_confirm.reset()
             elif options_count == self._story_option_record:
                 if self._story_option_confirm.reached():
-                    try:
-                        select = options[self.config.STORY_OPTION]
-                    except IndexError:
-                        select = options[0]
+                    # 检查是否是塞壬研究装置(3个选项时才检查)
+                    is_siren_device = False
+                    if options_count == 3:
+                        logger.info('[Story] 检测到3个选项,检查是否为塞壬研究装置')
+                        try:
+                            # 导入模板
+                            from module.os_handler.assets import SIREN_OPTION_A, SIREN_OPTION_B, SIREN_OPTION_C
+                            
+                            # 使用模板匹配检测3个选项
+                            match_a = self.match_template_color(SIREN_OPTION_A, offset=(20, 20))
+                            match_b = self.match_template_color(SIREN_OPTION_B, offset=(20, 20))
+                            match_c = self.match_template_color(SIREN_OPTION_C, offset=(20, 20))
+                            
+                            # 至少2个选项匹配就认为是塞壬研究装置(容错)
+                            matches = sum([match_a, match_b, match_c])
+                            logger.info(f'[Story] 塞壬研究装置模板匹配结果: A={match_a}, B={match_b}, C={match_c}, 总计={matches}/3')
+                            
+                            if matches >= 2:
+                                is_siren_device = True
+                                logger.info('[Story] ✓ 确认为塞壬研究装置,点击第2个选项(探测隐藏资源)')
+                            else:
+                                logger.info('[Story] ✗ 不是塞壬研究装置,按正常流程处理')
+                        except Exception as e:
+                            logger.warning(f'[Story] 塞壬研究装置检测异常: {e}')
+                            is_siren_device = False
+                    
+                    # 设置标志位供外部检查 (map.py)
+                    self.is_siren_device_confirmed = is_siren_device
+                    
+                    # 根据检测结果选择点击哪个选项
+                    if is_siren_device:
+                        # 塞壬研究装置:点击第2个选项(索引1)
+                        select = options[1]
+                        logger.info(f'[Story] 点击塞壬研究装置第2个选项: {select.name}')
+                    else:
+                        # 普通剧情:按配置的索引点击
+                        try:
+                            select = options[self.config.STORY_OPTION]
+                        except IndexError:
+                            select = options[0]
+                    
                     self.device.click(select)
                     self._story_option_timer.reset()
                     self.story_popup_timeout.reset()
