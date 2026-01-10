@@ -799,6 +799,7 @@ class OperationSiren(OSMap):
                 # 启用了智能调度
                 if not self.config.is_task_enabled('OpsiMeowfficerFarming'):
                     self.config.cross_set(keys='OpsiMeowfficerFarming.Scheduler.Enable', value=True)
+                    logger.info('【智能调度】未启用短猫相接任务，强制开启短猫相接')
                 # 我不能理解为什么在启用智能调度后必然会调用短猫但并没有在代码中强制开启
 
                 if yellow_coins < self.config.OpsiHazard1Leveling_OperationCoinsPreserve:
