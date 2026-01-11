@@ -3759,6 +3759,10 @@
     "AkashiShopFilter": {
       "name": "OpsiGeneral.AkashiShopFilter.name",
       "help": "OpsiGeneral.AkashiShopFilter.help"
+    },
+    "NotifyOpsiMail": {
+      "name": "OpsiGeneral.NotifyOpsiMail.name",
+      "help": "OpsiGeneral.NotifyOpsiMail.help"
     }
   },
   "OpsiAshBeacon": {
@@ -3833,6 +3837,18 @@
     "ForceRun": {
       "name": "OpsiExplore.ForceRun.name",
       "help": "OpsiExplore.ForceRun.help"
+    },
+    "IfSkipSirenResearch": {
+      "name": "OpsiExplore.IfSkipSirenResearch.name",
+      "help": "OpsiExplore.IfSkipSirenResearch.help",
+      "0": "0",
+      "6": "6",
+      "65": "65",
+      "654": "654"
+    },
+    "SkipedSirenResearch": {
+      "name": "OpsiExplore.SkipedSirenResearch.name",
+      "help": "OpsiExplore.SkipedSirenResearch.help"
     },
     "LastZone": {
       "name": "OpsiExplore.LastZone.name",

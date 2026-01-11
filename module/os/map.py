@@ -1,6 +1,7 @@
 # 此文件处理大世界（Operation Siren）模式下的地图导航与海域管理。
 # 包括全球地图切换、海域初始化、处理各种地图减益状态以及海域自动搜索的守护逻辑。
 import time
+import inspect
 from sys import maxsize
 
 import inflection
@@ -1108,7 +1109,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         Returns:
             bool: True if enabled, False otherwise
         """
-        return getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+        return self.config.cross_get(keys="OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable")
 
     def _should_skip_siren_research(self, grid):
         """
@@ -1126,6 +1127,32 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 return True
             else:
                 logger.info(f'[预检查] 格子 {grid} 是塞壬研究装置,功能已开启,继续处理')
+        return False
+
+    def _should_skip_siren_research_for_explore(self):
+
+        # 检查是否由月度开荒调用
+        is_explore = getattr(self, 'is_in_task_explore', False)
+        logger.hr(f'检查月度开荒是否跳过塞壬研究装置, is_explore={is_explore}', level=2)
+        if not is_explore:
+            return False
+
+        # 检查月度开荒是否配置跳过塞壬研究装置
+        skip_level = self.config.cross_get(keys="OpsiExplore.OpsiExplore.IfSkipSirenResearch")
+        if skip_level == 0:
+            return False
+
+        # 根据海域难度决定是否跳过
+        hazard_level = self.zone.hazard_level
+        if skip_level == 6 and hazard_level == 6:
+            logger.info(f'[月度开荒] 海域危险度 {hazard_level} = 6, 跳过塞壬研究装置')
+            return True
+        if skip_level == 65 and hazard_level >= 5:
+            logger.info(f'[月度开荒] 海域危险度 {hazard_level} >= 5, 跳过塞壬研究装置')
+            return True
+        if skip_level == 654 and hazard_level >= 4:
+            logger.info(f'[月度开荒] 海域危险度 {hazard_level} >= 4, 跳过塞壬研究装置')
+            return True
         return False
 
     def clear_question(self, drop=None):
@@ -1177,7 +1204,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 logger.info(f'[地图检测] 移动结果: {result}')
 
                 # ========== 配置检查 ==========
-                siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+                siren_research_enabled = self.config.cross_get(keys="OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable")
                 if not siren_research_enabled:
                     logger.warning('[配置检查] 塞壬研究装置功能已禁用,标记但不处理')
                     self._solved_map_event.add('is_scanning_device')
@@ -1377,7 +1404,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 logger.info(f'[地图检测] 移动结果: {result}')
 
                 # ========== 配置检查 ==========
-                siren_research_enabled = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+                siren_research_enabled = self.config.cross_get(keys="OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable")
                 if not siren_research_enabled:
                     logger.warning('[配置检查] 塞壬研究装置功能已禁用,标记但不处理')
                     self._solved_map_event.add('is_scanning_device')
@@ -1391,13 +1418,12 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                     logger.info('[装置处理] info_handler 已确认为塞壬研究装置')
                     logger.info('[装置处理] 步骤1: 执行自律寻敌')
                     self.os_auto_search_run(drop=drop)
+# 先标记处理，防止二次重扫时再次处理塞壬装置
+                    self._solved_map_event.add('is_scanning_device')
 
                     # 二次重扫，防止出现意外情况导致装置处理失败
                     logger.info('[装置处理] 步骤1.5: 执行二次重扫')
                     self.map_rescan_current(drop=drop)
-
-                    # 标记处理
-                    self._solved_map_event.add('is_scanning_device')
 
                     # Bug利用
                     logger.info('[装置处理] 步骤2: 检查是否需要执行Bug利用')
@@ -1571,6 +1597,17 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 logger.warning('[配置检查] 塞壬研究装置功能已禁用,跳过处理')
                 self._solved_map_event.add('is_scanning_device')
                 return True
+if self._should_skip_siren_research_for_explore():
+                # 记录已跳过的海域
+                zone_str = f'{self.zone};\n'
+                current_str = self.config.OpsiExplore_SkipedSirenResearch
+                if current_str is None:
+                    self.config.OpsiExplore_SkipedSirenResearch = zone_str
+                else:
+                    self.config.OpsiExplore_SkipedSirenResearch = str(current_str) + zone_str
+                logger.info(f'[月度开荒] 已记录跳过塞壬研究装置的海域: {self.config.OpsiExplore_SkipedSirenResearch}')
+                self._solved_map_event.add('is_scanning_device')
+                return True
 
             # ========== 移动并处理 ==========
             logger.info(f'[移动装置] 开始移动到装置位置: {grid}')
@@ -1586,18 +1623,23 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             logger.info(f'[移动装置] 移动完成,结果: {result}')
 
             if getattr(self, 'is_siren_device_confirmed', False):
-                # 执行自律寻敌
+                # 保存标志状态，因为二次重扫可能会重置它
+                siren_confirmed = True
+
                 # 执行自律寻敌
                 logger.info('[装置处理] 执行自律寻敌')
                 self.os_auto_search_run(drop=drop)
+
+                # 先标记为已处理，防止二次重扫时再次处理塞壬装置
+                self._solved_map_event.add('is_scanning_device')
 
                 # 二次重扫，防止出现意外情况导致装置处理失败
                 logger.info('[装置处理] 执行二次重扫')
                 self.map_rescan_current(drop=drop)
 
-                self._solved_map_event.add('is_scanning_device')
+                # 使用保存的标志状态，而不是重新检查（因为二次重扫可能会重置它）
 
-                if getattr(self, 'is_siren_device_confirmed', False):
+                if siren_confirmed:
                     logger.info('[装置处理] 已确认为塞壬研究装置，检查是否需要执行Bug利用')
                     self._handle_siren_bug_reinteract(drop=drop)
                 else:
@@ -1930,7 +1972,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
     def _handle_siren_bug_reinteract(self, drop=None):
         # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律
         try:
-            siren_research_enable = getattr(self.config, 'OpsiSirenBug_SirenResearch_Enable', False)
+            siren_research_enable = self.config.cross_get(keys="OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable")
             siren_bug_enable = getattr(self.config, 'OpsiSirenBug_SirenBug_Enable', False)
             siren_bug_zone = getattr(self.config, 'OpsiSirenBug_SirenBug_Zone', 0)
             siren_bug_type = getattr(self.config, 'OpsiSirenBug_SirenBug_Type', 'dangerous')
