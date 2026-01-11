@@ -600,6 +600,7 @@ class GeneratedConfig:
     OpsiGeneral_RepairPackThreshold = 0.9
     OpsiGeneral_DoRandomMapEvent = True
     OpsiGeneral_AkashiShopFilter = 'ActionPoint'
+    OpsiGeneral_NotifyOpsiMail = True
 
     # Group `OpsiAshBeacon`
     OpsiAshBeacon_AttackMode = 'current'  # current, current_dossier
@@ -619,6 +620,8 @@ class GeneratedConfig:
     # Group `OpsiExplore`
     OpsiExplore_SpecialRadar = False
     OpsiExplore_ForceRun = False
+    OpsiExplore_IfSkipSirenResearch = 0  # 0, 6, 65, 654
+    OpsiExplore_SkipedSirenResearch = None
     OpsiExplore_LastZone = 0
 
     # Group `OpsiShop`

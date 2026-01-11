@@ -3736,6 +3736,10 @@
     "AkashiShopFilter": {
       "name": "Akashi Shop Filter",
       "help": "Generally does not need to be modified or re-arranged but can do so if desired\nBuy AP boxes and Purple Coins"
+    },
+    "NotifyOpsiMail": {
+      "name": "OpsiGeneral.NotifyOpsiMail.name",
+      "help": "OpsiGeneral.NotifyOpsiMail.help"
     }
   },
   "OpsiAshBeacon": {
@@ -3810,6 +3814,18 @@
     "ForceRun": {
       "name": "Force Run",
       "help": "Ignore interval, clear all obscure zones, and use AP to submit scan orders (and submarine if enabled)\nGenerally not needed to force run, just run in intervals unless in a rush"
+    },
+    "IfSkipSirenResearch": {
+      "name": "OpsiExplore.IfSkipSirenResearch.name",
+      "help": "OpsiExplore.IfSkipSirenResearch.help",
+      "0": "0",
+      "6": "6",
+      "65": "65",
+      "654": "654"
+    },
+    "SkipedSirenResearch": {
+      "name": "OpsiExplore.SkipedSirenResearch.name",
+      "help": "OpsiExplore.SkipedSirenResearch.help"
     },
     "LastZone": {
       "name": "Last Zone Completed",

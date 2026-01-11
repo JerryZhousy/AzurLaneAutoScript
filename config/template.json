@@ -1931,7 +1931,8 @@
       "UseRepairPack": false,
       "RepairPackThreshold": 0.9,
       "DoRandomMapEvent": true,
-      "AkashiShopFilter": "ActionPoint"
+      "AkashiShopFilter": "ActionPoint",
+      "NotifyOpsiMail": true
     },
     "Storage": {
       "Storage": {}

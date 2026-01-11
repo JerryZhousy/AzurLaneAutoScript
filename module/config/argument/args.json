@@ -10359,6 +10359,10 @@
       "AkashiShopFilter": {
         "type": "textarea",
         "value": "ActionPoint"
+      },
+      "NotifyOpsiMail": {
+        "type": "checkbox",
+        "value": true
       }
     },
     "Storage": {
@@ -10540,6 +10544,21 @@
       "ForceRun": {
         "type": "checkbox",
         "value": false
+      },
+      "IfSkipSirenResearch": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          6,
+          65,
+          654
+        ]
+      },
+      "SkipedSirenResearch": {
+        "type": "textarea",
+        "value": "",
+        "display": "disabled"
       },
       "LastZone": {
         "type": "input",

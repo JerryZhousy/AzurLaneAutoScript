@@ -996,6 +996,7 @@ OpsiGeneral:
   DoRandomMapEvent: true
   AkashiShopFilter: |-
     ActionPoint
+  NotifyOpsiMail: true
 OpsiAshBeacon:
   AttackMode:
     value: current
@@ -1016,6 +1017,13 @@ OpsiFleet:
 OpsiExplore:
   SpecialRadar: false
   ForceRun: false
+  IfSkipSirenResearch:
+    value: 0
+    option: [ 0, 6, 65, 654 ]
+  SkipedSirenResearch:
+    type: textarea
+    display: disabled
+    value: ""
   LastZone: 0
 OpsiShop:
   PresetFilter:
