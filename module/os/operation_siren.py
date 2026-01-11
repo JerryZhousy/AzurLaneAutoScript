@@ -559,11 +559,11 @@ class OperationSiren(OSMap):
                 if current_threshold is not None:
                     # 判断是升至还是降至该阈值
                     if self._last_notified_ap_threshold  < current_threshold:
-                    # 行动力增加，升至更高阈值
-                    direction = "升至"
-                else:
-                    # 行动力减少，降至较低阈值
-                    direction = "降至"
+                        # 行动力增加，升至更高阈值
+                        direction = "升至"
+                    else:
+                        # 行动力减少，降至较低阈值
+                        direction = "降至"
 
                 self.notify_push(
                     title="[Alas] 行动力阈值变化",
@@ -901,12 +901,11 @@ class OperationSiren(OSMap):
 
                     logger.info('推迟侵蚀1任务1小时')
                     cd = self.nearest_task_cooling_down
-                        if cd is None:
-                            for task in ['OpsiAbyssal', 'OpsiStronghold', 'OpsiObscure']:
-                                if self.config.is_task_enabled(task):
-                                    self.config.task_call(task)
-                        self.config.task_delay(minute=60)
-                    self.config.task_stop()
+                    if cd is None:
+                        for task in ['OpsiAbyssal', 'OpsiStronghold', 'OpsiObscure']:
+                            if self.config.is_task_enabled(task):
+                                self.config.task_call(task)
+                    self.config.task_delay(minute=60)
                 else:
                     _previous_ap_insufficient = False
                 self.config.OpsiHazard1_PreviousApInsufficient = _previous_ap_insufficient
