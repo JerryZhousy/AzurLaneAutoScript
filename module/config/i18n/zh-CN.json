@@ -1,31 +1,31 @@
 {
   "Menu": {
     "Alas": {
-      "name": "港区OA",
+      "name": "智慧港区",
       "help": ""
     },
     "Farm": {
-      "name": "出击",
+      "name": "出击审批",
       "help": ""
     },
     "Event": {
-      "name": "活动",
+      "name": "活动审批",
       "help": ""
     },
     "EventDaily": {
-      "name": "活动每日",
+      "name": "活动每日审批",
       "help": ""
     },
     "Reward": {
-      "name": "收获",
+      "name": "采购审批",
       "help": ""
     },
     "DailyMission": {
-      "name": "每日任务",
+      "name": "每日任务流程",
       "help": ""
     },
     "Opsi": {
-      "name": "大世界",
+      "name": "大世界流程",
       "help": ""
     },
     "Tool": {
@@ -35,7 +35,7 @@
   },
   "Task": {
     "Alas": {
-      "name": "OA设置",
+      "name": "智慧港区设置",
       "help": ""
     },
     "General": {
@@ -43,11 +43,11 @@
       "help": ""
     },
     "Restart": {
-      "name": "重启设置（已优化）",
+      "name": "重启设置",
       "help": ""
     },
     "Main": {
-      "name": "主线图",
+      "name": "主线图-1",
       "help": ""
     },
     "Main2": {
@@ -59,15 +59,15 @@
       "help": ""
     },
     "GemsFarming": {
-      "name": "刷紧急委托",
+      "name": "紧急委托",
       "help": ""
     },
     "EventGeneral": {
-      "name": "活动通用设置",
+      "name": "活动通用",
       "help": ""
     },
     "Event": {
-      "name": "活动图",
+      "name": "活动图-1",
       "help": ""
     },
     "Event2": {
@@ -4209,7 +4209,7 @@
     },
     "Status": {
       "Running": "秘书舰正在处理",
-      "Inactive": "雪风大人在偷懒nanoda",
+      "Inactive": "茗正在偷走你的箱子",
       "Warning": "发生错误",
       "Updating": "等待更新"
     },
