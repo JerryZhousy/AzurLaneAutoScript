@@ -98,10 +98,11 @@ class CampaignRun(CampaignEvent, ShopStatus):
             return True
         # Oil limit
         if oil_check:
+            # Gem limit
             self.status_get_gems()
+            # Coin limit
             self.get_coin()
-            _oil = self.get_oil()
-            if _oil < max(500, self.config.StopCondition_OilLimit):
+            if self.get_oil() < max(500, self.config.StopCondition_OilLimit):
                 logger.hr('Triggered stop condition: Oil limit')
                 self.config.task_delay(minute=60)
                 return True
@@ -171,6 +172,15 @@ class CampaignRun(CampaignEvent, ShopStatus):
             str, str: name, folder
         """
         name = to_map_file_name(name)
+        # Handle event_20251218_cn d3-3 special case
+        if folder == 'event_20251218_cn':
+            # Convert d3-3 to d3_3 for three-battle retreat logic
+            if name == 'd3-3':
+                name = 'd3_3'
+                logger.info('Stage name d3-3 converted to d3_3 (three-battle retreat logic)')
+            # d3 remains as d3 for standard logic
+            elif name == 'd3':
+                logger.info('Stage name d3 using standard logic')
         # For GemsFarming, auto choose events or main chapters
         if self.config.task.command == 'GemsFarming':
             if self.stage_is_main(name):

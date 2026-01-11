@@ -8,6 +8,7 @@ from module.exception import ScriptEnd, ScriptError
 from module.log_res.log_res import LogRes
 from module.logger import logger
 from module.ocr.ocr import Digit
+from module.log_res.log_res import LogRes
 from module.ui.assets import BACK_ARROW
 
 
@@ -72,7 +73,7 @@ class Coalition(CoalitionCombat, CampaignEvent):
         else:
             logger.warning('Wait PT timeout, assume it is')
         LogRes(self.config).Pt = pt
-
+        self.config.update()
         return pt
 
     def check_oil(self):

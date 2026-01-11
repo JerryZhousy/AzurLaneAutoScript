@@ -1,3 +1,5 @@
+# 此文件专门负责处理游戏内的“装备码”输入与导出。
+# 包含 Base64 编码解析、配置导出与加载，以及自动在该页面进行文本录入和配置应用的交互逻辑。
 import re
 import yaml
 
@@ -106,7 +108,7 @@ class EquipmentCodeHandler(StorageHandler):
     #     """
     #     self.ui_back(check_button=EQUIPMENT_CODE_ENTRANCE)
 
-    def current_ship(self):
+    def current_ship(self, **kwargs):
         # Will be overridden in subclasses.
         pass
 

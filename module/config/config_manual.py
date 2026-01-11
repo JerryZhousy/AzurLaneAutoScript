@@ -1,5 +1,8 @@
 from pywebio.io_ctrl import Output
 
+# 此文件定义了手动配置项。
+# 包含了非自动生成的硬编码设置，如资源文件路径、UI 按钮偏移量以及任务调度的默认优先级逻辑。
+from module.config.utils import *
 import module.config.server as server
 
 
@@ -8,7 +11,7 @@ class ManualConfig:
     def SERVER(self):
         return server.server
 
-    SCHEDULER_PRIORITY = """
+    _DEFAULT_SCHEDULER_PRIORITY = """
     Restart
     > OpsiCrossMonth
     > Commission > Tactical > Research
@@ -31,6 +34,21 @@ class ManualConfig:
     > GemsFarming
     > OpsiHazard1Leveling
     """
+
+    @property
+    def SCHEDULER_PRIORITY(self):
+        task_adj = None
+        try:
+            task_adj = self.cross_get(keys=["YukikazeTaskManager", "TaskPriorityAdjustment"], default=None)
+        except Exception:
+            task_adj = None
+
+        if not task_adj:
+            task_adj = getattr(self, "YukikazeTaskManager_TaskPriorityAdjustment", None)
+
+        if task_adj:
+            return str(task_adj) + "\n" + (self._DEFAULT_SCHEDULER_PRIORITY or "")
+        return self._DEFAULT_SCHEDULER_PRIORITY
 
     """
     module.assets

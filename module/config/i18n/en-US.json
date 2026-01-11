@@ -614,6 +614,14 @@
       "save": "Save",
       "upload": "Upload",
       "save_and_upload": "Save and upload"
+    },
+    "TelemetryReport": {
+      "name": "DropRecord.TelemetryReport.name",
+      "help": "DropRecord.TelemetryReport.help"
+    },
+    "BugReport": {
+      "name": "DropRecord.BugReport.name",
+      "help": "DropRecord.BugReport.help"
     }
   },
   "Retirement": {
@@ -627,6 +635,16 @@
       "one_click_retire": "One-click Retire",
       "enhance": "Enhance",
       "old_retire": "Old Retire"
+    }
+  },
+  "YukikazeTaskManager": {
+    "_info": {
+      "name": "雪风大人的任务管理",
+      "help": "任务相关的优先级与调度设置。"
+    },
+    "TaskPriorityAdjustment": {
+      "name": "任务优先级调整",
+      "help": "Restart    # 重启游戏\n> OpsiCrossMonth    # 大世界跨月每日\n> Commission > Tactical > Research    # 委托 > 战术学院 > 科研\n> Exercise    # 演习\n> Dorm > Meowfficer > Guild > Gacha    # 后宅 > 指挥喵 > 大舰队 > 每日抽卡\n> Reward    # 收获\n> ShopFrequent > ShopOnce > Shipyard > Freebies    # 通用商店 > 其他商店 > 开发船坞 > 白嫖奖励\n> PrivateQuarters    # 宿舍计划\n> OpsiExplore    # 每月开荒\n> Minigame > Awaken    # 小游戏 > 认知觉醒\n> OpsiAshBeacon    # meta作战\n> OpsiDaily > OpsiShop > OpsiVoucher    # 大世界日常 > 港口商店 > 兑换商店\n> OpsiAbyssal > OpsiStronghold > OpsiObscure > OpsiArchive    # 深渊海域 > 塞壬要塞 > 隐秘海 > 档案坐标\n> Daily > Hard > OpsiAshBeacon > OpsiAshAssist > OpsiMonthBoss    # 每日挑战 > 困难图 > meta作战 > meta支援 > 月度boss\n> Sos > EventSp > EventA > EventB > EventC > EventD    # Sos > 活动每日SP > 活动每日A > 活动每日B > 活动每日C > 活动每日D\n> RaidDaily > CoalitionSp > WarArchives > MaritimeEscort    # 共斗活动每日 > 共斗活动sp > 作战档案 > 商船护航\n> Event > Event2 > Raid > Hospital > Coalition > Main > Main2 > Main3    # 活动图 > 活动图2 > 共斗活动 > Hospital > 共斗活动 > 主线 > 主线2 > 主线3\n> OpsiMeowfficerFarming    # 短猫相接\n> GemsFarming    # 刷紧急委托\n> OpsiHazard1Leveling    # 侵蚀一练级"
     }
   },
   "OneClickRetire": {
@@ -1281,10 +1299,6 @@
     "DelayTaskIFNoFlagship": {
       "name": "Delay task if no common CV",
       "help": "When there is no common CV available, delay the task"
-    },
-    "EquipmentCode": {
-      "name": "Gear Code",
-      "help": "Only works when 'Change Ship + Gears' is chosen.\nWhen substituting down CV/CVL/DD, if corresponding gear code is not provided, alas will export it\nWhen substituting up corresponding CV/CVL/DD, if corresponding gear code is not provided, alas will use exported gear code from previous ship; otherwise alas will use gear code in the config\nBluestacks users need to enable virtual keyboard first.\nSee https://support.bluestacks.com/hc/en-us/articles/360061968892-How-to-use-a-virtual-on-screen-keyboard-on-BlueStacks-5"
     },
     "CommissionLimit": {
       "name": "Prevent Too Many Urgent Commissions",
@@ -3773,6 +3787,10 @@
     "EnsureFullyCollected": {
       "name": "Ensure 200 Beacon Data Fully Collected",
       "help": "Ignore AP limit setting temporarily before ash beacon fully collected. \"Meowfficer Farming\" must be enabled"
+    },
+    "AutoCollectShip": {
+      "name": "Automatically acquire new META ships",
+      "help": "Automatically acquire new META ships when claiming rewards. If disabled, the \"Sync\" button will not be clicked, and rewards must be claimed manually."
     }
   },
   "OpsiFleetFilter": {
@@ -3968,6 +3986,10 @@
     "APPreserveUntilReset": {
       "name": "Keep AP until OpSi Reset",
       "help": "The value of \"Keep X Amount of AP\" will not be reduced until OpSi reset. Note: When enabled, these action points will only be consumed in task OpsiCrossMonth. This setting is inactive when OpsiCrossMonth is not enabled, meaning you must manually use these overflow action points to gain more rewards."
+    },
+    "StayInZone": {
+      "name": "指定海域计划作战",
+      "help": "雪风大人温馨提示:打开这个功能并指定海域后，将会在指定海域进行计划作战，不会再回到港口nanoda!侵蚀三推荐NA海域东南B，侵蚀五推荐卡利比安海B或者C nanoda!"
     }
   },
   "OpsiHazard1Leveling": {
@@ -4007,24 +4029,66 @@
     "DelayAfterFull": {
       "name": "Delay task when target level reached",
       "help": ""
+    },
+    "OperationCoinsPreserve": {
+      "name": "OpsiHazard1Leveling.OperationCoinsPreserve.name",
+      "help": "OpsiHazard1Leveling.OperationCoinsPreserve.help"
+    },
+    "MinimumActionPointReserve": {
+      "name": "保留 X 点行动力",
+      "help": "搏一搏，单车变摩托，雪风大人已经把幸运分给指挥官了nanoda，上吧nanoda！"
+    },
+    "ExecuteFixedPatrolScan": {
+      "name": "舰队强制移动",
+      "help": "雪风大人温馨提示：开启后，将强制移动舰队以免找不到明石，指挥官你也不想因为找不到明石导致坠机nanoda？打开这个功能轻轻松松达到50万+海里每月nanoda，指挥官还在等什么nanoda!"
+    },
+    "Cl1Filter": {
+      "name": "明石购买筛选",
+      "help": "侵蚀一明石一般只购买体力nanoda"
     }
   },
-  "OpsiCheckLeveling": {
+  "OpsiSirenBug": {
     "_info": {
-      "name": "Daily Leveling Check",
-      "help": "Check if all ships in current fleet have received enough experience to reach the target level\nIf yes, then Alas will push a message.\n'Error notify config' should be set first."
+      "name": "OpsiSirenBug._info.name",
+      "help": "OpsiSirenBug._info.help"
     },
-    "TargetLevel": {
-      "name": "Push when all ships received enough experience to reach target level X",
-      "help": "0 means no limit"
+    "SirenResearch_Enable": {
+      "name": "OpsiSirenBug.SirenResearch_Enable.name",
+      "help": "OpsiSirenBug.SirenResearch_Enable.help"
     },
-    "LastRun": {
-      "name": "Last Check Time",
-      "help": "Automatically updated with the last check time, generally does not need to be modified"
+    "SirenBug_Enable": {
+      "name": "OpsiSirenBug.SirenBug_Enable.name",
+      "help": "OpsiSirenBug.SirenBug_Enable.help"
     },
-    "DelayAfterFull": {
-      "name": "Delay task when target level reached",
-      "help": ""
+    "SirenBug_Type": {
+      "name": "OpsiSirenBug.SirenBug_Type.name",
+      "help": "OpsiSirenBug.SirenBug_Type.help",
+      "dangerous": "dangerous",
+      "safe": "safe"
+    },
+    "SirenBug_Zone": {
+      "name": "OpsiSirenBug.SirenBug_Zone.name",
+      "help": "OpsiSirenBug.SirenBug_Zone.help"
+    },
+    "DisableTaskSwitchDuringBug": {
+      "name": "OpsiSirenBug.DisableTaskSwitchDuringBug.name",
+      "help": "OpsiSirenBug.DisableTaskSwitchDuringBug.help",
+      "True": "True",
+      "False": "False"
+    }
+  },
+  "OpsiScheduling": {
+    "_info": {
+      "name": "OpsiScheduling._info.name",
+      "help": "OpsiScheduling._info.help"
+    },
+    "EnableSmartScheduling": {
+      "name": "OpsiScheduling.EnableSmartScheduling.name",
+      "help": "OpsiScheduling.EnableSmartScheduling.help"
+    },
+    "ActionPointNotifyLevels": {
+      "name": "OpsiScheduling.ActionPointNotifyLevels.name",
+      "help": "OpsiScheduling.ActionPointNotifyLevels.help"
     }
   },
   "Daemon": {
@@ -4446,6 +4510,30 @@
       "Pending": "Pending",
       "Waiting": "Waiting",
       "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "TimeError": "Time error",
+      "JustNow": "Just now",
+      "SecondsAgo": "Seconds ago",
+      "MinutesAgo": "Minutes ago",
+      "HoursAgo": "Hours ago",
+      "DaysAgo": "Days ago",
+      "MonthsAgo": "Months ago",
+      "YearsAgo": "Years ago",
+      "LongTimeAgo": "Long time ago",
+      "NoData": "No data",
+      "Oil": "Oil",
+      "Coin": "Coin",
+      "Gem": "Gem",
+      "Cube": "Cube",
+      "Pt": "Event Pt",
+      "YellowCoin": "Operation Supply Coin",
+      "PurpleCoin": "Special Item Token",
+      "ActionPoint": "Action Point",
+      "Merit": "Merit",
+      "Medal": "Medal",
+      "Core": "Core Data",
+      "GuildCoin": "Guild Coin"
     },
     "AddAlas": {
       "PopupTitle": "Add new config",

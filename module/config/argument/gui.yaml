@@ -74,6 +74,30 @@ Overview:
   Waiting:
   NoTask:
 
+Dashboard:
+  TimeError:
+  JustNow:
+  SecondsAgo:
+  MinutesAgo:
+  HoursAgo:
+  DaysAgo:
+  MonthsAgo:
+  YearsAgo:
+  LongTimeAgo:
+  NoData:
+  Oil:
+  Coin:
+  Gem:
+  Cube:
+  Pt:
+  YellowCoin:
+  PurpleCoin:
+  ActionPoint:
+  Merit:
+  Medal:
+  Core:
+  GuildCoin:
+
 AddAlas:
   PopupTitle:
   NewName:

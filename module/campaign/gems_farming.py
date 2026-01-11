@@ -5,8 +5,10 @@ from module.combat.assets import BATTLE_PREPARATION
 from module.combat.emotion import Emotion
 from module.equipment.assets import *
 from module.equipment.equipment_code import EquipmentCodeHandler
-from module.equipment.fleet_equipment import OCR_FLEET_INDEX
+from module.equipment.fleet_equipment import FleetEquipment, OCR_FLEET_INDEX
 from module.exception import CampaignEnd, ScriptError, RequestHumanTakeover
+from module.retire.retirement import Retirement, TEMPLATE_COMMON_CV, TEMPLATE_COMMON_DD
+from module.retire.assets import DOCK_CHECK, DOCK_SHIP_DOWN
 from module.handler.assets import AUTO_SEARCH_MAP_OPTION_OFF
 from module.logger import logger
 from module.map.assets import FLEET_PREPARATION, MAP_PREPARATION
@@ -33,10 +35,10 @@ class GemsEmotion(Emotion):
         Check emotion before entering a campaign.
         Args:
             battle (int): Battles in this campaign
+
         Raise:
             CampaignEnd: Pause current task to prevent emotion control in the future.
         """
-
         if not self.is_calculate:
             return
 
@@ -117,7 +119,7 @@ class GemsEquipmentHandler(EquipmentCodeHandler):
                 skip_first_screenshot = False
             else:
                 self.device.screenshot()
-            
+
             # End
             if not self.appear(EMPTY_SHIP_R):
                 break
@@ -174,12 +176,25 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         self.campaign = GemsCampaign(device=self.campaign.device, config=self.campaign.config)
         if self.change_vanguard:
             self.campaign.config.override(Emotion_Mode='ignore_calculate')
+            self.campaign.config.override(EnemyPriority_EnemyScaleBalanceWeight='S1_enemy_first')
         else:
             self.campaign.config.override(Emotion_Mode='ignore')
 
     @property
     def emotion_lower_bound(self):
         return 4 + self.campaign._map_battle * 2
+
+    def get_emotion(self):
+        if self.config.Fleet_FleetOrder == 'fleet1_standby_fleet2_all':
+            return self.campaign.config.Emotion_Fleet2Value
+        else:
+            return self.campaign.config.Emotion_Fleet1Value
+
+    def set_emotion(self, emotion):
+        if self.config.Fleet_FleetOrder == 'fleet1_standby_fleet2_all':
+            self.campaign.config.set_record(Emotion_Fleet2Value=emotion)
+        else:
+            self.campaign.config.set_record(Emotion_Fleet1Value=emotion)
 
     @property
     def change_flagship(self):
@@ -248,6 +263,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         Returns:
             bool: True if flagship changed.
         """
+
         logger.hr('Change flagship', level=1)
         logger.attr('ChangeFlagship', self.config.GemsFarming_ChangeFlagship)
         self._fleet_detail_enter(self.fleet_to_attack)
@@ -255,7 +271,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
             logger.hr('Unmount flagship equipments', level=2)
             self._ship_detail_enter(self.fleet_detail_enter_flagship)
             self.clear_all_equip()
-            self._fleet_back() 
+            self._fleet_back()
 
         logger.hr('Change flagship', level=2)
         success = self.flagship_change_execute()
@@ -380,7 +396,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
 
     def get_common_rarity_dd(self, emotion=16):
         """
-        Get a common rarity dd with level is 100 (70 for servers except CN) 
+        Get a common rarity dd with level is 100 (70 for servers except CN)
         and emotion >= self.emotion_lower_bound
 
         _dock_reset() needs to be called later.
@@ -466,7 +482,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
 
         Args:
             scanner (ShipScanner):
-            ship_type (str): 'cv' or 'dd' 
+            ship_type (str): 'cv' or 'dd'
         """
         if ship_type.lower() not in ['cv', 'dd']:
             logger.warning(f'Invalid ship_type: {ship_type}')
@@ -479,7 +495,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         else:
             filter_string =  self.config.__getattribute__(f'GemsFarming_Common{ship_type}Filter')
         sort_dsc_first = ship_type.lower() == 'dd'
-    
+
         common_ship = self.get_common_ship_filter(filter_string, ship_type=ship_type)
         templates = globals()[f'TEMPLATE_COMMON_{ship_type}']
         find_first = True
@@ -592,7 +608,32 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         if self.hard_mode:
             if not self.dock_enter(self.fleet_detail_enter_flagship):
                 return True
-            self.ship_down_hard()  
+            self.ship_down_hard()
+        if not self.dock_enter(self.fleet_enter_flagship):
+            return True
+
+    def flagship_change_with_emotion(self, ship):
+        """
+        Change flagship and calculate emotion
+        """
+        target_ship = max(ship, key=lambda s: (s.level, s.emotion))
+        if self.config.GemsFarming_ALLowHighFlagshipLevel:
+            self.set_emotion(target_ship.emotion)
+        self._ship_change_confirm(target_ship.button)
+
+    def flagship_change_execute(self):
+        """
+        Returns:
+            bool: If success.
+
+        Pages:
+            in: page_fleet
+            out: page_fleet
+        """
+        if self.hard_mode:
+            if not self.dock_enter(self.fleet_detail_enter_flagship):
+                return True
+            self.ship_down_hard()
         if not self.dock_enter(self.fleet_enter_flagship):
             return True
 
@@ -641,7 +682,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         if self.hard_mode:
             if not self.dock_enter(self.fleet_detail_enter):
                 return True
-            self.ship_down_hard()  
+            self.ship_down_hard()
         if not self.dock_enter(self.fleet_enter):
             return True
 

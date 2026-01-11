@@ -60,11 +60,12 @@ class CampaignEvent(CampaignStatus):
             self.get_event_pt()
             return False
         if command in GEMS_FARMINGS and self.stage_is_main(self.config.Campaign_Name):
+            self.get_event_pt()
             return False
 
         pt = self.get_event_pt()
-        logger.attr('Event_PT_limit', f'{pt}/{limit}')
-        if pt >= limit:
+        if pt >= limit and limit > 0:
+            logger.attr('Event_PT_limit', f'{pt}/{limit}')
             logger.hr(f'Reach event PT limit: {limit}')
             self._disable_tasks(tasks)
             return True

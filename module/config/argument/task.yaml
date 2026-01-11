@@ -5,8 +5,8 @@
 # ==================== Alas ====================
 
 Alas:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     Alas:
       - Emulator
@@ -19,14 +19,15 @@ Alas:
       - OneClickRetire
       - Enhance
       - OldRetire
+      - YukikazeTaskManager
     Restart:
       - Scheduler
 
 # ==================== Farm ====================
 
 Farm:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     Main:
       - Scheduler
@@ -67,12 +68,13 @@ Farm:
 # ==================== Event ====================
 
 Event:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     EventGeneral:
       - EventGeneral
       - TaskBalancer
+
     Event:
       - Scheduler
       - Campaign
@@ -108,6 +110,7 @@ Event:
       - Coalition
       - StopCondition
       - Emotion
+
     MaritimeEscort:
       - Scheduler
       - MaritimeEscort
@@ -125,12 +128,11 @@ Event:
       - HpControl
       - EnemyPriority
 
-
 # ==================== EventDaily ====================
 
 EventDaily:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     EventA:
       - Scheduler
@@ -197,8 +199,8 @@ EventDaily:
 # ==================== Reward ====================
 
 Reward:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     Commission:
       - Scheduler
@@ -231,6 +233,7 @@ Reward:
       - Awaken
     Island:
       - Scheduler
+      - IslandTransport
       - Island1
       - Island2
       - Island3
@@ -250,8 +253,8 @@ Reward:
 # ==================== DailyMission ====================
 
 DailyMission:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     Daily:
       - Scheduler
@@ -293,8 +296,8 @@ DailyMission:
 # ==================== Opsi ====================
 
 Opsi:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     OpsiGeneral:
       - OpsiGeneral
@@ -345,16 +348,18 @@ Opsi:
     OpsiHazard1Leveling:
       - Scheduler
       - OpsiHazard1Leveling
+      - OpsiSirenBug
       - OpsiFleet
       - OpsiCheckLeveling
+      - OpsiScheduling
     OpsiCrossMonth:
       - Scheduler
 
 # ==================== Tool ====================
 
 Tool:
-  menu: 'collapse'
-  page: 'tool'
+  menu: "collapse"
+  page: "tool"
   tasks:
     Daemon:
       - Daemon
@@ -370,3 +375,22 @@ Tool:
       - AzurLaneUncensored
     GameManager:
       - GameManager
+
+# ==================== Dashboard ====================
+
+Dashboard:
+  page: "dashboard"
+  tasks:
+    Dashboard:
+      - Oil
+      - Coin
+      - Gem
+      - Pt
+      - Cube
+      - ActionPoint
+      - YellowCoin
+      - PurpleCoin
+      - Core
+      - Medal
+      - Merit
+      - GuildCoin

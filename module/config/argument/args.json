@@ -515,6 +515,14 @@
           "upload",
           "save_and_upload"
         ]
+      },
+      "TelemetryReport": {
+        "type": "checkbox",
+        "value": true
+      },
+      "BugReport": {
+        "type": "checkbox",
+        "value": true
       }
     },
     "Storage": {
@@ -590,6 +598,12 @@
           "retire_all",
           "retire_10"
         ]
+      }
+    },
+    "YukikazeTaskManager": {
+      "TaskPriorityAdjustment": {
+        "type": "textarea",
+        "value": "Restart\n> OpsiCrossMonth\n> Commission > Tactical > Research\n> Exercise\n> Dorm > Meowfficer > Guild > Gacha\n> Reward\n> ShopFrequent > ShopOnce > Shipyard > Freebies\n> PrivateQuarters\n> OpsiExplore\n> Minigame > Awaken\n> OpsiAshBeacon\n> OpsiDaily > OpsiShop > OpsiVoucher\n> OpsiAbyssal > OpsiStronghold > OpsiObscure > OpsiArchive\n> Daily > Hard > OpsiAshBeacon > OpsiAshAssist > OpsiMonthBoss\n> Sos > EventSp > EventA > EventB > EventC > EventD\n> RaidDaily > CoalitionSp > WarArchives > MaritimeEscort\n> Event > Event2 > Raid > Hospital > HospitalEvent > Coalition > Main > Main2 > Main3\n> OpsiMeowfficerFarming\n> GemsFarming\n> OpsiHazard1Leveling"
       }
     },
     "Storage": {
@@ -935,6 +949,10 @@
         ]
       },
       "Fleet1Oath": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -2194,6 +2212,39 @@
           "prevent_red_face"
         ],
         "display": "hide"
+      }
+    },
+    "Emotion": {
+      "Mode": {
+        "type": "select",
+        "value": "calculate_ignore",
+        "option": [
+          "calculate",
+          "ignore",
+          "calculate_ignore"
+        ],
+        "display": "hide"
+      },
+      "Fleet1Value": {
+        "type": "input",
+        "value": 119
+      },
+      "Fleet1Record": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime",
+        "display": "disabled"
+      },
+      "Fleet1Control": {
+        "type": "select",
+        "value": "prevent_red_face",
+        "option": [
+          "keep_exp_bonus",
+          "prevent_green_face",
+          "prevent_yellow_face",
+          "prevent_red_face"
+        ],
+        "display": "hide"
       },
       "Fleet1Recover": {
         "type": "select",
@@ -2202,11 +2253,13 @@
           "not_in_dormitory",
           "dormitory_floor_1",
           "dormitory_floor_2"
-        ]
+        ],
+        "display": "hide"
       },
       "Fleet1Oath": {
         "type": "checkbox",
-        "value": false
+        "value": false,
+        "display": "hide"
       },
       "Fleet1Onsen": {
         "type": "checkbox",
@@ -2240,11 +2293,13 @@
           "not_in_dormitory",
           "dormitory_floor_1",
           "dormitory_floor_2"
-        ]
+        ],
+        "display": "hide"
       },
       "Fleet2Oath": {
         "type": "checkbox",
-        "value": false
+        "value": false,
+        "display": "hide"
       },
       "Fleet2Onsen": {
         "type": "checkbox",
@@ -2603,6 +2658,10 @@
         ]
       },
       "Fleet1Oath": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -3005,6 +3064,10 @@
         ]
       },
       "Fleet1Oath": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -3488,6 +3551,11 @@
         "value": false,
         "display": "hide"
       },
+      "Fleet1Onsen": {
+        "type": "checkbox",
+        "value": false,
+        "display": "hide"
+      },
       "Fleet2Value": {
         "type": "input",
         "value": 119,
@@ -3745,6 +3813,10 @@
         ]
       },
       "Fleet1Oath": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -4195,6 +4267,51 @@
           "war_archives_20190321_en",
           "war_archives_20191031_en",
           "war_archives_20181020_en"
+        ],
+        "option_bold": [
+          "war_archives_20180607_cn",
+          "war_archives_20180726_cn",
+          "war_archives_20181020_en",
+          "war_archives_20181026_en",
+          "war_archives_20181227_cn",
+          "war_archives_20190221_en",
+          "war_archives_20190314_en",
+          "war_archives_20190321_en",
+          "war_archives_20190620_en",
+          "war_archives_20190911_cn",
+          "war_archives_20191010_en",
+          "war_archives_20191031_en",
+          "war_archives_20200312_cn",
+          "war_archives_20200507_cn",
+          "war_archives_20200603_cn",
+          "war_archives_20200806_cn",
+          "war_archives_20200820_cn",
+          "war_archives_20200903_cn",
+          "war_archives_20200917_cn",
+          "war_archives_20201012_cn",
+          "war_archives_20201029_cn",
+          "war_archives_20201229_cn",
+          "war_archives_20210225_cn",
+          "war_archives_20210325_cn",
+          "war_archives_20210422_cn",
+          "war_archives_20210527_cn",
+          "war_archives_20210624_cn",
+          "war_archives_20210819_cn",
+          "war_archives_20210916_cn",
+          "war_archives_20211014_cn",
+          "war_archives_20211028_cn",
+          "war_archives_20211111_cn",
+          "war_archives_20211229_cn",
+          "war_archives_20220210_cn",
+          "war_archives_20220224_cn",
+          "war_archives_20220324_cn",
+          "war_archives_20220414_cn",
+          "war_archives_20220428_cn",
+          "war_archives_20220526_cn",
+          "war_archives_20220728_cn",
+          "war_archives_20220915_cn",
+          "war_archives_20221222_cn",
+          "war_archives_20231026_cn"
         ]
       },
       "Mode": {
@@ -5707,6 +5824,10 @@
         "type": "checkbox",
         "value": false
       },
+      "Fleet1Onsen": {
+        "type": "checkbox",
+        "value": false
+      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -6126,6 +6247,10 @@
         "type": "checkbox",
         "value": false
       },
+      "Fleet1Onsen": {
+        "type": "checkbox",
+        "value": false
+      },
       "Fleet2Value": {
         "type": "input",
         "value": 119
@@ -6529,6 +6654,10 @@
         ]
       },
       "Fleet1Oath": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Fleet1Onsen": {
         "type": "checkbox",
         "value": false
       },
@@ -9185,6 +9314,1405 @@
       }
     }
   },
+  "Island": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Island",
+        "display": "hide"
+      },
+      "SuccessInterval": {
+        "type": "input",
+        "value": 0,
+        "display": "hide"
+      },
+      "FailureInterval": {
+        "type": "input",
+        "value": 120,
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "00:00",
+        "display": "hide"
+      }
+    },
+    "Island1": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option3": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "Character3": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option4": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "Character4": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island2": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          2
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option3": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          3
+        ]
+      },
+      "Character3": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option4": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          4
+        ]
+      },
+      "Character4": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island3": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option3": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character3": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option4": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character4": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island4": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option3": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character3": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option4": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character4": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island5": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option3": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character3": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option4": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character4": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island6": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island7": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island8": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island9": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island10": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island11": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island12": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island13": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island14": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Island15": {
+      "Receive": {
+        "type": "checkbox",
+        "value": false
+      },
+      "Option1": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character1": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      },
+      "Option2": {
+        "type": "select",
+        "value": 0,
+        "option": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "Character2": {
+        "type": "select",
+        "value": "manjuu",
+        "option": [
+          "manjuu",
+          "saratoga",
+          "new_jersey",
+          "tashkent",
+          "lemalin",
+          "shimakaze",
+          "akashi",
+          "ying_swei",
+          "chao_ho",
+          "unicorn",
+          "cheshire",
+          "amagi_chan"
+        ]
+      }
+    },
+    "Storage": {
+      "Storage": {
+        "type": "storage",
+        "value": {},
+        "valuetype": "ignore",
+        "display": "disabled"
+      }
+    }
+  },
   "Daily": {
     "Scheduler": {
       "Enable": {
@@ -10326,7 +11854,7 @@
       },
       "AkashiShopFilter": {
         "type": "textarea",
-        "value": "ActionPoint > PurpleCoins"
+        "value": "ActionPoint"
       }
     },
     "Storage": {
@@ -10396,6 +11924,10 @@
         "value": true
       },
       "EnsureFullyCollected": {
+        "type": "checkbox",
+        "value": true
+      },
+      "AutoCollectShip": {
         "type": "checkbox",
         "value": true
       }
@@ -11117,6 +12649,10 @@
         "type": "input",
         "value": 0
       },
+      "StayInZone": {
+        "type": "checkbox",
+        "value": false
+      },
       "APPreserveUntilReset": {
         "type": "checkbox",
         "value": false
@@ -11212,9 +12748,47 @@
         "type": "input",
         "value": 100000
       },
-      "DoScanningDevice": {
+      "MinimumActionPointReserve": {
+        "type": "input",
+        "value": 200
+      },
+      "ExecuteFixedPatrolScan": {
         "type": "checkbox",
         "value": false
+      },
+      "Cl1Filter": {
+        "type": "textarea",
+        "value": "ActionPoint"
+      }
+    },
+    "OpsiSirenBug": {
+      "SirenResearch_Enable": {
+        "type": "checkbox",
+        "value": false
+      },
+      "SirenBug_Enable": {
+        "type": "checkbox",
+        "value": false
+      },
+      "SirenBug_Type": {
+        "type": "select",
+        "value": "dangerous",
+        "option": [
+          "dangerous",
+          "safe"
+        ]
+      },
+      "SirenBug_Zone": {
+        "type": "input",
+        "value": 0
+      },
+      "DisableTaskSwitchDuringBug": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
       }
     },
     "OpsiFleet": {
@@ -11247,6 +12821,17 @@
       "DelayAfterFull": {
         "type": "checkbox",
         "value": false
+      }
+    },
+    "OpsiScheduling": {
+      "EnableSmartScheduling": {
+        "type": "checkbox",
+        "value": false
+      },
+      "ActionPointNotifyLevels": {
+        "type": "input",
+        "value": "500,1000,2000,3000",
+        "valuetype": "str"
       }
     },
     "Storage": {

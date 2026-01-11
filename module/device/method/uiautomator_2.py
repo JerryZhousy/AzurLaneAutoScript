@@ -1,3 +1,6 @@
+# 此文件实现了基于 uiautomator2 的设备交互逻辑。
+# 包含截图、模拟点击、长按、滑动、层级提取（dump）等控制移动端设备的核心操作。
+import base64
 import time
 import typing as t
 from dataclasses import dataclass

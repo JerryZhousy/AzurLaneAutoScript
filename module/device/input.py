@@ -1,3 +1,5 @@
+# 此文件专门用于处理设备端的文本输入功能。
+# 封装了检查输入法窗口状态以及向安卓组件发送文本指令的逻辑。
 from module.device.method.uiautomator_2 import Uiautomator2
 from module.logger import logger
 

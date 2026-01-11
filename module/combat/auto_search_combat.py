@@ -328,6 +328,7 @@ class AutoSearchCombat(MapOperation, Combat, CampaignStatus):
         confirm_timer = Timer(10)
         confirm_timer.start()
         for _ in self.loop():
+            self.device.screenshot()
 
             if self.handle_submarine_call(submarine_mode, call=force_call):
                 continue

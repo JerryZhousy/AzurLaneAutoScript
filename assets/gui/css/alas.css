@@ -140,6 +140,13 @@ footer {
     font-size: 0.875rem;
 }
 
+.status-point {
+    margin: 37% 50% 63% 50%;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+}
+
 input[type="checkbox"] {
     width: 1.25rem;
     height: 1.25rem;
@@ -410,6 +417,7 @@ pre.rich-traceback-code {
 #pywebio-scope-scheduler-bar,
 #pywebio-scope-log-bar,
 #pywebio-scope-log,
+#pywebio-scope-image-container,
 #pywebio-scope-daemon-overview #pywebio-scope-groups {
     font-weight: 500;
     margin: 0.3125rem;
@@ -417,6 +425,7 @@ pre.rich-traceback-code {
 }
 
 #pywebio-scope-scheduler-bar,
+#pywebio-scope-image-container,
 #pywebio-scope-log-bar {
     display: flex;
     align-items: center;
@@ -612,4 +621,29 @@ pre.rich-traceback-code {
     font-family:
              "Arial",
              serif;
+}
+
+.alas-force-text,
+.alas-force-text * {
+    color: var(--alas-content-text) !important;
+}
+
+.alas-force-bg,
+.alas-force-bg * {
+    background: var(--alas-content-bg) !important;
+    color: var(--alas-content-text) !important;
+}
+
+#pywebio-scope-updater_info,
+#pywebio-scope-updater_state,
+#pywebio-scope-updater_loading,
+#pywebio-scope-updater_btn,
+#pywebio-scope-updater_detail,
+#pywebio-scope-updater_info *,
+#pywebio-scope-updater_state *,
+#pywebio-scope-updater_loading *,
+#pywebio-scope-updater_btn *,
+#pywebio-scope-updater_detail * {
+    background: var(--alas-content-bg) !important;
+    color: var(--alas-content-text) !important;
 }

@@ -1,5 +1,7 @@
 from module.base.button import Button
 from module.base.decorator import cached_property
+# 此文件定义了 Alas 逻辑模块的最高基类 ModuleBase。
+# 作为所有具体功能模块（如出击、大世界、每日任务等）的公共祖先，它整合了 UI 导航、任务循环控制及基本异常处理逻辑。
 from module.base.timer import Timer
 from module.base.utils import *
 from module.combat.emotion import Emotion
@@ -70,33 +72,7 @@ class ModuleBase:
         The import is paralleled since taking screenshot is I/O-bound while importing is CPU-bound,
         thus would speed up the startup 0.5 ~ 1.0s and even 5s on slow PCs.
         """
-        if ModuleBase.EARLY_OCR_IMPORT:
-            return
-        if not self.config.is_actual_task:
-            logger.info('No actual task bound, skip early_ocr_import')
-            return
-        if self.config.task.command in ['Daemon', 'OpsiDaemon']:
-            logger.info('No ocr in daemon task, skip early_ocr_import')
-            return
-
-        def do_ocr_import():
-            # Wait first image
-            import time
-            while 1:
-                if self.device.has_cached_image:
-                    break
-                time.sleep(0.01)
-
-            logger.info('early_ocr_import start')
-            from module.ocr.al_ocr import AlOcr
-            _ = AlOcr
-            logger.info('early_ocr_import finish')
-
-        logger.info('early_ocr_import call')
-        import threading
-        thread = threading.Thread(target=do_ocr_import, daemon=True)
-        thread.start()
-        ModuleBase.EARLY_OCR_IMPORT = True
+        return
 
     @cached_class_property
     def worker(self):
