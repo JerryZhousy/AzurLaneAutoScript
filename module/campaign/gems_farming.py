@@ -227,7 +227,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
     def _ship_detail_enter(self, button):
         self.ui_click(FLEET_DETAIL, appear_button=page_fleet.check_button,
                       check_button=FLEET_DETAIL_CHECK, skip_first_screenshot=True)
-        self.ship_info_enter(button, long_click=False)
+        self.equip_enter(button, long_click=False)
 
     def _fleet_detail_enter_hard(self, fleet):
         if self.appear(FLEET_PREPARATION, offset=(20, 50)):
@@ -247,7 +247,7 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
                 break
 
     def _ship_detail_enter_hard(self, button):
-        self.ship_info_enter(button)
+        self.equip_enter(button)
 
     def _fleet_back(self):
         self.ui_back(FLEET_DETAIL_CHECK)
@@ -612,31 +612,6 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
         if not self.dock_enter(self.fleet_enter_flagship):
             return True
 
-    def flagship_change_with_emotion(self, ship):
-        """
-        Change flagship and calculate emotion
-        """
-        target_ship = max(ship, key=lambda s: (s.level, s.emotion))
-        if self.config.GemsFarming_ALLowHighFlagshipLevel:
-            self.set_emotion(target_ship.emotion)
-        self._ship_change_confirm(target_ship.button)
-
-    def flagship_change_execute(self):
-        """
-        Returns:
-            bool: If success.
-
-        Pages:
-            in: page_fleet
-            out: page_fleet
-        """
-        if self.hard_mode:
-            if not self.dock_enter(self.fleet_detail_enter_flagship):
-                return True
-            self.ship_down_hard()
-        if not self.dock_enter(self.fleet_enter_flagship):
-            return True
-
         ship = self.get_common_rarity_cv()
         if ship:
             self.flagship_change_with_emotion(ship)
@@ -722,24 +697,6 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
 
         return super().triggered_stop_condition(oil_check=oil_check)
 
-    def get_emotion(self):
-        """
-        Get fleet emotion value from config
-        """
-        if self.config.Fleet_FleetOrder == 'fleet1_standby_fleet2_all':
-            return self.campaign.config.Emotion_Fleet2Value
-        else:
-            return self.campaign.config.Emotion_Fleet1Value
-
-    def set_emotion(self, emotion):
-        """
-        Set fleet emotion value
-        """
-        if self.config.Fleet_FleetOrder == 'fleet1_standby_fleet2_all':
-            self.campaign.config.set_record(Emotion_Fleet2Value=emotion)
-        else:
-            self.campaign.config.set_record(Emotion_Fleet1Value=emotion)
-
     def run(self, name, folder='campaign_main', mode='normal', total=0):
         """
         Args:
@@ -803,8 +760,8 @@ class GemsFarming(CampaignRun, GemsEquipmentHandler, Retirement):
                     self._trigger_emotion = False
                     self.campaign.ensure_auto_search_exit()
                     self.config.task_stop()
-                elif not success and (self.config.GemsFarming_DelayTaskIFNoFlagship \
-                        or self._trigger_emotion):
+                elif not success and (self.config.GemsFarming_DelayTaskIFNoFlagship
+                                      or self._trigger_emotion):
                     self._trigger_emotion = False
                     self.campaign.ensure_auto_search_exit()
                     self.config.task_delay(minute=30)

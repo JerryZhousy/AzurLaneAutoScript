@@ -26,10 +26,6 @@ class Equipment(StorageHandler):
         if equipping_filter.set('on' if enable else 'off', main=self):
             self.wait_until_stable(SWIPE_AREA)
 
-    def equipping_set(self, enable=False):
-        if equipping_filter.set('on' if enable else 'off', main=self):
-            self.wait_until_stable(SWIPE_AREA)
-
     def _equip_view_swipe(self, distance, check_button=EQUIPMENT_OPEN):
         swipe_count = 0
         swipe_timer = Timer(5, count=10)
