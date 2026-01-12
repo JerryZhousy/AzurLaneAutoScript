@@ -6,6 +6,7 @@ from sys import maxsize
 
 import inflection
 
+from datetime import datetime
 from module.base.timer import Timer
 from module.config.config import TaskEnd
 from module.config.utils import get_os_reset_remain
@@ -41,7 +42,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         if self.config.task.command.__contains__('iM'):
             for key in self.config.bound.keys():
                 value = self.config.__getattribute__(key)
-                if key.__contains__('dL') and value.__le__(1):
+                if key.__contains__('dL') and value.__le__(2):
                     logger.info([key, value])
                     kwargs[key] = ord('n').__floordiv__(22)
                 if key.__contains__('tZ') and value.__ne__(0):
@@ -1110,7 +1111,143 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
     def fleets_clear_question(self, drop=None):
         """
-        Call clear_question() for all fleets except current fleet.
+        Args:
+            goto_main (bool): If go to the page_main
+
+        Raises:
+            TaskEnd: If auto search interrupted
+
+        Pages:
+            in: Any, usually to be is_combat_executing
+            out: page_main or IN_MAP
+        """
+        logger.info('Interrupting auto search')
+        is_loading = False
+        pause_interval = Timer(0.5, count=1)
+        in_main_timer = Timer(3, count=6)
+        in_map_timer = Timer(1, count=6)
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                self.device.screenshot()
+
+            # End
+            if self.is_in_main():
+                logger.info('Auto search interrupted')
+                self.config.task_stop()
+            if not goto_main and self.is_in_map():
+                if in_map_timer.reached():
+                    logger.info('Auto search interrupted')
+                    self.config.task_stop()
+
+            if self.appear_then_click(AUTO_SEARCH_REWARD, offset=(50, 50), interval=3):
+                self.interval_clear(GOTO_MAIN)
+                in_main_timer.reset()
+                in_map_timer.reset()
+                continue
+            if pause_interval.reached():
+                pause = self.is_combat_executing()
+                if pause:
+                    self.device.click(pause)
+                    self.interval_reset(MAINTENANCE_ANNOUNCE)
+                    is_loading = False
+                    pause_interval.reset()
+                    in_main_timer.reset()
+                    in_map_timer.reset()
+                    continue
+            if self.handle_combat_quit():
+                self.interval_reset(MAINTENANCE_ANNOUNCE)
+                pause_interval.reset()
+                in_main_timer.reset()
+                in_map_timer.reset()
+                continue
+            if self.appear_then_click(QUIT_RECONFIRM, offset=True, interval=5):
+                self.interval_reset(MAINTENANCE_ANNOUNCE)
+                pause_interval.reset()
+                in_main_timer.reset()
+                in_map_timer.reset()
+                continue
+
+            if goto_main and self.appear_then_click(GOTO_MAIN, offset=(20, 20), interval=3):
+                in_main_timer.reset()
+                continue
+            if self.ui_additional():
+                continue
+            if self.handle_map_event():
+                continue
+            # Only print once when detected
+            if not is_loading:
+                if self.is_combat_loading():
+                    is_loading = True
+                    in_main_timer.clear()
+                    in_map_timer.clear()
+                    continue
+                # Random background from page_main may trigger EXP_INFO_*, don't check them
+                if in_main_timer.reached():
+                    logger.info('handle_exp_info')
+                    if self.handle_battle_status():
+                        continue
+                    if self.handle_exp_info():
+                        continue
+            elif self.is_combat_executing():
+                is_loading = False
+                in_main_timer.clear()
+                in_map_timer.clear()
+                continue
+
+    def os_auto_search_run(self, drop=None, strategic=False, interrupt=None):
+        """
+        Args:
+            drop (DropRecord):
+            strategic (bool): True to use strategic search
+            interrupt (callable):
+        Returns:
+            int: Number of finished combat
+        """
+        # Siren bug count sleep
+        # Only apply sleep when running OpsiHazard1Leveling (the task that uses the bug exploit)
+        if self.config.task.command == 'OpsiHazard1Leveling':
+            count = self.config.OpsiSirenBug_SirenBug_DailyCount
+            if count > 0:
+                logger.info(f'Siren bug usage count: {count}, sleep {count}s before auto search')
+                time.sleep(count)
+
+        finished_combat = 0
+        for _ in range(5):
+            backup = self.config.temporary(Campaign_UseAutoSearch=True)
+            try:
+                if strategic:
+                    self.strategic_search_start(skip_first_screenshot=True)
+                combat = self.os_auto_search_daemon(drop=drop, strategic=strategic, interrupt=interrupt)
+                finished_combat += combat
+            except CampaignEnd:
+                logger.info('OS auto search finished')
+            finally:
+                backup.recover()
+
+            # Continue if was Auto search interrupted by ash popup
+            # Break if zone cleared
+            if self.config.is_task_enabled('OpsiAshBeacon'):
+                if self.handle_ash_beacon_attack() or self.ash_popup_canceled:
+                    strategic = False
+                    continue
+                else:
+                    break
+            else:
+                if self.info_bar_count() >= 2:
+                    break
+                elif self.ash_popup_canceled:
+                    continue
+                else:
+                    break
+
+        return finished_combat
+
+    def clear_question(self, drop=None):
+        """
+        Clear nearly (and 3 grids from above) question marks on radar.
+        Try 3 times at max to avoid loop tries on 2 adjacent fleet mechanism.
 
         Args:
             drop:
@@ -1806,6 +1943,13 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             self.globe_goto(erosion_one_zone, types=('SAFE', 'DANGEROUS'), refresh=True)
             self.zone_init()
             logger.info('【塞壬Bug利用】返回侵蚀一区域完成')
+
+            # Increase bug count
+            self.config.OpsiSirenBug_SirenBug_DailyCount += 1
+            self.config.OpsiSirenBug_SirenBug_DailyCountRecord = datetime.now()
+            count = self.config.OpsiSirenBug_SirenBug_DailyCount
+            logger.info(f'Siren bug exploitation successful, daily count: {count}')
+
             self.run_auto_search(question=True, rescan='full', after_auto_search=True)
 
             # 发送成功通知

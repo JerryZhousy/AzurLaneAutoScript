@@ -2130,6 +2130,8 @@
     "OpsiExplore": {
       "SpecialRadar": false,
       "ForceRun": false,
+      "IfSkipSirenResearch": 0,
+      "SkipedSirenResearch": null,
       "LastZone": 0
     },
     "OpsiFleet": {
@@ -2348,7 +2350,9 @@
       "SirenBug_Enable": false,
       "SirenBug_Type": "dangerous",
       "SirenBug_Zone": 0,
-      "DisableTaskSwitchDuringBug": false
+      "DisableTaskSwitchDuringBug": false,
+      "SirenBug_DailyCount": 0,
+      "SirenBug_DailyCountRecord": "2020-01-01 00:00:00"
     },
     "OpsiFleet": {
       "Fleet": 1,
