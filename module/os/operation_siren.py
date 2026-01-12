@@ -549,10 +549,8 @@ class OperationSiren(OSMap):
                 current_threshold = threshold
                 break
 
-        # 查询是否为首次调用
-        if hasattr(self, '_last_notified_ap_threshold'):
-        
-        
+        # 查询是否为首次调用（属性存在且不为 None 才进行比较）
+        if hasattr(self, '_last_notified_ap_threshold') and self._last_notified_ap_threshold is not None:
             # 如果跨越了阈值区间，发送推送通知
             if current_threshold != self._last_notified_ap_threshold:
                 if current_threshold is not None:
@@ -797,11 +795,6 @@ class OperationSiren(OSMap):
             yellow_coins = self.get_yellow_coins()
             if self.config.OpsiScheduling_EnableSmartScheduling:
                 # 启用了智能调度
-                if not self.config.is_task_enabled('OpsiMeowfficerFarming'):
-                    self.config.cross_set(keys='OpsiMeowfficerFarming.Scheduler.Enable', value=True)
-                    logger.info('【智能调度】未启用短猫相接任务，强制开启短猫相接')
-                # 我不能理解为什么在启用智能调度后必然会调用短猫但并没有在代码中强制开启
-
                 if yellow_coins < self.config.OpsiHazard1Leveling_OperationCoinsPreserve:
                     logger.info(f'【智能调度】黄币不足 ({yellow_coins} < {self.config.OpsiHazard1Leveling_OperationCoinsPreserve}), 需要执行短猫相接')
 
@@ -846,7 +839,12 @@ class OperationSiren(OSMap):
 
                         with self.config.multi_set():
                             cd = self.nearest_task_cooling_down
-                            if cd is None:
+                            if cd is not None:
+                                # 有冷却任务时，同时延迟侵蚀1任务到冷却任务之后
+                                # 避免侵蚀1在短猫被延迟后立即再次运行导致无限循环
+                                logger.info(f'有冷却任务 {cd.command}，延迟侵蚀1到 {cd.next_run}')
+                                self.config.task_delay(target=cd.next_run)
+                            else:
                                 for task in ['OpsiAbyssal', 'OpsiStronghold', 'OpsiObscure']:
                                     if self.config.is_task_enabled(task):
                                         self.config.task_call(task)
