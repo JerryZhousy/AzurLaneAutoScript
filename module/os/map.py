@@ -941,46 +941,6 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 in_map_timer.clear()
                 continue
 
-    def os_auto_search_run(self, drop=None, strategic=False, interrupt=None):
-        """
-        Args:
-            drop (DropRecord):
-            strategic (bool): True to use strategic search
-            interrupt (callable):
-        Returns:
-            int: Number of finished combat
-        """
-        finished_combat = 0
-        for _ in range(5):
-            backup = self.config.temporary(Campaign_UseAutoSearch=True)
-            try:
-                if strategic:
-                    self.strategic_search_start(skip_first_screenshot=True)
-                combat = self.os_auto_search_daemon(drop=drop, strategic=strategic, interrupt=interrupt)
-                finished_combat += combat
-            except CampaignEnd:
-                logger.info('OS auto search finished')
-            finally:
-                backup.recover()
-
-            # Continue if was Auto search interrupted by ash popup
-            # Break if zone cleared
-            if self.config.is_task_enabled('OpsiAshBeacon'):
-                if self.handle_ash_beacon_attack() or self.ash_popup_canceled:
-                    strategic = False
-                    continue
-                else:
-                    break
-            else:
-                if self.info_bar_count() >= 2:
-                    break
-                elif self.ash_popup_canceled:
-                    continue
-                else:
-                    break
-
-        return finished_combat
-
     @property
     def _is_siren_research_enabled(self):
         """
