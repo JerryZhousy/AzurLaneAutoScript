@@ -88,7 +88,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         #            logger.exception(e)
         #except Exception:
         #    logger.debug("CL1 pre-scan check skipped due to unexpected condition")
-
+            
         # self.map_init()
         self.hp_reset()
         self.handle_after_auto_search()
@@ -343,7 +343,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
         repair = False
         success = False
-        if self.storage_get_next_item('REPAIR_PACK'):
+        if self.storage_get_next_item('REPAIR_PACK'): 
             for index in fleet_index:
                 if self.handle_storage_one_fleet_repair(fleet_index=index,
                         threshold=self.config.OpsiGeneral_RepairPackThreshold):
@@ -362,8 +362,8 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         """
         Args:
             fleet_index (None|int|list[int]): fleet index
-                If None, fixed fleet in OpsiFleetFilter_Filter before current fleet,
-                         submarine fleet is always the last fleet to repair if it exists in filter string
+                If None, fixed fleet in OpsiFleetFilter_Filter before current fleet, 
+                         submarine fleet is always the last fleet to repair if it exists in filter string    
                 E.g.: OpsiFleetFilter_Filter = 'Fleet-1 > CallSubmarine > Fleet-3 > Fleet-4 > Fleet-2'
                       current fleet is fleet 1, repair fleet 1 and submarine fleet
                       current fleet is fleet 4, repair fleet 1, fleet 3, fleet 4 and submarine fleet
@@ -646,7 +646,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
     def on_auto_search_battle_count_add(self):
         self._auto_search_battle_count += 1
         logger.attr('battle_count', self._auto_search_battle_count)
-
+        
         # Check if CL1 tracking should be enabled
         try:
             is_cl1_task = self.config.task.command == 'OpsiHazard1Leveling'
@@ -739,7 +739,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         key = self._cl1_month_key(year=year, month=month)
         data = self._load_cl1_monthly()
         return int(data.get(key, 0))
-
+    
     def os_auto_search_daemon(self, drop=None, strategic=False, interrupt=None, skip_first_screenshot=True):
         """
         Args:
@@ -978,7 +978,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
     def _is_siren_research_enabled(self):
         """
         Check if siren research feature is enabled in config.
-
+        
         Returns:
             bool: True if enabled, False otherwise
         """
@@ -987,10 +987,10 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
     def _should_skip_siren_research(self, grid):
         """
         Check if siren research device should be skipped based on config.
-
+        
         Args:
             grid: The grid to check
-
+            
         Returns:
             bool: True if should skip (feature disabled), False otherwise
         """
@@ -1013,7 +1013,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         skip_level = self.config.cross_get(keys="OpsiExplore.OpsiExplore.IfSkipSirenResearch")
         if skip_level == 0:
             return False
-
+        
         # 根据海域难度决定是否跳过
         hazard_level = self.zone.hazard_level
         if skip_level == 6 and hazard_level == 6:
@@ -1053,12 +1053,12 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             self.view.show()
 
             grid = self.convert_radar_to_local(grid)
-
+            
             # ========== 移动前检查：是否为塞壬研究装置且功能未开启 ==========
             if self._should_skip_siren_research(grid):
                 self._solved_map_event.add('is_scanning_device')
                 return True
-
+            
             self.device.click(grid)
             with self.config.temporary(STORY_ALLOW_SKIP=False):
                 result = self.wait_until_walk_stable(
@@ -1084,18 +1084,18 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
                 # ========== 装置处理 ==========
                 # 选项点击已由 wait_until_walk_stable -> info_handler.story_skip 处理
-
+                
                 # 执行自律寻敌
                 logger.info('[装置处理] 步骤1: 执行自律寻敌')
                 self.os_auto_search_run(drop=drop)
-
+                
                 # 标记处理
                 self._solved_map_event.add('is_scanning_device')
-
+                
                 # Bug利用
                 logger.info('[装置处理] 步骤2: 检查是否需要执行Bug利用')
                 self._handle_siren_bug_reinteract(drop=drop)
-
+                
                 return True
 
         logger.warning('Failed to goto question mark after 5 trail, '
@@ -1234,16 +1234,16 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         grids = self.view.select(is_scanning_device=True)
         if 'is_scanning_device' not in self._solved_map_event and grids and grids[0].is_scanning_device:
             grid = grids[0]
-
+            
             # ========== 地图选择:发现研究装置 ==========
             logger.hr('发现研究装置,开始处理', level=2)
             logger.info(f'[地图选择] 在 {grid} 位置发现研究装置')
-
+            
             if not self._is_siren_research_enabled:
                 logger.warning('[配置检查] 塞壬研究装置功能已禁用,跳过处理')
                 self._solved_map_event.add('is_scanning_device')
                 return True
-
+            
             if self._should_skip_siren_research_for_explore():
                 # 记录已跳过的海域
                 zone_str = f'{self.zone};\n'
@@ -1255,24 +1255,24 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 logger.info(f'[月度开荒] 已记录跳过塞壬研究装置的海域: {self.config.OpsiExplore_SkipedSirenResearch}')
                 self._solved_map_event.add('is_scanning_device')
                 return True
-
+            
             # ========== 移动并处理 ==========
             logger.info(f'[移动装置] 开始移动到装置位置: {grid}')
             self.device.click(grid)
-
+            
             # 重置标志位
             self.is_siren_device_confirmed = False
-
+            
             # wait_until_walk_stable 会调用 handle_story_skip 处理选项
             logger.info('[移动装置] 等待移动稳定...')
             result = self.wait_until_walk_stable(
                 drop=drop, walk_out_of_step=False, confirm_timer=Timer(1.5, count=4))
             logger.info(f'[移动装置] 移动完成,结果: {result}')
-
+            
             if getattr(self, 'is_siren_device_confirmed', False):
                 # 保存标志状态，因为二次重扫可能会重置它
                 siren_confirmed = True
-
+                
                 # 执行自律寻敌
                 logger.info('[装置处理] 执行自律寻敌')
                 self.os_auto_search_run(drop=drop)
@@ -1283,15 +1283,14 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 # 二次重扫，防止出现意外情况导致装置处理失败
                 logger.info('[装置处理] 执行二次重扫')
                 self.map_rescan_current(drop=drop)
-
+                
                 # 使用保存的标志状态，而不是重新检查（因为二次重扫可能会重置它）
-
                 if siren_confirmed:
                     logger.info('[装置处理] 已确认为塞壬研究装置，检查是否需要执行Bug利用')
                     self._handle_siren_bug_reinteract(drop=drop)
                 else:
                     logger.info('[装置处理] 未确认为塞壬研究装置，跳过Bug利用')
-
+            
             return True
 
         grids = self.view.select(is_logging_tower=True)
@@ -1617,7 +1616,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
 
     def _handle_siren_bug_reinteract(self, drop=None):
-        # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律
+        # 侵蚀一塞壬研究装置处理后，跳转指定高侵蚀区域触发塞壬研究装置消耗两次紫币，最后返回侵蚀一自律   
         try:
             siren_research_enable = self.config.cross_get(keys="OpsiHazard1Leveling.OpsiSirenBug.SirenResearch_Enable")
             siren_bug_enable = getattr(self.config, 'OpsiSirenBug_SirenBug_Enable', False)
@@ -1658,11 +1657,11 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             if disable_task_switch:
                 self.config._disable_task_switch = False
             return
-
+        
         erosion_one_zone = self.name_to_zone(current_zone_id)
-
+        
         logger.hr(f'RUN SIREN BUG EXPLOITATION')
-
+        
         try:
             # 解析目标区域
             try:
@@ -1673,9 +1672,9 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 if disable_task_switch:
                     self.config._disable_task_switch = False
                 return
-
+            
             logger.info(f'当前区域: {erosion_one_zone}, 目标区域: {target_zone}')
-
+            
             # 跳转至指定高侵蚀区域
             with self.config.temporary(STORY_ALLOW_SKIP=False):
                 self.os_map_goto_globe(unpin=False)
@@ -1717,7 +1716,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
                         # 移动舰队至塞壬研究装置，触发剧情
                         self.device.click(grid)
-
+                        
                         # 等待剧情选项出现（表示舰队已到达装置并触发剧情）
                         option_wait_timer = Timer(10, count=20).start()
                         options_found = False
@@ -1729,11 +1728,11 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                                 options_found = True
                                 break
                             time.sleep(0.5)
-
+                        
                         if not options_found:
                             logger.warning(f'等待剧情选项超时，跳过后续操作')
                             continue
-
+                        
                         # 找到选项，处理剧情
                         with self.config.temporary(STORY_ALLOW_SKIP=False):
                             self._solved_map_event.add('is_scanning_device')
@@ -1749,7 +1748,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                             else:
                                 logger.warning('[Bug利用] 第1组选项点击失败')
                                 raise RuntimeError('第1组选项点击失败，跳过后续操作')
-
+                            
                             # 第2次：选择第2个选项
                             logger.info('[Bug利用] 等待第2组选项（选择第2个）')
                             time.sleep(2.0)
@@ -1761,7 +1760,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                             else:
                                 logger.warning('[Bug利用] 第2组选项点击失败')
                                 raise RuntimeError('第2组选项点击失败，跳过后续操作')
-
+                            
                             # 第3次：选择第3个选项
                             logger.info('[Bug利用] 等待第3组选项（选择第3个）')
                             time.sleep(2.0)
@@ -1791,7 +1790,6 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             logger.info('【塞壬Bug利用】返回侵蚀一区域')
             self.os_map_goto_globe(unpin=False)
             self.globe_goto(erosion_one_zone, types=('SAFE', 'DANGEROUS'), refresh=True)
-            self.zone_init()
             logger.info('【塞壬Bug利用】返回侵蚀一区域完成')
 
             # Increase bug count
@@ -1800,8 +1798,8 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             count = self.config.OpsiSirenBug_SirenBug_DailyCount
             logger.info(f'Siren bug exploitation successful, daily count: {count}')
 
-            self.run_auto_search(question=True, rescan='full', after_auto_search=True)
-
+            # self.run_auto_search(question=True, rescan='full', after_auto_search=True)
+            
             # 发送成功通知
             try:
                 if hasattr(self, 'notify_push'):
@@ -1815,12 +1813,12 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
         except (RuntimeError, Exception) as e:
             logger.error(f'塞壬研究装置BUG利用失败: {e}', exc_info=True)
-
+            
             # 异常时清除标志
             if disable_task_switch and hasattr(self.config, '_disable_task_switch'):
                 self.config._disable_task_switch = False
                 logger.info('【塞壬Bug利用】异常退出，恢复任务切换')
-
+            
             # 发送失败通知
             try:
                 if hasattr(self, 'notify_push'):
@@ -1830,7 +1828,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                     )
             except Exception as notify_err:
                 logger.debug(f'发送失败通知失败: {notify_err}')
-
+            
             # 为避免卡在选项中，尝试选择最后一个选项退出
             if self._select_story_option_by_index(target_index=2, options_count=3):
                 logger.info('异常处理：已尝试选择最后一个选项退出剧情')
@@ -1839,7 +1837,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             try:
                 self.os_map_goto_globe(unpin=False)
                 self.globe_goto(erosion_one_zone, types=('SAFE', 'DANGEROUS'), refresh=True)
-                self.zone_init()
+                logger.info('异常处理：返回侵蚀一区域')
             except Exception as return_err:
                 logger.error(f'返回侵蚀一失败: {return_err}')
         finally:
