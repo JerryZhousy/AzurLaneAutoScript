@@ -52,13 +52,6 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                             kwargs[key] = 0
                     except ScriptError:
                         pass
-        if self.config.task.command.__contains__('iH'):
-            for key in self.config.bound.keys():
-                value = self.config.__getattribute__(key)
-                if key.__contains__('dP') and value.__ne__(0):
-                    logger.info([key, value])
-                    if key.__hash__().__mod__(key.__len__()).__rshift__(3).__ge__(1):
-                        kwargs[key] = 0
         self.config.override(
             Submarine_Fleet=1,
             Submarine_Mode='every_combat',
@@ -973,7 +966,6 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
         # 检查是否由月度开荒调用
         is_explore = getattr(self, 'is_in_task_explore', False)
-        logger.hr(f'检查月度开荒是否跳过塞壬研究装置, is_explore={is_explore}', level=2)
         if not is_explore:
             return False
 
@@ -1069,141 +1061,6 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         logger.warning('Failed to goto question mark after 5 trail, '
                        'this might be 2 adjacent fleet mechanism, stopped')
         return False
-
-    def fleets_clear_question(self, goto_main=True, skip_first_screenshot=True):
-        """
-        Args:
-            goto_main (bool): If go to the page_main
-
-        Raises:
-            TaskEnd: If auto search interrupted
-
-        Pages:
-            in: Any, usually to be is_combat_executing
-            out: page_main or IN_MAP
-        """
-        logger.info('Interrupting auto search')
-        is_loading = False
-        pause_interval = Timer(0.5, count=1)
-        in_main_timer = Timer(3, count=6)
-        in_map_timer = Timer(1, count=6)
-        while 1:
-            if skip_first_screenshot:
-                skip_first_screenshot = False
-            else:
-                self.device.screenshot()
-
-            # End
-            if self.is_in_main():
-                logger.info('Auto search interrupted')
-                self.config.task_stop()
-            if not goto_main and self.is_in_map():
-                if in_map_timer.reached():
-                    logger.info('Auto search interrupted')
-                    self.config.task_stop()
-
-            if self.appear_then_click(AUTO_SEARCH_REWARD, offset=(50, 50), interval=3):
-                self.interval_clear(GOTO_MAIN)
-                in_main_timer.reset()
-                in_map_timer.reset()
-                continue
-            if pause_interval.reached():
-                pause = self.is_combat_executing()
-                if pause:
-                    self.device.click(pause)
-                    self.interval_reset(MAINTENANCE_ANNOUNCE)
-                    is_loading = False
-                    pause_interval.reset()
-                    in_main_timer.reset()
-                    in_map_timer.reset()
-                    continue
-            if self.handle_combat_quit():
-                self.interval_reset(MAINTENANCE_ANNOUNCE)
-                pause_interval.reset()
-                in_main_timer.reset()
-                in_map_timer.reset()
-                continue
-            if self.appear_then_click(QUIT_RECONFIRM, offset=True, interval=5):
-                self.interval_reset(MAINTENANCE_ANNOUNCE)
-                pause_interval.reset()
-                in_main_timer.reset()
-                in_map_timer.reset()
-                continue
-
-            if goto_main and self.appear_then_click(GOTO_MAIN, offset=(20, 20), interval=3):
-                in_main_timer.reset()
-                continue
-            if self.ui_additional():
-                continue
-            if self.handle_map_event():
-                continue
-            # Only print once when detected
-            if not is_loading:
-                if self.is_combat_loading():
-                    is_loading = True
-                    in_main_timer.clear()
-                    in_map_timer.clear()
-                    continue
-                # Random background from page_main may trigger EXP_INFO_*, don't check them
-                if in_main_timer.reached():
-                    logger.info('handle_exp_info')
-                    if self.handle_battle_status():
-                        continue
-                    if self.handle_exp_info():
-                        continue
-            elif self.is_combat_executing():
-                is_loading = False
-                in_main_timer.clear()
-                in_map_timer.clear()
-                continue
-
-    def os_auto_search_run(self, drop=None, strategic=False, interrupt=None):
-        """
-        Args:
-            drop (DropRecord):
-            strategic (bool): True to use strategic search
-            interrupt (callable):
-        Returns:
-            int: Number of finished combat
-        """
-        # Siren bug count sleep
-        # Only apply sleep when running OpsiHazard1Leveling (the task that uses the bug exploit)
-        if self.config.task.command == 'OpsiHazard1Leveling':
-            count = self.config.OpsiSirenBug_SirenBug_DailyCount
-            if count > 0:
-                logger.info(f'Siren bug usage count: {count}, sleep {count}s before auto search')
-                time.sleep(count)
-
-        finished_combat = 0
-        for _ in range(5):
-            backup = self.config.temporary(Campaign_UseAutoSearch=True)
-            try:
-                if strategic:
-                    self.strategic_search_start(skip_first_screenshot=True)
-                combat = self.os_auto_search_daemon(drop=drop, strategic=strategic, interrupt=interrupt)
-                finished_combat += combat
-            except CampaignEnd:
-                logger.info('OS auto search finished')
-            finally:
-                backup.recover()
-
-            # Continue if was Auto search interrupted by ash popup
-            # Break if zone cleared
-            if self.config.is_task_enabled('OpsiAshBeacon'):
-                if self.handle_ash_beacon_attack() or self.ash_popup_canceled:
-                    strategic = False
-                    continue
-                else:
-                    break
-            else:
-                if self.info_bar_count() >= 2:
-                    break
-                elif self.ash_popup_canceled:
-                    continue
-                else:
-                    break
-
-        return finished_combat
 
     def run_auto_search(self, question=True, rescan=None, after_auto_search=True, interrupt=None):
         """
@@ -1851,6 +1708,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                                     logger.info('[Bug利用] 第1组确认成功')
                             else:
                                 logger.warning('[Bug利用] 第1组选项点击失败')
+                                raise RuntimeError('第1组选项点击失败，跳过后续操作')
 
                             # 第2次：选择第2个选项
                             logger.info('[Bug利用] 等待第2组选项（选择第2个）')
@@ -1862,6 +1720,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                                     logger.info('[Bug利用] 第2组确认成功')
                             else:
                                 logger.warning('[Bug利用] 第2组选项点击失败')
+                                raise RuntimeError('第2组选项点击失败，跳过后续操作')
 
                             # 第3次：选择第3个选项
                             logger.info('[Bug利用] 等待第3组选项（选择第3个）')
@@ -1873,6 +1732,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                                     logger.info('[Bug利用] 第3组确认成功')
                             else:
                                 logger.warning('[Bug利用] 第3组选项点击失败')
+                                raise RuntimeError('第3组选项点击失败，跳过后续操作')
 
                             device_handled = True
                             logger.info('[Bug利用] 所有选项处理完成')
@@ -1880,6 +1740,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
 
                 if not device_handled:
                     logger.warning(f'区域{siren_bug_zone}未找到塞壬研究装置，跳过后续操作')
+                    raise RuntimeError('未找到塞壬研究装置')
 
             # Bug利用核心操作完成，清除禁用任务切换标志
             if disable_task_switch and hasattr(self.config, '_disable_task_switch'):
@@ -1912,7 +1773,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             except Exception as notify_err:
                 logger.debug(f'发送成功通知失败: {notify_err}')
 
-        except Exception as e:
+        except (RuntimeError, Exception) as e:
             logger.error(f'塞壬研究装置BUG利用失败: {e}', exc_info=True)
 
             # 异常时清除标志
@@ -1929,6 +1790,10 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                     )
             except Exception as notify_err:
                 logger.debug(f'发送失败通知失败: {notify_err}')
+
+            # 为避免卡在选项中，尝试选择最后一个选项退出
+            if self._select_story_option_by_index(target_index=2, options_count=3):
+                logger.info('异常处理：已尝试选择最后一个选项退出剧情')
 
             # 尝试返回侵蚀一
             try:
