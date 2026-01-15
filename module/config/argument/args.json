@@ -1967,7 +1967,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2415,7 +2415,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2823,7 +2823,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -4734,10 +4734,11 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
-          "event_20231221_cn"
+          "event_20231221_cn",
+          "event_20251218_cn"
         ]
       },
       "Mode": {
@@ -5154,7 +5155,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5575,7 +5576,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -6000,7 +6001,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -6415,7 +6416,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -11816,8 +11817,7 @@
           "noshiro",
           "sirius",
           "new_jersey",
-          "taihou",
-          "aegir"
+          "taihou"
         ]
       }
     },
@@ -12794,6 +12794,10 @@
       "Cl1Filter": {
         "type": "textarea",
         "value": "ActionPoint"
+      },
+      "RecordNonCL1AP": {
+        "type": "checkbox",
+        "value": true
       }
     },
     "OpsiSirenBug": {

@@ -3490,8 +3490,7 @@
       "noshiro": "能代",
       "sirius": "天狼星",
       "new_jersey": "紐澤西",
-      "taihou": "大鳳",
-      "aegir": "埃吉爾"
+      "taihou": "大鳳"
     }
   },
   "Daily": {
@@ -4040,6 +4039,10 @@
     "DoScanningDevice": {
       "name": "做塞壬探測裝置",
       "help": "消耗紫幣換取黃幣，可能會導致紫幣不足"
+    },
+    "RecordNonCL1AP": {
+      "name": "OpsiHazard1Leveling.RecordNonCL1AP.name",
+      "help": "OpsiHazard1Leveling.RecordNonCL1AP.help"
     }
   },
   "OpsiSirenBug": {
