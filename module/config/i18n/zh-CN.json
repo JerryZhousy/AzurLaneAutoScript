@@ -47,7 +47,7 @@
       "help": ""
     },
     "Main": {
-      "name": "主线图-1",
+      "name": "主线图",
       "help": ""
     },
     "Main2": {
@@ -59,7 +59,7 @@
       "help": ""
     },
     "GemsFarming": {
-      "name": "紧急委托",
+      "name": "刷紧急委托",
       "help": ""
     },
     "EventGeneral": {
@@ -67,7 +67,7 @@
       "help": ""
     },
     "Event": {
-      "name": "活动图-1",
+      "name": "活动图",
       "help": ""
     },
     "Event2": {
@@ -3490,7 +3490,8 @@
       "noshiro": "能代",
       "sirius": "天狼星",
       "new_jersey": "新泽西",
-      "taihou": "大凤"
+      "taihou": "大凤",
+      "aegir": "埃吉尔"
     }
   },
   "Daily": {

@@ -914,12 +914,12 @@ SupplyPack:
 Minigame:
   Collect: false
 PrivateQuarters:
-  BuyRoses: true
-  BuyCake: false
-  TargetInteract: true
-  TargetShip:
-    value: anchorage
-    option: [anchorage, noshiro, sirius, new_jersey, taihou]
+    BuyRoses: true
+    BuyCake: false
+    TargetInteract: true
+    TargetShip:
+      value: anchorage
+      option: [ anchorage, noshiro, sirius, new_jersey, taihou, aegir ]
 # ==================== Daily ====================
 
 Daily:
