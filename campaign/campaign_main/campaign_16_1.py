@@ -60,7 +60,6 @@ class Config:
     MAP_HAS_AMBUSH = True
 
     # ===== End of generated config =====
-
     MAP_HAS_SUBMARINE_SUPPORT = True
 
 
