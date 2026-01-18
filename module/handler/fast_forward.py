@@ -122,6 +122,7 @@ class FastForwardHandler(AutoSearchHandler):
         > 13-1 > 13-2 > 13-3 > 13-4
         > 14-1 > 14-2 > 14-3 > 14-4
         > 15-1 > 15-2 > 15-3 > 15-4
+        > 16-1 > 16-2 > 16-3 > 16-4
         """,
         'A1 > A2 > A3',
         'B1 > B2 > B3',
@@ -560,6 +561,12 @@ class FastForwardHandler(AutoSearchHandler):
 
         return False
 
+    def handle_submarine_support_popup(self):
+        """
+        Should be rewritten in W16 submarine base class
+        """
+        return False
+
     def handle_map_walk_speedup(self, skip_first_screenshot=True):
         """
         Turn on walk speedup, no reason to turn it off
@@ -586,9 +593,3 @@ class FastForwardHandler(AutoSearchHandler):
                 self.device.click(MAP_WALK_SPEEDUP)
                 interval.reset()
                 continue
-
-    def handle_submarine_cost_popup(self):
-        if self.config.MAP_HAS_SUBMARINE_SUPPORT and self.handle_popup_confirm('SUBMARINE_COST'):
-            return True
-
-        return False

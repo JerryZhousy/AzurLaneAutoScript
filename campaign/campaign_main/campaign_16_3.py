@@ -1,9 +1,9 @@
-from module.logger import logger
-from module.campaign.campaign_base import CampaignBase
+from module.map.map_base import CampaignMap
 from module.map.map_grids import SelectedGrids, RoadGrids
+from module.logger import logger
 
-from .campaign_16_base import CampaignBase, CampaignMap
-from .campaign_16_base import Config as ConfigBase
+from .campaign_16_base_aircraft import CampaignBase
+from .campaign_16_base_aircraft import Config as ConfigBase
 
 MAP = CampaignMap('16-3')
 MAP.shape = 'K6'
@@ -40,62 +40,51 @@ A5, B5, C5, D5, E5, F5, G5, H5, I5, J5, K5, \
 A6, B6, C6, D6, E6, F6, G6, H6, I6, J6, K6, \
     = MAP.flatten()
 
-roads = [RoadGrids([C3, D3, F3, G4, H4])]
+road_main = RoadGrids([C3, D3, F3, G4, H4])
 
 
 class Config(ConfigBase):
-    # ===== Start of generated config =====
     MAP_HAS_MAP_STORY = False
     MAP_HAS_FLEET_STEP = False
     MAP_HAS_AMBUSH = True
-    # ===== End of generated config =====
-
-    INTERNAL_LINES_FIND_PEAKS_PARAMETERS = {
-        'height': (120, 255 - 17),
-        'width': (0.9, 10),
-        'prominence': 10,
-        'distance': 35,
-    }
-    EDGE_LINES_FIND_PEAKS_PARAMETERS = {
-        'height': (255 - 50, 255),
-        'prominence': 10,
-        'distance': 50,
-        'wlen': 1000
-    }
-    INTERNAL_LINES_HOUGHLINES_THRESHOLD = 25
-    EDGE_LINES_HOUGHLINES_THRESHOLD = 25
-    MAP_WALK_USE_CURRENT_FLEET = True
 
 
 class Campaign(CampaignBase):
     MAP = MAP
 
     def battle_0(self):
-        if not self.map_is_clear_mode:
-            self.destroy_land_base(D2, C3, D3)
+        self.clear_chosen_enemy(C3)
+        return True
 
-        if self.clear_roadblocks(roads):
+    def battle_1(self):
+        if self.use_support_fleet:
+            self.air_strike(E3)
+        self.clear_chosen_enemy(D3)
+        return True
+
+    def battle_2(self):
+        if self.clear_roadblocks([road_main]):
             return True
-        if self.clear_potential_roadblocks(roads):
-            return True
-        if self.clear_filter_enemy(self.ENEMY_FILTER, preserve=1):
-            return True
-
-        return self.battle_default()
-
-    def battle_3(self):
-        if not self.map_is_clear_mode:
-            self.destroy_land_base(K6, J5, J6)
-
-        boss = self.map.select(is_boss=True)
-        if boss:
-            return self.fleet_boss.brute_clear_boss()
-
-        if self.clear_roadblocks(roads):
-            return True
-        if self.clear_potential_roadblocks(roads):
+        if self.clear_potential_roadblocks([road_main]):
             return True
         if self.clear_filter_enemy(self.ENEMY_FILTER, preserve=0):
             return True
-        
+        return self.battle_default()
+
+    def battle_3(self):
+        boss = self.map.select(is_boss=True)
+        if boss:
+            if not self.check_accessibility(boss[0], fleet='boss'):
+                return self.clear_roadblocks([road_main])
+            if self.use_support_fleet:
+                # at this stage the most right zone should be accessible
+                self.goto(K5)
+                self.air_strike(J6)
+            return self.fleet_boss.clear_boss()
+        if self.clear_roadblocks([road_main]):
+            return True
+        if self.clear_potential_roadblocks([road_main]):
+            return True
+        if self.clear_filter_enemy(self.ENEMY_FILTER, preserve=0):
+            return True
         return self.battle_default()
