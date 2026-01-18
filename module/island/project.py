@@ -5,6 +5,7 @@ import numpy as np
 from scipy import signal
 
 import module.config.server as server
+
 from module.base.button import Button, ButtonGrid
 from module.base.timer import Timer
 from module.base.utils import color_similarity_2d, crop, random_rectangle_vector, rgb2gray
@@ -15,6 +16,7 @@ from module.island.ui import IslandUI
 from module.logger import logger
 from module.map.map_grids import SelectedGrids
 from module.ocr.ocr import Duration, Ocr
+
 
 class ProjectNameOcr(Ocr):
     def after_process(self, result):
@@ -69,9 +71,9 @@ class IslandProject:
             return
 
         # name
-        dx = {'cn':326, 'en':137}[server.server]
-        dy = {'cn':0,   'en':2}[server.server]
-        area = (self.x1 - 446, self.y1, self.x1 - dx, self.y2+dy)
+        dx = {'cn': 326, 'en': 137}[server.server]
+        dy = {'cn': 0, 'en': 2}[server.server]
+        area = (self.x1 - 446, self.y1, self.x1 - dx, self.y2 + dy)
         button = Button(area=area, color=(), button=area, name='PROJECT_NAME')
         ocr = ProjectNameOcr(button, lang='cnocr')
         self.name = ocr.ocr(self.image)
@@ -372,7 +374,7 @@ class IslandProjectRun(IslandUI):
                 click_timer.reset()
                 continue
 
-            if enter and self.appear_then_click(ROLE_SELECT_ENTER, offset=(5, 5), interval=2):
+            if enter and self.appear_then_click(ROLE_SELECT_ENTER, threshold=10, interval=2):
                 success = True
                 self.interval_clear(GET_ITEMS_ISLAND)
                 click_timer.reset()
@@ -610,8 +612,8 @@ class IslandProjectRun(IslandUI):
                     continue
 
                 button = PROJECT_START
-                timer_offset = {'cn':100, 'en':60}[server.server]
-                self.appear(button, offset=(timer_offset, 0))
+                # the offset of OCR_PRODUCTION_TIME is determined by PROJECT_START
+                self.appear(button, offset=(100, 0))
                 offset = tuple(np.subtract(button.button, button._button)[:2])
                 product = IslandProduct(self.device.image, new=True, offset=offset)
                 if product == last:
