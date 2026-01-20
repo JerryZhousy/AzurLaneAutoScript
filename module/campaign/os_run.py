@@ -7,37 +7,45 @@ from module.os_handler.action_point import ActionPointLimit
 
 
 class OSCampaignRun(OSMapOperation):
-    def load_campaign(self, cls=OperationSiren):
+    campaign: OperationSiren
+    campaign_loaded = False
+
+    def load_campaign(self):
+        if self.campaign_loaded:
+            return False
+
         config = self.config.merge(OSConfig())
-        campaign = cls(config=config, device=self.device)
-        campaign.os_init()
-        return campaign
+        self.campaign = OperationSiren(config=config, device=self.device)
+        self.campaign.os_init()
+
+        self.campaign_loaded = True
+        return True
 
     def opsi_explore(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_explore()
+            self.load_campaign()
+            self.campaign.os_explore()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_shop(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_shop()
+            self.load_campaign()
+            self.campaign.os_shop()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_voucher(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_voucher()
+            self.load_campaign()
+            self.campaign.os_voucher()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_daily(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_daily()
+            self.load_campaign()
+            self.campaign.os_daily()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
@@ -65,8 +73,8 @@ class OSCampaignRun(OSMapOperation):
 
     def opsi_obscure(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_obscure()
+            self.load_campaign()
+            self.campaign.os_obscure()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
@@ -78,35 +86,35 @@ class OSCampaignRun(OSMapOperation):
             self.config.task_stop()
             return
         try:
-            campaign = self.load_campaign()
-            campaign.clear_month_boss()
+            self.load_campaign()
+            self.campaign.clear_month_boss()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_abyssal(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_abyssal()
+            self.load_campaign()
+            self.campaign.os_abyssal()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_archive(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_archive()
+            self.load_campaign()
+            self.campaign.os_archive()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_stronghold(self):
         try:
-            campaign = self.load_campaign()
-            campaign.os_stronghold()
+            self.load_campaign()
+            self.campaign.os_stronghold()
         except ActionPointLimit:
             self.config.opsi_task_delay(ap_limit=True)
 
     def opsi_cross_month(self):
-        campaign = self.load_campaign()
         try:
-            campaign.os_cross_month()
+            self.load_campaign()
+            self.campaign.os_cross_month()
         except ActionPointLimit:
-            campaign.os_cross_month_end()
+            self.campaign.os_cross_month_end()
