@@ -730,7 +730,7 @@
       "AmbushEvade": true
     },
     "Coalition": {
-      "Mode": "area1-normal",
+      "Mode": "tc1",
       "Fleet": "single"
     },
     "StopCondition": {
@@ -1336,7 +1336,7 @@
       "AmbushEvade": true
     },
     "Coalition": {
-      "Mode": "area1-normal",
+      "Mode": "sp",
       "Fleet": "single"
     },
     "StopCondition": {
@@ -1552,6 +1552,18 @@
       "SuccessInterval": 0,
       "FailureInterval": 120,
       "ServerUpdate": "00:00"
+    },
+    "IslandTransport": {
+      "SubmitCarrot": true,
+      "SubmitCotton": true,
+      "SubmitFlex": true,
+      "SubmitFreshMeat": true,
+      "SubmitManjuu": true,
+      "SubmitMilk": true,
+      "SubmitNapaCabbage": true,
+      "SubmitOnion": true,
+      "SubmitPoultry": true,
+      "SubmitStrawberries": true
     },
     "Island1": {
       "Receive": false,
