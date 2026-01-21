@@ -7178,16 +7178,12 @@
   "Commission": {
     "Scheduler": {
       "Enable": {
-        "type": "switch",
-        "value": true,
+        "type": "checkbox",
+        "value": false,
         "option": [
           true,
           false
-        ],
-        "option_bold": [
-          true
-        ],
-        "display": "hide"
+        ]
       },
       "NextRun": {
         "type": "datetime",
@@ -7343,16 +7339,12 @@
   "Research": {
     "Scheduler": {
       "Enable": {
-        "type": "switch",
-        "value": true,
+        "type": "checkbox",
+        "value": false,
         "option": [
           true,
           false
-        ],
-        "option_bold": [
-          true
-        ],
-        "display": "hide"
+        ]
       },
       "NextRun": {
         "type": "datetime",
@@ -7709,16 +7701,12 @@
   "Reward": {
     "Scheduler": {
       "Enable": {
-        "type": "switch",
-        "value": true,
+        "type": "checkbox",
+        "value": false,
         "option": [
           true,
           false
-        ],
-        "option_bold": [
-          true
-        ],
-        "display": "hide"
+        ]
       },
       "NextRun": {
         "type": "datetime",
