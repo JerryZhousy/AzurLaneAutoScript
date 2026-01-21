@@ -445,21 +445,10 @@ MaritimeEscort:
   Enable: true
 Coalition:
   Mode:
-    value: area1-normal
+    value: tc1
     option:
       [
-        area1-normal,
-        area1-hard,
-        area2-normal,
-        area2-hard,
-        area3-normal,
-        area3-hard,
-        area4-normal,
-        area4-hard,
-        area5-normal,
-        area5-hard,
-        area6-normal,
-        area6-hard,
+        tc1, tc2, tc3, sp, ex
       ]
   Fleet:
     value: single
@@ -666,6 +655,17 @@ _Island:
       - unicorn
       - cheshire
       - amagi_chan
+IslandTransport:
+  SubmitCarrot: true
+  SubmitCotton: true
+  SubmitFlex: true
+  SubmitFreshMeat: true
+  SubmitManjuu: true
+  SubmitMilk: true
+  SubmitNapaCabbage: true
+  SubmitOnion: true
+  SubmitPoultry: true
+  SubmitStrawberries: true
 Island1:
   Receive: false
   Option1: *IslandOption8
@@ -1120,6 +1120,16 @@ OpsiScheduling:
   ActionPointNotifyLevels:
     value: "500,1000,2000,3000"
     valuetype: str
+
+# =================== Island ====================
+IslandSeasonTask:
+  TaskDict:
+    type: textarea
+    value: |-
+IslandTechnology:
+  TechnologyStatus:
+    type: textarea
+    value: |-
 
 # ==================== Tools ====================
 

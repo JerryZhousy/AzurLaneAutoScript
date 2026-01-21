@@ -603,7 +603,7 @@
     "YukikazeTaskManager": {
       "TaskPriorityAdjustment": {
         "type": "textarea",
-        "value": "Restart\n> OpsiCrossMonth\n> Commission > Tactical > Research\n> Exercise\n> Dorm > Meowfficer > Guild > Gacha\n> Reward\n> ShopFrequent > ShopOnce > Shipyard > Freebies >Island\n> PrivateQuarters\n> OpsiExplore\n> Minigame > Awaken\n> OpsiAshBeacon\n> OpsiDaily > OpsiShop > OpsiVoucher\n> OpsiAbyssal > OpsiStronghold > OpsiObscure > OpsiArchive\n> Daily > Hard > OpsiAshBeacon > OpsiAshAssist > OpsiMonthBoss\n> Sos > EventSp > EventA > EventB > EventC > EventD\n> RaidDaily > CoalitionSp > WarArchives > MaritimeEscort\n> Event > Event2 > Raid > Hospital > HospitalEvent > Coalition > Main > Main2 > Main3\n> OpsiMeowfficerFarming\n> GemsFarming\n> OpsiHazard1Leveling"
+        "value": "Restart\n> OpsiCrossMonth\n> Commission > Tactical > Research\n> Exercise\n> Dorm > Meowfficer > Guild > Gacha\n> Reward\n> ShopFrequent > ShopOnce > Shipyard > Freebies > Island\n> PrivateQuarters\n> OpsiExplore\n> Minigame > Awaken\n> OpsiAshBeacon\n> OpsiDaily > OpsiShop > OpsiVoucher\n> OpsiAbyssal > OpsiStronghold > OpsiObscure > OpsiArchive\n> Daily > Hard > OpsiAshBeacon > OpsiAshAssist > OpsiMonthBoss\n> Sos > EventSp > EventA > EventB > EventC > EventD\n> RaidDaily > CoalitionSp > WarArchives > MaritimeEscort\n> Event > Event2 > Raid > Hospital > HospitalEvent > Coalition > Main > Main2 > Main3\n> OpsiMeowfficerFarming\n> GemsFarming\n> OpsiHazard1Leveling"
       }
     },
     "Storage": {
@@ -1967,7 +1967,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2415,7 +2415,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2823,7 +2823,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -3660,22 +3660,22 @@
         "type": "state",
         "value": "campaign_main",
         "option": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_cn": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_en": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_jp": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_tw": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_bold": [
-          "coalition_20251120"
+          "coalition_20260122"
         ]
       },
       "Mode": {
@@ -3716,20 +3716,13 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "area1-normal",
+        "value": "tc1",
         "option": [
-          "area1-normal",
-          "area1-hard",
-          "area2-normal",
-          "area2-hard",
-          "area3-normal",
-          "area3-hard",
-          "area4-normal",
-          "area4-hard",
-          "area5-normal",
-          "area5-hard",
-          "area6-normal",
-          "area6-hard"
+          "tc1",
+          "tc2",
+          "tc3",
+          "sp",
+          "ex"
         ]
       },
       "Fleet": {
@@ -4734,7 +4727,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5155,7 +5148,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5576,7 +5569,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -6001,7 +5994,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -6416,7 +6409,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20251218_cn"
+          "event_20231221_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -7062,24 +7055,22 @@
         "type": "state",
         "value": "campaign_main",
         "option": [
-          "coalition_20250626",
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_cn": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_en": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_jp": [
-          "coalition_20251120"
+          "coalition_20260122"
         ],
         "option_tw": [
-          "coalition_20250626"
+          "coalition_20260122"
         ],
         "option_bold": [
-          "coalition_20250626",
-          "coalition_20251120"
+          "coalition_"
         ]
       },
       "Mode": {
@@ -7120,21 +7111,15 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "area1-normal",
+        "value": "sp",
         "option": [
-          "area1-normal",
-          "area1-hard",
-          "area2-normal",
-          "area2-hard",
-          "area3-normal",
-          "area3-hard",
-          "area4-normal",
-          "area4-hard",
-          "area5-normal",
-          "area5-hard",
-          "area6-normal",
-          "area6-hard"
-        ]
+          "tc1",
+          "tc2",
+          "tc3",
+          "sp",
+          "ex"
+        ],
+        "display": "hide"
       },
       "Fleet": {
         "type": "select",
@@ -7965,6 +7950,48 @@
         "type": "input",
         "value": "00:00",
         "display": "hide"
+      }
+    },
+    "IslandTransport": {
+      "SubmitCarrot": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitCotton": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitFlex": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitFreshMeat": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitManjuu": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitMilk": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitNapaCabbage": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitOnion": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitPoultry": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SubmitStrawberries": {
+        "type": "checkbox",
+        "value": true
       }
     },
     "Island1": {
@@ -12910,6 +12937,73 @@
       "Command": {
         "type": "input",
         "value": "OpsiCrossMonth",
+        "display": "hide"
+      },
+      "SuccessInterval": {
+        "type": "input",
+        "value": 0,
+        "display": "hide"
+      },
+      "FailureInterval": {
+        "type": "input",
+        "value": 120,
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "00:00",
+        "display": "hide"
+      }
+    },
+    "Storage": {
+      "Storage": {
+        "type": "storage",
+        "value": {},
+        "valuetype": "ignore",
+        "display": "disabled"
+      }
+    }
+  },
+  "IslandInfo": {
+    "IslandSeasonTask": {
+      "TaskDict": {
+        "type": "textarea",
+        "value": ""
+      }
+    },
+    "IslandTechnology": {
+      "TechnologyStatus": {
+        "type": "textarea",
+        "value": ""
+      }
+    },
+    "Storage": {
+      "Storage": {
+        "type": "storage",
+        "value": {},
+        "valuetype": "ignore",
+        "display": "disabled"
+      }
+    }
+  },
+  "IslandSeasonTask": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "IslandSeasonTask",
         "display": "hide"
       },
       "SuccessInterval": {
