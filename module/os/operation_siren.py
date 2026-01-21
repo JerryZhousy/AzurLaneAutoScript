@@ -13,6 +13,19 @@ from module.config.utils import (get_nearest_weekday_date,
 from module.exception import RequestHumanTakeover, GameStuckError, ScriptError
 from module.equipment.assets import EQUIPMENT_OPEN
 from module.logger import logger
+from module.os.config import OSConfig
+from module.os.tasks.abyssal import OpsiAbyssal
+from module.os.tasks.archive import OpsiArchive
+from module.os.tasks.cross_month import OpsiCrossMonth
+from module.os.tasks.daily import OpsiDaily
+from module.os.tasks.explore import OpsiExplore
+from module.os.tasks.hazard_leveling import OpsiHazard1Leveling
+from module.os.tasks.meowfficer_farming import OpsiMeowfficerFarming
+from module.os.tasks.month_boss import OpsiMonthBoss
+from module.os.tasks.obscure import OpsiObscure
+from module.os.tasks.shop import OpsiShop
+from module.os.tasks.stronghold import OpsiStronghold
+from module.os.tasks.voucher import OpsiVoucher
 from module.map.map_grids import SelectedGrids
 from module.notify import handle_notify
 from module.os.assets import FLEET_FLAGSHIP
@@ -1080,9 +1093,25 @@ class OperationSiren(OSMap):
                     logger.info(f'Delay task `{task}` to {next_run}')
                     self.config.cross_set(keys=keys, value=next_run)
 
-    # List of failed zone id
-    _os_explore_failed_zone = []
 
+class OperationSiren(
+    OpsiDaily,
+    OpsiShop,
+    OpsiVoucher,
+    OpsiMeowfficerFarming,
+    OpsiHazard1Leveling,
+    OpsiObscure,
+    OpsiAbyssal,
+    OpsiArchive,
+    OpsiStronghold,
+    OpsiMonthBoss,
+    OpsiExplore,
+    OpsiCrossMonth,
+):
+    """
+    Operation Siren main class that combines all task modules.
+    """
+    pass
     def _os_explore(self):
         """
         Explore all dangerous zones at the beginning of month.
@@ -1534,7 +1563,6 @@ class OperationSiren(OSMap):
 
 if __name__ == '__main__':
     self = OperationSiren('month_test', task='OpsiMonthBoss')
-    from module.os.config import OSConfig
 
     self.config = self.config.merge(OSConfig())
 
