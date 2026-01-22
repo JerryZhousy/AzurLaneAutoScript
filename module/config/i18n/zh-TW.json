@@ -736,6 +736,7 @@
       "coalition_20240627": "歡迎來到童心學院",
       "coalition_20250626": "迷彩都市的尋蹤者",
       "coalition_20251120": "DATE A LANE",
+      "coalition_20260122": "Light & Shadow Fashion Shoot!",
       "event_20200227_cn": "Northern Overture",
       "event_20200312_cn": "斯圖爾特的硝煙",
       "event_20200326_cn": "Microlayer Medley",
@@ -816,7 +817,6 @@
       "event_20250912_cn": "起舞於天原之上",
       "event_20251023_cn": "颶風與自由群島",
       "event_20251218_cn": "響徹於天穹之音",
-      "event_20260122_cn": "Light & Shadow Fashion Shoot!",
       "raid_20200624": "特別演習埃塞克斯級(復刻)",
       "raid_20210708": "復刻穿越彼方的水線",
       "raid_20220127": "演習神秘事件調查",
@@ -1445,10 +1445,9 @@
     "Mode": {
       "name": "難度",
       "help": "SP圖需要使用活動每日SP運行",
-      "tc1": "tc1",
-      "tc2": "tc2",
-      "tc3": "tc3",
-      "sp": "sp",
+      "easy": "easy",
+      "normal": "normal",
+      "hard": "hard",
       "ex": "ex"
     },
     "Fleet": {
@@ -4059,6 +4058,10 @@
     "APPreserveUntilReset": {
       "name": "保留行動力直到月底",
       "help": "\"保留 X 點行動力\" 設定不會在大世界重置前幾天减少\n注意：開啟後只會在跨月每日任務中消耗這些行動力，未啟用跨月每日任務時該設定無效，這意味著你需要手動使用這些行動力以獲得更高的收益"
+    },
+    "OperationCoinsReturnThreshold": {
+      "name": "OpsiMeowfficerFarming.OperationCoinsReturnThreshold.name",
+      "help": "OpsiMeowfficerFarming.OperationCoinsReturnThreshold.help"
     }
   },
   "OpsiHazard1Leveling": {

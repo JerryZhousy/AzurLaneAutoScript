@@ -445,11 +445,8 @@ MaritimeEscort:
   Enable: true
 Coalition:
   Mode:
-    value: tc1
-    option:
-      [
-        tc1, tc2, tc3, sp, ex
-      ]
+    value: hard
+    option: [easy, normal, hard, ex]
   Fleet:
     value: single
     option: [ single, multi ]
@@ -1087,6 +1084,7 @@ OpsiMeowfficerFarming:
     value: 0
   StayInZone: false
   APPreserveUntilReset: false
+  OperationCoinsReturnThreshold: 30000
 OpsiHazard1Leveling:
   TargetZone:
     value: 0

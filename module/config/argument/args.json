@@ -1967,7 +1967,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2415,7 +2415,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -2823,7 +2823,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -3660,6 +3660,7 @@
         "type": "state",
         "value": "campaign_main",
         "option": [
+          "coalition_20251120",
           "coalition_20260122"
         ],
         "option_cn": [
@@ -3672,9 +3673,10 @@
           "coalition_20260122"
         ],
         "option_tw": [
-          "coalition_20260122"
+          "coalition_20251120"
         ],
         "option_bold": [
+          "coalition_20251120",
           "coalition_20260122"
         ]
       },
@@ -3716,12 +3718,11 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "tc1",
+        "value": "hard",
         "option": [
-          "tc1",
-          "tc2",
-          "tc3",
-          "sp",
+          "easy",
+          "normal",
+          "hard",
           "ex"
         ]
       },
@@ -4727,7 +4728,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5148,7 +5149,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5569,7 +5570,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -5994,7 +5995,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -6409,7 +6410,7 @@
           "event_20231221_cn"
         ],
         "option_tw": [
-          "event_20231221_cn"
+          "event_20251218_cn"
         ],
         "option_bold": [
           "event_20231221_cn",
@@ -7055,6 +7056,7 @@
         "type": "state",
         "value": "campaign_main",
         "option": [
+          "coalition_20251120",
           "coalition_20260122"
         ],
         "option_cn": [
@@ -7067,10 +7069,11 @@
           "coalition_20260122"
         ],
         "option_tw": [
-          "coalition_20260122"
+          "coalition_20251120"
         ],
         "option_bold": [
-          "coalition_"
+          "coalition_20251120",
+          "coalition_20260122"
         ]
       },
       "Mode": {
@@ -7111,12 +7114,11 @@
     "Coalition": {
       "Mode": {
         "type": "select",
-        "value": "sp",
+        "value": "hard",
         "option": [
-          "tc1",
-          "tc2",
-          "tc3",
-          "sp",
+          "easy",
+          "normal",
+          "hard",
           "ex"
         ],
         "display": "hide"
@@ -12719,6 +12721,10 @@
       "APPreserveUntilReset": {
         "type": "checkbox",
         "value": false
+      },
+      "OperationCoinsReturnThreshold": {
+        "type": "input",
+        "value": 30000
       }
     },
     "OpsiFleet": {

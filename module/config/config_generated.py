@@ -268,7 +268,7 @@ class GeneratedConfig:
     MaritimeEscort_Enable = True
 
     # Group `Coalition`
-    Coalition_Mode = 'tc1'  # tc1, tc2, tc3, sp, ex
+    Coalition_Mode = 'hard'  # easy, normal, hard, ex
     Coalition_Fleet = 'single'  # single, multi
 
     # Group `EventShop`
@@ -679,6 +679,7 @@ class GeneratedConfig:
     OpsiMeowfficerFarming_TargetZone = 0
     OpsiMeowfficerFarming_StayInZone = False
     OpsiMeowfficerFarming_APPreserveUntilReset = False
+    OpsiMeowfficerFarming_OperationCoinsReturnThreshold = 30000
 
     # Group `OpsiHazard1Leveling`
     OpsiHazard1Leveling_TargetZone = 0  # 0, 44, 22

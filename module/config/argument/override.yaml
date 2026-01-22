@@ -274,7 +274,7 @@ Coalition:
     AmbushEvade: true
     Coalition:
       Mode:
-        option: [ tc1, tc2, tc3, sp, ex ]
+        option: [ easy, normal, hard, ex ]
   StopCondition:
     MapAchievement: non_stop
     StageIncrease: false
@@ -304,7 +304,7 @@ CoalitionSp:
     AmbushEvade: true
   Coalition:
     # CoalitionSp hard-codes Mode='sp'
-    Mode: sp
+    Mode: hard
   StopCondition:
     MapAchievement: non_stop
     StageIncrease: false
