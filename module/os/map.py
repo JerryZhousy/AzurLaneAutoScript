@@ -11,7 +11,6 @@ from module.base.timer import Timer
 from module.config.config import TaskEnd
 from module.config.utils import get_os_reset_remain
 from module.exception import CampaignEnd, GameTooManyClickError, MapWalkError, RequestHumanTakeover, ScriptError
-from module.exercise.assets import QUIT_RECONFIRM
 from module.handler.login import LoginHandler, MAINTENANCE_ANNOUNCE
 from module.logger import logger
 from module.map.map import Map
@@ -781,12 +780,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
         finished_combat = 0
         died_timer = Timer(1.5, count=3)
         self.hp_reset()
-        while 1:
-            if skip_first_screenshot:
-                skip_first_screenshot = False
-            else:
-                self.device.screenshot()
-
+        for _ in self.loop():
             # End
             if not unlock_checked and unlock_check_timer.reached():
                 logger.critical('Unable to use auto search in current zone')
@@ -870,6 +864,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
             else:
                 self.device.screenshot()
 
+
             # End
             if self.is_in_main():
                 logger.info('Auto search interrupted')
@@ -900,7 +895,7 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
                 in_main_timer.reset()
                 in_map_timer.reset()
                 continue
-            if self.appear_then_click(QUIT_RECONFIRM, offset=True, interval=5):
+            if self.handle_combat_quit_reconfirm():
                 self.interval_reset(MAINTENANCE_ANNOUNCE)
                 pause_interval.reset()
                 in_main_timer.reset()
@@ -1374,6 +1369,8 @@ class OSMap(OSFleet, Map, GlobeCamera, StorageHandler, StrategicSearchHandler):
     def map_rescan(self, rescan_mode='full', drop=None):
         if self.zone.is_port:
             logger.info('Current zone is a port, do not need rescan')
+            return False
+        if self.is_cl1_enabled and not self.config.is_task_enabled('OpsiMeowfficerFarming'):
             return False
 
         for _ in range(5):

@@ -74,7 +74,6 @@ Event:
     EventGeneral:
       - EventGeneral
       - TaskBalancer
-
     Event:
       - Scheduler
       - Campaign
@@ -134,6 +133,12 @@ EventDaily:
   menu: "collapse"
   page: "setting"
   tasks:
+    CoalitionSp:
+      - Scheduler
+      - Campaign
+      - Coalition
+      - StopCondition
+      - Emotion
     EventA:
       - Scheduler
       - EventDaily
@@ -187,12 +192,6 @@ EventDaily:
       - Scheduler
       - RaidDaily
       - Campaign
-      - StopCondition
-      - Emotion
-    CoalitionSp:
-      - Scheduler
-      - Campaign
-      - Coalition
       - StopCondition
       - Emotion
 
@@ -357,15 +356,14 @@ Opsi:
 
 # =================== Island ===================
 Island:
-  menu: 'collapse'
-  page: 'setting'
+  menu: "collapse"
+  page: "setting"
   tasks:
     IslandInfo:
       - IslandSeasonTask
       - IslandTechnology
     IslandSeasonTask:
       - Scheduler
-
 
 # ==================== Tool ====================
 
