@@ -3653,7 +3653,7 @@
           "easy",
           "normal",
           "hard",
-          "ex"
+          "sp"
         ]
       },
       "Fleet": {
@@ -7027,7 +7027,7 @@
           "easy",
           "normal",
           "hard",
-          "ex"
+          "sp"
         ],
         "display": "hide"
       },
