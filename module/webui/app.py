@@ -44,7 +44,7 @@ from pywebio.output import (
     use_scope,
 )
 from pywebio.pin import pin, pin_on_change
-from pywebio.session import download, go_app, info, local, register_thread, run_js, set_env
+from pywebio.session import download, go_app, info, local, register_thread, run_js, set_env, eval_js
 
 import module.webui.lang as lang
 from module.config.config import AzurLaneConfig, Function
@@ -1819,7 +1819,7 @@ class AlasGUI(Frame):
         )
 
         # Announcement check feature
-        # JavaScript function to show announcement modal with iframe (called from backend)
+        # JavaScript function to show announcement modal (called from backend)
         run_js(
             '''
         (function(){
@@ -1849,77 +1849,71 @@ class AlasGUI(Frame):
                 return shown.indexOf(announcementId) !== -1;
             };
 
-            // 新版：iframe 嵌入方式
-            window.alasShowAnnouncementV2 = function(id, url, title, priority) {
-                if (window.alasHasBeenShown(id) || document.getElementById('alas-announcement-modal')) {
+            window.alasShowAnnouncement = function(title, content, announcementId, url) {
+                if (window.alasHasBeenShown(announcementId) || document.getElementById('alas-announcement-modal')) {
                     return;
                 }
 
                 // Create modal overlay
                 var overlay = document.createElement('div');
                 overlay.id = 'alas-announcement-modal';
-                overlay.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);z-index:100000;display:flex;justify-content:center;align-items:center;';
+                overlay.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:100000;display:flex;justify-content:center;align-items:center;';
 
-                // Create modal container
+                // Create modal content
                 var modal = document.createElement('div');
-                var isImportant = priority === 'important';
-                modal.style.cssText = 'background:#fff;border-radius:12px;max-width:600px;width:90%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.3);overflow:hidden;' + (isImportant ? 'border:2px solid #e74c3c;' : '');
-
-                // Title bar
-                var titleBar = document.createElement('div');
-                titleBar.style.cssText = 'padding:16px 20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;';
+                var isWeb = !!url;
                 
+                if (isWeb) {
+                    // Web page style: larger, fixed height
+                    modal.style.cssText = 'background:#fff;border-radius:12px;padding:16px;width:95%;max-width:1200px;height:85vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.3);';
+                } else {
+                    // Text style: automatic height, narrower
+                    modal.style.cssText = 'background:#fff;border-radius:12px;padding:24px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.3);';
+                }
+
+                // Title
                 var titleEl = document.createElement('h3');
-                titleEl.textContent = '📢 ' + title;
-                titleEl.style.cssText = 'margin:0;font-size:1.1rem;color:#333;';
-                
-                var closeX = document.createElement('span');
-                closeX.textContent = '×';
-                closeX.style.cssText = 'font-size:1.5rem;cursor:pointer;color:#999;line-height:1;';
-                closeX.onmouseover = function(){ closeX.style.color = '#333'; };
-                closeX.onmouseout = function(){ closeX.style.color = '#999'; };
-                closeX.onclick = function(){
-                    window.alasMarkAnnouncementShown(id);
-                    overlay.remove();
-                };
-                
-                titleBar.appendChild(titleEl);
-                titleBar.appendChild(closeX);
+                titleEl.textContent = title;
+                titleEl.style.cssText = 'margin:0 0 12px 0;font-size:1.25rem;color:#333;border-bottom:2px solid #4fc3f7;padding-bottom:8px;flex-shrink:0;';
 
-                // iframe container
-                var iframeContainer = document.createElement('div');
-                iframeContainer.style.cssText = 'flex:1;min-height:200px;overflow:hidden;';
-                
-                var iframe = document.createElement('iframe');
-                iframe.src = url;
-                iframe.style.cssText = 'width:100%;height:100%;border:none;min-height:300px;';
-                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-                iframeContainer.appendChild(iframe);
+                modal.appendChild(titleEl);
 
-                // Footer with button
-                var footer = document.createElement('div');
-                footer.style.cssText = 'padding:16px 20px;border-top:1px solid #eee;text-align:center;flex-shrink:0;';
+                // Content (Text or Iframe)
+                if (isWeb) {
+                    var iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    iframe.style.cssText = 'flex:1;border:none;width:100%;background:#f5f5f5;border-radius:4px;';
+                    modal.appendChild(iframe);
+                } else {
+                    var contentEl = document.createElement('div');
+                    contentEl.textContent = content;
+                    contentEl.style.cssText = 'font-size:1rem;color:#555;line-height:1.6;margin-bottom:20px;white-space:pre-wrap;';
+                    modal.appendChild(contentEl);
+                }
+
+                // Close button area
+                var btnContainer = document.createElement('div');
+                btnContainer.style.cssText = 'margin-top:16px;text-align:center;flex-shrink:0;';
                 
                 var closeBtn = document.createElement('button');
-                closeBtn.textContent = '我知道了';
-                closeBtn.style.cssText = 'background:linear-gradient(90deg,#00b894,#0984e3);color:#fff;border:none;padding:10px 40px;border-radius:6px;cursor:pointer;font-size:1rem;';
+                closeBtn.textContent = '确认';
+                closeBtn.style.cssText = 'background:linear-gradient(90deg,#00b894,#0984e3);color:#fff;border:none;padding:10px 32px;border-radius:6px;cursor:pointer;font-size:1rem;display:inline-block;';
                 closeBtn.onmouseover = function(){ closeBtn.style.opacity = '0.9'; };
                 closeBtn.onmouseout = function(){ closeBtn.style.opacity = '1'; };
                 closeBtn.onclick = function(){
-                    window.alasMarkAnnouncementShown(id);
+                    window.alasMarkAnnouncementShown(announcementId);
                     overlay.remove();
                 };
-                footer.appendChild(closeBtn);
-
-                modal.appendChild(titleBar);
-                modal.appendChild(iframeContainer);
-                modal.appendChild(footer);
+                
+                btnContainer.appendChild(closeBtn);
+                modal.appendChild(btnContainer);
+                
                 overlay.appendChild(modal);
 
                 // Close on overlay click
                 overlay.onclick = function(e){
                     if (e.target === overlay) {
-                        window.alasMarkAnnouncementShown(id);
+                        window.alasMarkAnnouncementShown(announcementId);
                         overlay.remove();
                     }
                 };
@@ -1933,45 +1927,13 @@ class AlasGUI(Frame):
                                  localStorage.getItem('Theme') === 'dark';
                     if (isDark) {
                         modal.style.background = '#2d3436';
-                        titleBar.style.borderColor = '#444';
                         titleEl.style.color = '#dfe6e9';
-                        footer.style.borderColor = '#444';
+                        if (!isWeb) {
+                             // contentEl only exists in text mode
+                             var c = modal.querySelector('div[style*="font-size:1rem"]');
+                             if(c) c.style.color = '#b2bec3';
+                        }
                     }
-                } catch (e) {}
-            };
-
-            // 兼容旧版本（前端展示纯文本）
-            window.alasShowAnnouncement = function(title, content, announcementId) {
-                if (window.alasHasBeenShown(announcementId) || document.getElementById('alas-announcement-modal')) {
-                    return;
-                }
-                var overlay = document.createElement('div');
-                overlay.id = 'alas-announcement-modal';
-                overlay.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:100000;display:flex;justify-content:center;align-items:center;';
-                var modal = document.createElement('div');
-                modal.style.cssText = 'background:#fff;border-radius:12px;padding:24px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.3);';
-                var titleEl = document.createElement('h3');
-                titleEl.textContent = title;
-                titleEl.style.cssText = 'margin:0 0 16px 0;font-size:1.25rem;color:#333;border-bottom:2px solid #4fc3f7;padding-bottom:8px;';
-                var contentEl = document.createElement('div');
-                contentEl.textContent = content;
-                contentEl.style.cssText = 'font-size:1rem;color:#555;line-height:1.6;margin-bottom:20px;white-space:pre-wrap;';
-                var closeBtn = document.createElement('button');
-                closeBtn.textContent = '确认';
-                closeBtn.style.cssText = 'background:linear-gradient(90deg,#00b894,#0984e3);color:#fff;border:none;padding:10px 32px;border-radius:6px;cursor:pointer;font-size:1rem;display:block;margin:0 auto;';
-                closeBtn.onclick = function(){
-                    window.alasMarkAnnouncementShown(announcementId);
-                    overlay.remove();
-                };
-                modal.appendChild(titleEl);
-                modal.appendChild(contentEl);
-                modal.appendChild(closeBtn);
-                overlay.appendChild(modal);
-                overlay.onclick = function(e){ if (e.target === overlay) { window.alasMarkAnnouncementShown(announcementId); overlay.remove(); } };
-                document.body.appendChild(overlay);
-                try {
-                    var isDark = document.body.classList.contains('pywebio-dark') || localStorage.getItem('Theme') === 'dark';
-                    if (isDark) { modal.style.background = '#2d3436'; titleEl.style.color = '#dfe6e9'; contentEl.style.color = '#b2bec3'; }
                 } catch (e) {}
             };
         })();
@@ -2062,39 +2024,69 @@ class AlasGUI(Frame):
         self.task_handler.add(self.set_aside_status, 2)
         self.task_handler.add(visibility_state_switch.g(), 15)
         self.task_handler.add(update_switch.g(), 1)
-        self.task_handler.start()
-
-        # 公告推送功能 - 使用全局 SSE 连接的回调机制
-        from module.base.api_client import announcement_manager
+        self.task_handler.add(update_switch.g(), 1)
         
-        def push_announcement_to_frontend(data: dict):
-            """接收到公告时推送到前端"""
+        # 公告检查功能
+        self._last_announcement_id = None
+        
+        def check_and_push_announcement():
+            """检查公告并推送到前端"""
+            logger.info("开始检查公告...")  # DEBUG
             try:
-                ann_id = data.get('id', '')
-                url = data.get('url', '')
-                title = data.get('title', '公告')
-                priority = data.get('priority', 'normal')
+                from module.base.api_client import ApiClient
+                data = ApiClient.get_announcement(timeout=10)
+                logger.info(f"API返回数据: {bool(data)}") # DEBUG
                 
-                if ann_id and url:
-                    # 使用新版 iframe 方式
-                    id_json = json.dumps(ann_id)
-                    url_json = json.dumps(url)
-                    title_json = json.dumps(title)
-                    priority_json = json.dumps(priority)
-                    run_js(f"window.alasShowAnnouncementV2({id_json}, {url_json}, {title_json}, {priority_json});")
-                elif ann_id:
-                    # 降级到旧版纯文本方式
-                    content = data.get('content', '')
-                    old_id = data.get('announcementId', ann_id)
-                    title_json = json.dumps(title)
-                    content_json = json.dumps(content)
-                    id_json = json.dumps(old_id)
-                    run_js(f"window.alasShowAnnouncement({title_json}, {content_json}, {id_json});")
+                if data:
+                    announcement_id = data.get('announcementId')
+                    logger.info(f"公告ID: {announcement_id}, 上次ID: {self._last_announcement_id}") # DEBUG
+                    
+                    # 只有当ID不同时才推送
+                    if announcement_id and announcement_id != self._last_announcement_id:
+                        # 检查浏览器是否已看过
+                        try:
+                            announcement_id_json = json.dumps(announcement_id)
+                            has_shown = eval_js(f"window.alasHasBeenShown({announcement_id_json})")
+                            logger.info(f"浏览器是否已看过: {has_shown}") # DEBUG
+                            if has_shown:
+                                self._last_announcement_id = announcement_id
+                                return
+                        except Exception as e:
+                            logger.error(f"JS检查失败: {e}") # DEBUG
+                            pass
+
+                        title_json = json.dumps(data.get('title', ''))
+                        content_json = json.dumps(data.get('content', ''))
+                        announcement_id_json = json.dumps(announcement_id)
+                        url_json = json.dumps(data.get('url', ''))
+                        
+                        logger.info(f"准备推送公告: {data.get('title')}") # DEBUG
+                        run_js(f"window.alasShowAnnouncement({title_json}, {content_json}, {announcement_id_json}, {url_json});")
+                        self._last_announcement_id = announcement_id
             except Exception as e:
-                logger.debug(f"Push announcement failed: {e}")
+                logger.error(f"公告检查异常: {e}")
+                import traceback
+                traceback.print_exc()
+
+        # 定期公告检查生成器
+        def announcement_checker():
+            logger.info("公告检查任务启动") # DEBUG
+            th = yield  # 获取任务处理器引用
+            # 首次检查
+            check_and_push_announcement()
+            # 设置后续检查间隔为30秒
+            th._task.delay = 30
+            yield
+            while True:
+                logger.info("执行定期公告检查") # DEBUG
+                check_and_push_announcement()
+                yield
+
+        # 添加公告检查任务（初始延迟5秒）
+        self.task_handler.add(announcement_checker(), delay=5)
         
-        # 注册回调，接收全局公告推送
-        announcement_manager.register_callback(push_announcement_to_frontend)
+        # 启动任务处理器
+        self.task_handler.start()
 
         # Return to previous page
 
@@ -2277,10 +2269,6 @@ def startup():
             and State.deploy_config.Password is not None
     ):
         task_handler.add(RemoteAccess.keep_ssh_alive(), 60)
-    
-    # 启动全局公告 SSE 连接
-    from module.base.api_client import announcement_manager
-    announcement_manager.start()
 
 
 def clearup():
@@ -2292,11 +2280,6 @@ def clearup():
     RemoteAccess.kill_ssh_process()
     close_discord_rpc()
     stop_ocr_server_process()
-    
-    # 停止公告 SSE 连接
-    from module.base.api_client import announcement_manager
-    announcement_manager.stop()
-    
     for alas in ProcessManager._processes.values():
         alas.stop()
     State.clearup()
