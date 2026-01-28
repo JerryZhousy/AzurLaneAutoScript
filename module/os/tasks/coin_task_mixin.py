@@ -26,6 +26,10 @@ class CoinTaskMixin:
     # Configuration paths (shared constants to avoid hardcoding)
     CONFIG_PATH_CL1_PRESERVE = 'OpsiHazard1Leveling.OpsiHazard1Leveling.OperationCoinsPreserve'
     CONFIG_PATH_RETURN_THRESHOLD = 'OpsiHazard1Leveling.OpsiScheduling.OperationCoinsReturnThreshold'
+    CONFIG_PATH_RETURN_THRESHOLD_APPLY_ALL = 'OpsiHazard1Leveling.OpsiScheduling.OperationCoinsReturnThresholdApplyToAllCoinTasks'
+
+    # Task name used for "short cat" (meowfficer farming)
+    TASK_NAME_MEOWFFICER_FARMING = 'OpsiMeowfficerFarming'
     
     def notify_push(self, title, content):
         """
@@ -121,6 +125,16 @@ class CoinTaskMixin:
         """
         if not self.is_cl1_enabled:
             return None, None
+
+        # Scope switch: by default apply to all coin supplement tasks.
+        # When disabled, only apply to OpsiMeowfficerFarming (短猫相接).
+        if not self._is_operation_coins_return_threshold_applicable():
+            cl1_preserve = self.config.cross_get(
+                keys=self.CONFIG_PATH_CL1_PRESERVE,
+                default=100000
+            )
+            logger.info('OperationCoinsReturnThreshold 适用范围开关关闭：仅短猫相接启用；当前任务跳过黄币返回检查')
+            return None, cl1_preserve
         
         # Get and cache CL1 preserve value
         cl1_preserve = self.config.cross_get(
@@ -161,6 +175,34 @@ class CoinTaskMixin:
         return_threshold = cl1_preserve + return_threshold_config
         
         return return_threshold, cl1_preserve
+
+    def _get_current_coin_task_name(self):
+        """
+        Get current task name for scheduling scope checks.
+
+        Returns:
+            str: task command name (e.g., 'OpsiObscure') if available, otherwise class name.
+        """
+        if hasattr(self.config, 'task') and hasattr(self.config.task, 'command') and self.config.task.command:
+            return self.config.task.command
+        return self.__class__.__name__
+
+    def _is_operation_coins_return_threshold_applicable(self):
+        """
+        Determine whether OperationCoinsReturnThreshold should be applied for current task.
+
+        Config:
+            OpsiScheduling.OperationCoinsReturnThresholdApplyToAllCoinTasks (bool)
+                - True: apply to all coin supplement tasks
+                - False: only apply to OpsiMeowfficerFarming (短猫相接)
+        """
+        apply_all = self.config.cross_get(
+            keys=self.CONFIG_PATH_RETURN_THRESHOLD_APPLY_ALL,
+            default=True
+        )
+        if apply_all:
+            return True
+        return self._get_current_coin_task_name() == self.TASK_NAME_MEOWFFICER_FARMING
     
     def _check_yellow_coins_and_return_to_cl1(self, context="循环中", task_display_name=None):
         """
@@ -174,6 +216,10 @@ class CoinTaskMixin:
             bool: True if returned to CL1, False otherwise
         """
         if not self.is_cl1_enabled:
+            return False
+
+        if not self._is_operation_coins_return_threshold_applicable():
+            # Scope switch off: only short cat checks coins.
             return False
         
         return_threshold, cl1_preserve = self._get_operation_coins_return_threshold()
