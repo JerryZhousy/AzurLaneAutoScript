@@ -2087,7 +2087,7 @@ class AlasGUI(Frame):
                 yield
 
         # 添加公告检查任务（初始延迟5秒）
-        self.task_handler.add(announcement_checker(), delay=5)
+        # self.task_handler.add(announcement_checker(), delay=5)
 
         # 启动任务处理器
         self.task_handler.start()
