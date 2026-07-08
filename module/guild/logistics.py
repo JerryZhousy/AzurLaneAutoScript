@@ -300,6 +300,7 @@ class GuildLogistics(GuildBase):
                 continue
 
             if self._is_in_guild_logistics():
+                """
                 # Supply
                 if not supply_checked and self._guild_logistics_supply_available():
                     if click_interval.reached():
@@ -309,6 +310,7 @@ class GuildLogistics(GuildBase):
                     continue
                 else:
                     supply_checked = True
+                """
                 # Mission
                 if not mission_checked and self._guild_logistics_mission_available():
                     if click_interval.reached():
